@@ -26,7 +26,7 @@ Sistema de seleção e desenvolvimento de ideias através de Hackathons. Trabalh
     - Configure seu servidor web. Os arquivos estáticos são criados na pasta 'static' dentro do projeto
 
 
-###Referência de estrutura
+### Referência de estrutura
 Aplicação Django referência para estrutra, organização e codigos, Django SIGE:
 ```sh
 https://github.com/thiagopena/djangoSIGE
