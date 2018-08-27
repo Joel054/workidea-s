@@ -32,3 +32,8 @@ Aplicação Django referência para estrutra, organização e codigos, Django SI
 https://github.com/thiagopena/djangoSIGE
 
 ```
+### Template usado como base
+```sh
+https://github.com/gurayyarar/AdminBSBMaterialDesign
+
+```
