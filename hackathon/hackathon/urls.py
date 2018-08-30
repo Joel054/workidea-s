@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from core import views
+# from user import views
+#from django.contrib.auth.views import login, logout
+#from user.forms import UserAdminCreationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
+    url(r'^dashboard/', views.dashboard, name='dashboard'),
 ]

@@ -25,7 +25,7 @@ SECRET_KEY = '=#4a(s4(hl6m1wvuk$uz5itz^0=bgzpgc2g&nxyca*=yk_vjt#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    #'user',
+    'competicoes',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +122,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+
+# # auth
+# LOGIN_URL = 'login'
+# LOGIN_REDIRECT_URL = 'index'
+# LOGOUT_URL = 'logout'
+# AUTH_USER_MODEL = 'user.User'
+#
