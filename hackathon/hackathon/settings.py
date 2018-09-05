@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    #'user',
     'competicoes',
 ]
 
@@ -124,8 +123,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 # # auth
-# LOGIN_URL = 'login'
-# LOGIN_REDIRECT_URL = 'index'
-# LOGOUT_URL = 'logout'
-# AUTH_USER_MODEL = 'user.User'
+#LOGIN_URL = 'login'
+#LOGIN_REDIRECT_URL = 'index'
+#LOGOUT_URL = 'logout'
+#AUTH_USER_MODEL = 'user.User'
 #
