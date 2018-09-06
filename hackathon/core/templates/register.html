@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <form method="post" action="{% url 'register_commit' %}">
+        {% csrf_token %}
+        <h3>username</h3>
+        <input name="username" id="username">
+        <h3>password</h3>
+        <input name="password" id="password">
+        <h3>password confirm</h3>
+        <input name="confirm_password" id="confirm_password">
+        <h3>email</h3>
+        <input name="email" id="email">
+        <input type="submit" value="register">
+    </form>
+    {{ errors }}
+</head>
+<body>
+
+</body>
+</html>

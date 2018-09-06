@@ -24,7 +24,10 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 urlpatterns = [
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html',redirect_field_name='dashboard.html')),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name="login"),
+    path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+    path('register/', views.register, name='register'),
+    path('register_commit/', views.register_commit, name='register_commit'),
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^dashboard/', views.dashboard, name='dashboard'),

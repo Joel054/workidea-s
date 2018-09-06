@@ -124,7 +124,7 @@ MEDIA_URL = '/media/'
 
 # # auth
 #LOGIN_URL = 'login'
-#LOGIN_REDIRECT_URL = 'index'
-#LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/dashboard'
+LOGOUT_URL = '/login'
 #AUTH_USER_MODEL = 'user.User'
 #
