@@ -6,12 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Melody Admin</title>
-    <link rel="stylesheet" href="{% static 'vendors/iconfonts/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.addons.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" href="{% static '../../images/favicon.png' %}"/>
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
 </head>
 <body>
 <div class="container-scroller">
@@ -20,8 +20,16 @@
         {% include '_partial/float_button.html' %}
         {% include '_partial/right_sidebar.html' %}
         {% include '_partial/sidebar.html' %}
-        {% block content %}
-        {% endblock %}
+        <div class="main-panel">
+            {% block content %}
+            {% endblock %}
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">WorkIdea's desenvolvido para Projeto de Software 2 em 2018</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Desenvolvido por Clecio, João e Joel</i></span>
+              </div>
+            </footer>
+        </div>
     </div>
 </div>
 {% block scripts %}

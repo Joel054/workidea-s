@@ -18911,7 +18911,7 @@ input:focus {
 .navbar.default-layout-navbar .navbar-brand-wrapper .navbar-brand img {
   width: calc(255px - 100px);
   max-width: 100%;
-  height: 38px;
+  height: 32px;
   margin: auto;
   vertical-align: middle;
 }
