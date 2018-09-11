@@ -5,14 +5,18 @@
     <title>Register</title>
     <form method="post" action="{% url 'register_commit' %}">
         {% csrf_token %}
-        <h3>username</h3>
-        <input name="username" id="username">
-        <h3>password</h3>
-        <input name="password" id="password">
+        <h3>Username</h3>
+        <input type="text" name="username" id="username">
+        <h3>Password</h3>
+        <input type="password" name="password" id="password">
         <h3>password confirm</h3>
-        <input name="confirm_password" id="confirm_password">
-        <h3>email</h3>
-        <input name="email" id="email">
+        <input type="password" name="confirm_password" id="confirm_password">
+        <h3>Email</h3>
+        <input type="email" name="email" id="email">
+        <h3>Nome</h3>
+        <input type="text" name="first_name" id="first_name">
+        <h3>Sobrenome</h3>
+        <input type="text" name="last_name" id="last_name">
         <input type="submit" value="register">
     </form>
     {{ errors }}

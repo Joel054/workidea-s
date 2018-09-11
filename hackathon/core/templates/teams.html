@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="{% url 'create_team' %}">
+        {% csrf_token %}
+        <h3>name</h3>
+        <input type="text" name="name" id="name" value="{% if update %} {{ update.name }} {% endif %}">
+        <h3>description</h3>
+        <input type="text" name="description" id="description" value="{% if update %} {{ update.description }} {% endif %}">
+        <input type="hidden" name="id_team"  value="{% if update %} {{ update.id }} {% endif %}">
+        <input type="submit" value="{% if update %}Update{% else %}New{% endif %}">
+    </form>
+    <ul>
+    {% for member in members %}
+        <li>
+            {{ member }}
+            {% if member.level_asses == 'Admin' %}
+                <form methods="post" action="{% url 'delete_team' %}" >
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                    <input type="submit" value="Delete">
+                </form>
+                <form methods="post" action="{% url 'update_team' %}" >
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                    <input type="submit" value="Update">
+                </form>
+                <form methods="post" action="{% url 'get_team' %}" >
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                    <input type="submit" value="GO">
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    {{ delete }}
+</ul>
+</body>
+</html>

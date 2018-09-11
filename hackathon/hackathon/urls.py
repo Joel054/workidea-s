@@ -16,19 +16,26 @@ Including another URLconf
 
 from django.conf.urls import url
 from django.contrib import admin
-from core import views
+from core import Views
 from django.contrib.auth import views as auth_views
 # from user import views
 #from django.contrib.auth.views import login, logout
 #from user.forms import UserAdminCreationForm
 from django.urls import path
 
+from Teams import Team
+
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
-    path('register/', views.register, name='register'),
-    path('register_commit/', views.register_commit, name='register_commit'),
+    path('register/', Views.register, name='register'),
+    path('register_commit/', Views.register_commit, name='register_commit'),
+    path('team/list', Team.list_team, name='list_teams'),
+    path('team/new', Team.create_team, name='create_team'),
+    path('team/delete', Team.delete_team, name='delete_team'),
+    path('team/update', Team.update_team, name='update_team'),
+    path('team/get', Team.get_team, name='get_team'),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
-    url(r'^dashboard/', views.dashboard, name='dashboard'),
+    url(r'^$', Views.index, name='index'),
+    url(r'^dashboard/', Views.dashboard, name='dashboard'),
 ]

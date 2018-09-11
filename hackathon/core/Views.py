@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 
 
@@ -22,21 +21,19 @@ def register_commit(request):
     email = request.POST['email']
     password = request.POST['password']
     confirm_password = request.POST['confirm_password']
+    first_name = request.POST['first_name']
+    last_name = request.POST['last_name']
     if confirm_password == password:
         try:
-            user = authenticate(username=_username)
-            if user:
+            user = User.objects.get(username=_username)
+            print(user)
+            if user is not None:
                 return render(request, 'register.html', {'errors': 'Usuario ja existente'})
-            else:
-                user2 = authenticate(email=email)
-                if user2:
-                    return render(request, 'register.html', {'errors': 'Email ja cadastrado'})
-                else:
-                    user = User.objects.create_user(_username, email, password)
-                    user.save()
+
         except User.DoesNotExist:
-            user = User.objects.create_user(_username, email, password)
+            user = User.objects.create_user(_username, email, password, first_name=first_name, last_name=last_name)
             user.save()
+
     else:
         return render(request, 'register.html', {'errors': 'As senhas não correspondem'})
     return redirect('../login/')
@@ -44,5 +41,8 @@ def register_commit(request):
 
 def register(request):
     return render(request, 'register.html')
+
+
+
 
 
