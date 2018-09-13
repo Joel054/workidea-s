@@ -83,7 +83,7 @@
             <nav class="navbar navbar-expand-lg fixed-top">
                 <div class="container">
 
-                    <a class="navbar-brand" href="#"><img src="{% static 'assets_show/images/logo.png' %}" alt=""></a>
+                    <a class="navbar-brand brand-logo" href=""><img src="{% static 'images/logo.png' %}" style="width:155px; height:30px;" alt="logo"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon  icon_menu"></span>
 </button>
@@ -101,15 +101,15 @@
                             </li>
                             <li class="nav-item">
                                 <a data-scroll="" class="nav-link section-scroll" href="#pricing">Contribuidores</a>
-                            </li>                    
+                            </li>
                             <li>
                                 <a data-scroll="" href="#blog" class="nav-link section-scroll">Blog</a>
                             </li>
 
                             <li>
                                 <div class="connect-block">
-                                    <a href="">Cadastre-se</a>
-                                    <a href="" class="btn btn-white">Login</a>
+                                    <a href="{% url 'register' %}">Cadastre-se</a>
+                                    <a href="{% url 'login' %}" class="btn btn-white">Login</a>
                                 </div>
 
                             </li>
@@ -141,11 +141,11 @@
 
                         <div class="hero-text">
 
-                            <h2>Crie, gerencie e participe de Hackathons</h2>
+                            <h2>Crie, gerencie e participe de Hackathons.</h2>
 
-                            <p>Participe e organize eventos para produção de ideias de software</p>
+                            <p>Participe e organize eventos para produção de ideias de software.</p>
 
-                            <a href="" class="btn btn-white">Comece agora</a>
+                            <a href="{% url 'login' %}" class="btn btn-white">Comece agora</a>
 
 
                         </div>

@@ -1,17 +1,17 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Melody Admin</title>
-        <link rel="stylesheet" href="{% static 'vendors/iconfonts/font-awesome/css/all.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.addons.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Melody Admin</title>
+    <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.addons.css' %}">
 
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="shortcut icon" href="{% static '../../images/favicon.png' %}"/>
-    </head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
+</head>
     <body>
         <div class="container-scroller">
             <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -20,66 +20,61 @@
                         <div class="col-lg-6 d-flex align-items-center justify-content-center">
                             <div class="auth-form-transparent text-left p-3">
                                 <div class="brand-logo">
-                                    <img src="../../images/logo.svg" alt="logo">
+                                    <img src="{% static 'images/logo.png' %}"  alt="logo">
                                 </div>
-                                <h4>Welcome back!</h4>
-                                <h6 class="font-weight-light">Happy to see you again!</h6>
+                                <h4 style="color: purple;">Olá!</h4>
+                                <h6 class="font-weight-light"> Ficamos felizes em ver você!</h6>
                                 <form class="pt-3" method="post" action="{% url 'login' %}">
                                     {% csrf_token %}
-                                    <table>
-                                        <tr>
-                                            <td>{{ form.username.label_tag }}</td>
-                                            <td>{{ form.username }}</td>
-                                            <td>{{ form.password.label_tag }}</td>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail">Username</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend bg-transparent">
+                                                        <span class="input-group-text bg-transparent border-right-0">
+                                                            <i class="fa fa-user text-primary"></i>
+                                                        </span>
+                                                    </div>
 
-                                            <td>{{ form.password }}</td>
-                                        </tr>
-                                    </table>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail">Username</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend bg-transparent">
-                                                <span class="input-group-text bg-transparent border-right-0">
-                                                    <i class="fa fa-user text-primary"></i>
-                                                </span>
+                                                    <input type="text" name="username" id="username" class="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Lord Valdemar">
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="batata">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword">Password</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend bg-transparent">
-                                                <span class="input-group-text bg-transparent border-right-0">
-                                                    <i class="fa fa-lock text-primary"></i>
-                                                </span>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword">Password</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend bg-transparent">
+                                                        <span class="input-group-text bg-transparent border-right-0">
+                                                            <i class="fa fa-lock text-primary"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    <input type="password" name="password" id="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Batata123">
+                                                </div>
                                             </div>
-                                            <input type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="senha">
-                                        </div>
-                                    </div>
                                     <div class="my-2 d-flex justify-content-between align-items-center">
                                         <div class="form-check">
                                             <label class="form-check-label text-muted">
                                                 <input type="checkbox" class="form-check-input">
-                                                Keep me signed in
+                                                Lembrar-me
                                             </label>
                                         </div>
                                         <a href="#" class="auth-link text-black">Forgot password?</a>
                                     </div>
                                     <div class="my-3">
-                                        <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">LOGIN</a>
-                                        <input type="submit" placeholder="login">
+                                        <input class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="Entrar">
+
                                     </div>
 
                                     <div class="text-center mt-4 font-weight-light">
-                                        Não possui conta? <a href="register-2.html" class="text-primary">Criar</a>
+                                        Não possui conta? <a href="{% url 'register' %}" class="text-primary">Criar</a>
                                     </div>
                                     <input type="hidden" name="next" value="{{ next }}">
-                                    {{ form.errors }}
+                                    <div style="color:red;"> {{ form.errors }}</div>
+
                                 </form>
                             </div>
                         </div>
                         <div class="col-lg-6 login-half-bg d-flex flex-row">
+                            <!--<img src="{% static 'images/login-background.png' %}">-->
                             <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2018
                                 All rights reserved.</p>
                         </div>
