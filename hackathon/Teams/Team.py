@@ -1,5 +1,8 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from core.models import Member, Team
+
+from core import Views
 
 
 def list_team(request):
@@ -79,3 +82,29 @@ def return_team(request, context):
     else:
         context = append
     return render(request, 'teams.html', context)
+
+
+def new_team_invitations(request):
+    team = request.GET['team']
+    users = request.GET['users'] # lista de usuarios
+    team = Team.objects.get(id=team)
+    for user in users:
+         us = User.objects.get(id=user)
+         invitation = Member(id_user=us, level_asses='C', id_team=team)
+    return render(request, 'teams.html', context)
+
+
+def invitation_response(request):
+    response = request.GET["response"] # resposta (S = sim, N=não)
+    user = request.user
+    member = request.GET['member']
+    member = Member.objects.get(id=member)
+    if member.id_use == user:
+        if member.level_asses == 'C':
+            if response == 'S':
+                member.level_asses = 'U'
+                member.save()
+            else:
+                member.delete()
+            Views.dashboard(request)
+    Views.dashboard(request)

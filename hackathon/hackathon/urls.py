@@ -35,6 +35,8 @@ urlpatterns = [
     path('team/delete', Team.delete_team, name='delete_team'),
     path('team/update', Team.update_team, name='update_team'),
     path('team/get', Team.get_team, name='get_team'),
+    patch('team/invitation/new', Team.new_team_invitations, name='invitations_team'),
+    patch('team/invitation/response', Team.invitation_response, name='response_invitations_team'),
     url(r'^admin/', admin.site.urls),
     url(r'^$', Views.index, name='index'),
     url(r'^dashboard/', Views.dashboard, name='dashboard'),

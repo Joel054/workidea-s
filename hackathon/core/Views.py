@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 
 
@@ -43,6 +44,8 @@ def register(request):
     return render(request, 'register.html')
 
 
-
-
-
+def get_user(request):
+    name = request.GET['name']
+    users = User.objects.filter(name=name)
+    context = {"users": users}
+    return HttpRequest(request, context)
