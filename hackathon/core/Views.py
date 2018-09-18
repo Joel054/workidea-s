@@ -34,7 +34,6 @@ def register_commit(request):
         except User.DoesNotExist:
             user = User.objects.create_user(_username, email, password, first_name=first_name, last_name=last_name)
             user.save()
-
     else:
         return render(request, 'register.html', {'errors': 'As senhas não correspondem'})
     return redirect('../login/')

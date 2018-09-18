@@ -29,7 +29,7 @@ class Member(models.Model):
     id_team = models.ForeignKey(Team, on_delete=models.CASCADE)
 
     def __str__(self):
-        return_ = "User " + self.id_user.username + " é " + self.level_asses + "do team " + self.id_team.name
+        return_ = "User " + self.id_user.username + " é " + self.level_asses + " do team " + self.id_team.name
         return return_
 
 
