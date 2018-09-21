@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from .models import Activity, Premium, Phase, Notification, Hackathon, Team, Member
+from Teams.models import Member, Team
+
+from hackathon.competicoes.models import Hackathon, Phase, Premium, Activity
+from .models import Notification
 from django.contrib import admin
 
 # Register your models here.
