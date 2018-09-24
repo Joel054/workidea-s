@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
-from hackathon.Teams.models import Team
+from Teams.models import Team
 
 
 class Activity(models.Model):

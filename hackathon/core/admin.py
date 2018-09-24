@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from Teams.models import Member, Team
 
-from hackathon.competicoes.models import Hackathon, Phase, Premium, Activity
+from competicoes.models import Hackathon, Phase, Premium, Activity
 from .models import Notification
 from django.contrib import admin
 

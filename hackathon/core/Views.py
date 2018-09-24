@@ -14,7 +14,9 @@ def index(request):
 
 
 def dashboard(request):
-    return render(request, 'index.html')
+    if request.user.is_authenticated:
+        return render(request, 'index.html')
+    return index(request)
 
 
 def register_commit(request):
