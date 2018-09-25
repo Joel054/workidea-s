@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', Views.index, name='index'),
     url(r'^dashboard/', Views.dashboard, name='dashboard'),
+    url(r'^settings/', Views.settings, name='settings'),
     path('team/', include("Teams.urls"))
 ]

@@ -79,3 +79,7 @@ def update_user(request):
         user.save()
         return dashboard(request)
     return redirect("../login/")
+
+
+def settings(request):
+    return render(request, 'settings.html')
