@@ -26,8 +26,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name="login"),
-    path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+    path('logout/', Views.logout_view, name="logout"),
     path('register/', Views.register, name='register'),
+    path('user/update/', Views.update_user, name='update_user'),
     path('register_commit/', Views.register_commit, name='register_commit'),
     url(r'^admin/', admin.site.urls),
     url(r'^$', Views.index, name='index'),
