@@ -1,10 +1,8 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from Teams.models import Member, Team
-
 from core import Views
-
-from Teams.Team import return_team
+from .models import Member, Team
+from .Team import return_team
 
 
 def list_team(request):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from Teams.models import Member, Team
+from team.models import Member, Team
 
 from competicoes.models import Hackathon, Phase, Premium, Activity
 from .models import Notification

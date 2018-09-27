@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
-from Teams.models import Team
+from team.models import  Team
 
 
 # Create your models here.

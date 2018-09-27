@@ -1,5 +1,5 @@
 
-from Teams.models import Member
+from .models import Member
 from django.shortcuts import render
 
 # request padrão

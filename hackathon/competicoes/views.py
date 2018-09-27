@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 
 # Create your views here.
-from hackathon.Teams.models import Team
+from hackathon.team.models import Team
 from hackathon.competicoes.models import Hackathon
 
 

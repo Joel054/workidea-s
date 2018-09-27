@@ -61,13 +61,13 @@ def logout_view(request):
 def update_user(request):
     user = request.user
     if request.user.is_authenticated:
-        username = request.GET['username']
-        email = request.GET['email']
-        first_name = request.GET['first_name']
-        last_name = request.GET['last_name']
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         if username != '':
-            test_username = User.objects.filter(username=username)
-            if test_username is not None:
+            test_username = User.objects.filter(username=username).exists()
+            if test_username:
                 return render(request, 'settings.html', {'error': 'Este username ja existe'})
             user.username = username
         if email != '':
