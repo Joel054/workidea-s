@@ -3,128 +3,116 @@
 {% block content %}
     <div class="content-wrapper">
         <div class="row">
-        <div class="col-md-8 grid-margin grid-margin-md-0 stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Equipes</h4>
-                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                        <div class="wrapper ml-3">
-                            <h6 class="mb-1">Stella Davidson</h6>
-                            <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City, USA
-                            </small>
-                        </div>
-                        <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                class="fas fa-check font-weight-bold"></i></div>
+            <div class="col-md-8 grid-margin grid-margin-md-0 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Equipes</h4>
+                        {% for member in members %}
+                            <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                                <div class="wrapper ml-3">
+                                    <h6 class="mb-1">{{ member }}</h6>
+                                </div>
+                                {% if member.level_asses == 'Admin' %}
+                                    <div class="badge badge-pill badge-info ml-auto px-1 py-1">
+                                        <form methods="post" action="{% url 'update_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                            <input type="submit" value="Update">
+                                        </form>
+                                    </div>
+                                    <div class="badge badge-pill badge-info ml-auto px-1 py-1">
+                                        <form methods="post" action="{% url 'delete_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                            <input type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                    <div class="badge badge-pill badge-info ml-auto px-1 py-1">
+                                        <form methods="post" action="{% url 'get_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                            <input type="submit" value="GO">
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
+                         {% endfor %}
+                     {{ delete }}
                     </div>
-                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                        <div class="wrapper ml-3">
-                            <h6 class="mb-1">Daniel Russel</h6>
-                            <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Florida, USA
-                            </small>
+                </div>
+            </div>
+            <div class="col-md-4 grid-margin grid-margin-md-0 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Convites</h4>
+                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                            <div class="wrapper ml-3">
+                                <h6 class="mb-1">Stella Davidson</h6>
+                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City, USA
+                                </small>
+                            </div>
+                            <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
+                                    class="fas fa-check font-weight-bold"></i></div>
                         </div>
-                        <div class="badge badge-pill badge-success ml-auto px-1 py-1"><i
-                                class="fas fa-plus font-weight-bold"></i></div>
-                    </div>
-                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                        <div class="wrapper ml-3">
-                            <h6 class="mb-1">Bruno King</h6>
-                            <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Arkansas, USA
-                            </small>
+                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                            <div class="wrapper ml-3">
+                                <h6 class="mb-1">Daniel Russel</h6>
+                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Florida, USA
+                                </small>
+                            </div>
+                            <div class="badge badge-pill badge-success ml-auto px-1 py-1"><i
+                                    class="fas fa-plus font-weight-bold"></i></div>
                         </div>
-                        <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                class="fas fa-check font-weight-bold"></i></div>
-                    </div>
-                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                        <div class="wrapper ml-3">
-                            <h6 class="mb-1">David Moore</h6>
-                            <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Arizon, USA</small>
+                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                            <div class="wrapper ml-3">
+                                <h6 class="mb-1">Bruno King</h6>
+                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Arkansas, USA
+                                </small>
+                            </div>
+                            <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
+                                    class="fas fa-check font-weight-bold"></i></div>
                         </div>
-                        <div class="badge badge-pill badge-success ml-auto px-1 py-1"><i
-                                class="fas fa-plus font-weight-bold"></i></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 grid-margin grid-margin-md-0 stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Convites</h4>
-                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                        <div class="wrapper ml-3">
-                            <h6 class="mb-1">Stella Davidson</h6>
-                            <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City, USA
-                            </small>
-                        </div>
-                        <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                class="fas fa-check font-weight-bold"></i></div>
-                    </div>
-                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                        <div class="wrapper ml-3">
-                            <h6 class="mb-1">Daniel Russel</h6>
-                            <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Florida, USA
-                            </small>
-                        </div>
-                        <div class="badge badge-pill badge-success ml-auto px-1 py-1"><i
-                                class="fas fa-plus font-weight-bold"></i></div>
-                    </div>
-                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                        <div class="wrapper ml-3">
-                            <h6 class="mb-1">Bruno King</h6>
-                            <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Arkansas, USA
-                            </small>
-                        </div>
-                        <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                class="fas fa-check font-weight-bold"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div>
-        <form method="post" action="{% url 'create_team' %}">
-            {% csrf_token %}
-            <h3>name</h3>
-            <input type="text" name="name" id="name" value="{% if update %} {{ update.name }} {% endif %}">
-            <h3>description</h3>
-            <input type="text" name="description" id="description"
-                   value="{% if update %} {{ update.description }} {% endif %}">
-            <input type="hidden" name="id_team" value="{% if update %} {{ update.id }} {% endif %}">
-            <input type="submit" value="{% if update %}Update{% else %}New{% endif %}">
-        </form>
-        <ul>
-            {% for member in members %}
-                <li>
-                    {{ member }}
-                    {% if member.level_asses == 'Admin' %}
-                        <form methods="post" action="{% url 'delete_team' %}">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                            <input type="submit" value="Delete">
-                        </form>
-                        <form methods="post" action="{% url 'update_team' %}">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                            <input type="submit" value="Update">
-                        </form>
-                        <form methods="post" action="{% url 'get_team' %}">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                            <input type="submit" value="GO">
-                        </form>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-        {{ delete }}
-        </ul>
+        <div><br></div>
+        <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{% if update %}Edite sua Equipe{% else %}Crie sua Equipe{% endif %}</h4>
+                  <form id="example-form" method="post" action="{% url 'create_team' %}">
+                    {% csrf_token %}
+                    <div>
+                      <section>
+                        <div class="form-group">
+                          <label>Nome</label>
+                          <input class="form-control" name="name" id="name"  placeholder="Nome da Equipe" value="{% if update %} {{ update.name }} {% endif %}">
+                          <small class="form-text text-muted">Ex: Só Beck end, Terror do NetBeans, HeadShot, Tic-e-taca, C mexe comigo..</small>
+                        </div>
+                        <div class="form-group">
+                          <label>Descrição</label>
+                          <input class="form-control" name="description" id="description"  placeholder="Descrição da Equipe"  value="{% if update %} {{ update.description }} {% endif %}">
+                          <small class="form-text text-muted">Ex: Só tem fera aqui bixo..</small>
+                        </div>
+                        <input type="hidden" name="id_team" value="{% if update %} {{ update.id }} {% endif %}">
+                      </section>
+                    </div>
+                    <div class="mt-6">
+                        <input class="btn btn-primary btn-fw" type="submit" value="{% if update %}Editar{% else %}Pronto{% endif %}">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
-    </div>
+</div>
 
 {% endblock %}
