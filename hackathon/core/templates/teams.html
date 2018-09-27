@@ -7,32 +7,19 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Equipes</h4>
-                        {% for member in members %}
+                        {% for  member in members %}
                             <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                 <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                                 <div class="wrapper ml-3">
-                                    <h6 class="mb-1">{{ member }}</h6>
+                                    <h6 class="mb-1">{{ member.id_team.name }}</h6>
                                 </div>
                                 {% if member.level_asses == 'Admin' %}
-                                    <div class="badge badge-pill badge-info ml-auto px-1 py-1">
-                                        <form methods="post" action="{% url 'update_team' %}">
-                                            {% csrf_token %}
-                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                                            <input type="submit" value="Update">
-                                        </form>
-                                    </div>
-                                    <div class="badge badge-pill badge-info ml-auto px-1 py-1">
-                                        <form methods="post" action="{% url 'delete_team' %}">
-                                            {% csrf_token %}
-                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                                            <input type="submit" value="Delete">
-                                        </form>
-                                    </div>
-                                    <div class="badge badge-pill badge-info ml-auto px-1 py-1">
+
+                                    <div class="ml-auto px-1 py-1">
                                         <form methods="post" action="{% url 'get_team' %}">
                                             {% csrf_token %}
                                             <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                                            <input type="submit" value="GO">
+                                            <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
                                         </form>
                                     </div>
                                 {% endif %}
