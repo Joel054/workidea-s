@@ -70,7 +70,11 @@ def update_team(request):
 
 def get_team(request):
     user = request.user
-    id = request.POST.get('id_team')
+    id = 0
+    if request.method == 'POST':
+        id = request.POST.get('id_team')
+    else:
+        id = request.GET.get('id_team')
     team = Team.objects.get(id=id)
     authorization = Member.objects.get(id_user=user, id_team=team)
     if authorization:
