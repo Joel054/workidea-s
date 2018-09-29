@@ -58,7 +58,6 @@ def list_hackathon(request):
     return dashboard(request)
 
 
-
 # Phase
 def create_phase(request):
     user = request.user
@@ -71,6 +70,7 @@ def create_phase(request):
         phase.description = request.POST.get('description')
         phase.save()
         hackathon.phases.add(phase)
+
 
 def dashboard_hackathon(request):
     return render(request, 'competicoes/index.html')

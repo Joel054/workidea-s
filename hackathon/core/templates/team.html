@@ -15,10 +15,11 @@
                 },
                 dataType: 'json',
                 success: function (data) {
+                    var jsonData = JSON.parse(JSON.stringify(data));
+                    alert(jsonData[0]['fields']['username'])
+}
 
-                    alert(data);
 
-                }
               });
         });
     });

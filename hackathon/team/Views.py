@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from core import Views
 from .models import Member, Team
 from .Team import return_team
-from django.http.response import HttpResponse
+from django.http import HttpResponse
 
 
 def list_team(request):
@@ -96,10 +96,8 @@ def new_team_invitation(request):
     else:
         search = request.GET['search']
         result = User.objects.filter(username=search)
-        if result:
-            for us in result:
-                context.append(us)
-    return HttpResponse({'users': context})
+        context = serializers.serialize('json', result)
+    return HttpResponse(context)
 
 
 def invitation_response(request):
