@@ -72,15 +72,21 @@ def get_team(request):
     return return_team(request, None)
 
 
-def new_team_invitations(request):
-    team = request.GET['team']
-    users = request.GET['users']
-    team = Team.objects.get(id=team)
-    for user in users:
-         us = User.objects.get(id=user)
-         invitation = Member(id_user=us, level_asses='C', id_team=team)
-         invitation.save()
-    return render(request, 'teams.html')
+def new_team_invitation(request):
+    context = null
+    if request.method == 'POST':
+        team = request.GET['team']
+        user_id = request.GET['user_id']
+        team = Team.objects.get(id=team)
+        us = User.objects.get(id=user_id)
+        invitation = Member(id_user=us, level_asses='C', id_team=team)
+        invitation.save()
+        context = {'status_invitation': 'convite enviado'}
+    else:
+        search = request.GET['search']
+        result = User.objects.filter(Q(username_contains=search)|Q(email=search))[:20]
+        context ={'users': result}
+    return JsonResponse(context)
 
 
 def invitation_response(request):

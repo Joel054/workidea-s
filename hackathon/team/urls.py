@@ -8,6 +8,6 @@ urlpatterns = [
     path('delete', views.delete_team, name='delete_team'),
     path('update', views.update_team, name='update_team'),
     path('get', views.get_team, name='get_team'),
-    path('invitation/new', views.new_team_invitations, name='invitations_team'),
+    path('invitation/new', views.new_team_invitation, name='invitation_team'),
     path('invitation/response', views.invitation_response, name='response_invitations_team')
 ]
