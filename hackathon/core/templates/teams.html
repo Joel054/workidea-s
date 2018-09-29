@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
     <div class="content-wrapper">
+    {% if delete %}
+        <div class="msg-warning alert alert-fill-warning" role="alert">
+        <i class="fa fa-exclamation-triangle"></i>
+        {{ delete }}
+    </div>
+        <script>
+            setTimeout(function(){
+                var msg = document.getElementsByClassName("msg-warning");
+                while(msg.length > 0){
+                    msg[0].parentNode.removeChild(msg[0]);
+                }
+            }, 2000);
+        </script>
+    {% endif %}
         <div class="row">
             <div class="col-md-8 grid-margin grid-margin-md-0 stretch-card">
                 <div class="card">
@@ -62,7 +77,18 @@
                         <div class="wrapper d-flex align-items-center py-2 border-bottom">
                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                             <div class="wrapper ml-3">
-                                <h6 class="mb-1">N funciona - teste</h6>
+                                <h6 class="mb-1">Stella Davidson</h6>
+                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City,
+                                    USA
+                                </small>
+                            </div>
+                            <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
+                                    class="fas fa-check font-weight-bold"></i></div>
+                        </div>
+                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                            <div class="wrapper ml-3">
+                                <h6 class="mb-1">Daniel Russel</h6>
                                 <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Florida, USA
                                 </small>
                             </div>
@@ -74,46 +100,61 @@
             </div>
         </div>
         <!-- botao nova equipe -->
-        <div class="text-center">
-           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#NovaEquipe">Nova Equipe<i class="fa fa-play-circle ml-1"></i></button>
-        </div>
+        {#        <div class="text-center">#}
+        {#           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#NovaEquipe">Nova Equipe<i class="fa fa-play-circle ml-1"></i></button>#}
+        {#        </div>#}
         <!--modal editar-->
-        <div class="modal fade" id="NovaEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="NovaEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="card-title">{% if update %}Edite sua Equipe{% else %}Crie sua Equipe{% endif %}</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                        <h4 class="card-title">{% if update %}Edite sua Equipe{% else %}Crie sua Equipe{% endif %}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                      <form id="example-form" method="post" action="{% url 'create_team' %}">
+                    <form id="example-form" method="post" action="{% url 'create_team' %}">
                         <div class="modal-body">
                             {% csrf_token %}
                             <div>
-                              <section>
-                                <div class="form-group">
-                                  <label>Nome</label>
-                                  <input class="form-control" name="name" id="name"  placeholder="Nome da Equipe" value="{% if update %} {{ update.name }} {% endif %}">
-                                  <small class="form-text text-muted">Ex: Só Beck end, Terror do NetBeans, HeadShot, Tic-e-taca, C mexe comigo..</small>
-                                </div>
-                                <div class="form-group">
-                                  <label>Descrição</label>
-                                  <input class="form-control" name="description" id="description"  placeholder="Descrição da Equipe"  value="{% if update %} {{ update.description }} {% endif %}">
-                                  <small class="form-text text-muted">Ex: Só tem fera aqui bixo..</small>
-                                </div>
-                                <input type="hidden" name="id_team" value="{% if update %} {{ update.id }} {% endif %}">
-                              </section>
+                                <section>
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input class="form-control" name="name" id="name" placeholder="Nome da Equipe"
+                                               value="{% if update %} {{ update.name }} {% endif %}">
+                                        <small class="form-text text-muted">Ex: Só Beck end, Terror do NetBeans,
+                                            HeadShot, Tic-e-taca, C mexe comigo..
+                                        </small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descrição</label>
+                                        <input class="form-control" name="description" id="description"
+                                               placeholder="Descrição da Equipe"
+                                               value="{% if update %} {{ update.description }} {% endif %}">
+                                        <small class="form-text text-muted">Ex: Só tem fera aqui bixo..</small>
+                                    </div>
+                                    <input type="hidden" name="id_team"
+                                           value="{% if update %} {{ update.id }} {% endif %}">
+                                </section>
                             </div>
                         </div>
                         <div class="modal-footer">
-                          <input class="btn btn-primary btn-fw" type="submit" value="{% if update %}Editar{% else %}Pronto{% endif %}">
-                          <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-light" type="reset">Limpar</button>
+                            <input class="btn btn-primary btn-fw" type="submit"
+                                   value="{% if update %}Editar{% else %}Pronto{% endif %}">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
         </div>
-</div>
+    </div>
+    <div class="theme-setting-wrapper">
+        <div id="settings-trigger" data-toggle="modal" data-target="#NovaEquipe">
+            <i class="fas fa-plus"></i>
+            <i class="fas fa-user-friends"></i>
+        </div>
+    </div>
 
 {% endblock %}
