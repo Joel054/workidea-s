@@ -55,3 +55,17 @@ def list_hackathon(request):
         context = {'hackathons': hackathons}
         return render(request, 'hackatons.html', context)
     return dashboard(request)
+
+
+# Phase
+def create_phase(request):
+    user = request.user
+    id_hackathon = request.POST.get('id_hackathon')
+    hackathon = Hackathon.objects.get(id=id_hackathon)
+    member = Member.objects.filter(id_user=user, id_team=hackathon.team_manager)
+    if member.level_asses == "A":
+        phase = Phase()
+        phase.name = request.POST.get('name')
+        phase.description = request.POST.get('description')
+        phase.save()
+        hackathon.phases.add(phase)

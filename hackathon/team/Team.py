@@ -14,3 +14,6 @@ def return_team(request, context):
     else:
         context = append
     return render(request, 'teams.html', context)
+
+
+

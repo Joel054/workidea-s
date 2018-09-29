@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from core import Views
 from .models import Member, Team
 from .Team import return_team
+from django.http.response import HttpResponse
 
 
 def list_team(request):
@@ -69,10 +70,10 @@ def update_team(request):
 
 def get_team(request):
     user = request.user
-    id = request.GET.get('id_team')
-    team = Team.objects.get(id=int(id))
+    id = request.POST.get('id_team')
+    team = Team.objects.get(id=id)
     authorization = Member.objects.get(id_user=user, id_team=team)
-    if authorization is not None:
+    if authorization:
         context = {'team': team, 'level_asses': authorization.level_asses}
         return render(request, 'team.html', context)
     return return_team(request, None)
@@ -94,11 +95,11 @@ def new_team_invitation(request):
         if result:
             for us in result:
                 context.append(us)
-    return JsonResponse({'users': context})
+    return HttpResponse({'users': context})
 
 
 def invitation_response(request):
-    response = request.GET["response"] # resposta (S = sim, N=não)
+    response = request.GET["response"]   # resposta (S = sim, N=não)
     user = request.user
     member = request.GET['member']
     member = Member.objects.get(id=member)
