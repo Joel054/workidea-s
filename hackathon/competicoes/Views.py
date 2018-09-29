@@ -9,6 +9,7 @@ from team.models import Team, Member
 from competicoes.models import Hackathon
 
 
+
 def create_hackathon(request):
     hackathon = Hackathon()
     hackathon.name = request.POST.get('name')
@@ -55,3 +56,8 @@ def list_hackathon(request):
         context = {'hackathons': hackathons}
         return render(request, 'hackatons.html', context)
     return dashboard(request)
+
+
+def dashboard_hackathon(request):
+    return render(request, 'competicoes/index.html')
+

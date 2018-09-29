@@ -34,5 +34,6 @@ urlpatterns = [
     url(r'^$', Views.index, name='index'),
     url(r'^dashboard/', Views.dashboard, name='dashboard'),
     url(r'^settings/', Views.settings, name='settings'),
-    path('team/', include("team.urls"))
+    path('team/', include("team.urls")),
+    path('hackathon/', include("competicoes.urls"))
 ]
