@@ -51,13 +51,15 @@ def delete_team(request):
 
 def update_team(request):
     user = request.user
-    id = request.GET.get('id_team')
-    team = Team.objects.get(id=int(id))
+    id = request.POST.get('id_team')
+    team = Team.objects.get(id=id)
     authorization = Member.objects.get(id_user=user, id_team=team)
-    if authorization is not None:
+    if authorization:
         if authorization.level_asses == 'Admin':
-            context = {'update': team}
-            return return_team(request, context)
+            team.name = request.POST.get("name")
+            team.description = request.POST.get("description")
+            team.save()
+            return get_team(request)
     return return_team(request, None)
 
 

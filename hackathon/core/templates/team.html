@@ -11,10 +11,10 @@
                     {% if level_asses == 'Admin' %}
                     <div class=" ml-auto px-1 py-1">
 
-                            <form methods="post" action="{% url 'update_team' %}">
+                            <form>
                                 {% csrf_token %}
                                 <input type="hidden" value="{{ team.id }}" name="id_team">
-                                <button type="submit" class="btn btn-dark btn-icon-text">
+                                <button type="button" class="btn btn-dark btn-icon-text" data-toggle="modal" data-target="#EditarEquipe">
                                     Editar
                                     <i class="fas fa-pencil-alt btn-icon-append"></i>
                                 </button>
@@ -186,6 +186,43 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <!--modal editar-->
+            <div class="modal fade" id="EditarEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="card-title">Edite sua Equipe</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                      <form id="example-form" method="post" action="{% url 'update_team' %}">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <div>
+                              <section>
+                                <div class="form-group">
+                                  <label>Nome</label>
+                                  <input class="form-control" name="name" id="name"  placeholder="Nome da Equipe" value="{{ team.name }}">
+                                  <small class="form-text text-muted">Ex: Só Beck end, Terror do NetBeans, HeadShot, Tic-e-taca, C mexe comigo..</small>
+                                </div>
+                                <div class="form-group">
+                                  <label>Descrição</label>
+                                  <input class="form-control" name="description" id="description"  placeholder="Descrição da Equipe"  value="{{ team.description }}">
+                                  <small class="form-text text-muted">Ex: Só tem fera aqui bixo..</small>
+                                </div>
+                                <input type="hidden" name="id_team" value="{{ team.id }}">
+                              </section>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <input class="btn btn-primary btn-fw" type="submit" value="Editar">
+                          <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
