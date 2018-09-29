@@ -8,27 +8,31 @@
                     <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
                          alt="profile image"/>
                     <h4>{{ team }}</h4>
+                    {% if level_asses == 'Admin' %}
                     <div class=" ml-auto px-1 py-1">
-                        <form methods="post" action="{% url 'update_team' %}">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                            <button type="submit" class="btn btn-dark btn-icon-text">
-                                Editar
-                                <i class="fas fa-pencil-alt btn-icon-append"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class=" ml-auto px-1 py-1">
-                        <form methods="post" action="{% url 'delete_team' %}">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
 
-                            <button type="submit" class="btn btn-danger btn-icon-text">
-                                Deletar
-                                <i class="fa fa-eraser btn-icon-prepend"></i>
-                            </button>
-                        </form>
+                            <form methods="post" action="{% url 'update_team' %}">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ team.id }}" name="id_team">
+                                <button type="submit" class="btn btn-dark btn-icon-text">
+                                    Editar
+                                    <i class="fas fa-pencil-alt btn-icon-append"></i>
+                                </button>
+                            </form>
+
                     </div>
+                    <div class=" ml-auto px-1 py-1">
+                            <form methods="post" action="{% url 'delete_team' %}">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ team.id }}" name="id_team">
+
+                                <button type="submit" class="btn btn-danger btn-icon-text">
+                                    Deletar
+                                    <i class="fa fa-eraser btn-icon-prepend"></i>
+                                </button>
+                            </form>
+                    </div>
+                    {% endif %}
 {#                    <p class="text-muted">{{ member }}</p>#}
 {#                    <p class="text-muted">#}
 {#                        {{ User }} " + self.id_user.username + " é " + self.level_asses + " do team " + self.id_team.name#}

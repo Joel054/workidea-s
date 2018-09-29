@@ -15,27 +15,33 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="dashboard/">
+            <a class="nav-link" href="{% url 'dashboard' %}">
                 <i class="fa fa-home menu-icon"></i>
                 <span class="menu-title">Home</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="dashboard/">
+            <a class="nav-link" href="{% url 'dashboard' %}">
                 <i class="fa fa-puzzle-piece menu-icon"></i>
                 <span class="menu-title">Hackthons</span>
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{% url 'list_teams' %}">
+                <i class="fas fa-user-friends menu-icon"></i>
+                <span class="menu-title">Equipes</span>
+            </a>
+             <!--
             <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
                aria-controls="page-layouts">
                 <i class="fas fa-user-friends menu-icon"></i>
                 <span class="menu-title">Equipes</span>
                 <i class="menu-arrow"></i>
             </a>
+
             <div class="collapse" id="page-layouts">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Times</a>
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'list_teams' %}">Times</a>
                     </li>
                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time2</a>
                     </li>
@@ -44,7 +50,7 @@
                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time4</a>
                     </li>
                 </ul>
-            </div>
+            </div>-->
         </li>
     </ul>
 </nav>

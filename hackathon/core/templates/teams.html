@@ -13,8 +13,6 @@
                                 <div class="wrapper ml-3">
                                     <h6 class="mb-1">{{ member.id_team.name }}</h6>
                                 </div>
-                                {% if member.level_asses == 'Admin' %}
-
                                     <div class="ml-auto px-1 py-1">
                                         <form methods="post" action="{% url 'get_team' %}">
                                             {% csrf_token %}
@@ -22,7 +20,6 @@
                                             <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
                                         </form>
                                     </div>
-                                {% endif %}
                             </div>
                          {% endfor %}
                      {{ delete }}
@@ -67,13 +64,20 @@
                 </div>
             </div>
         </div>
-    <div>
-        <div><br></div>
-        <div class="row">
-            <div class="col-12 grid-margin">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">{% if update %}Edite sua Equipe{% else %}Crie sua Equipe{% endif %}</h4>
+        <div class="text-center">
+           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#NovaEquipe">Nova Equipe<i class="fa fa-play-circle ml-1"></i></button>
+        </div>
+
+      <div class="modal fade" id="NovaEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="card-title">{% if update %}Edite sua Equipe{% else %}Crie sua Equipe{% endif %}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+                <div class="modal-body">
                   <form id="example-form" method="post" action="{% url 'create_team' %}">
                     {% csrf_token %}
                     <div>
@@ -92,14 +96,18 @@
                       </section>
                     </div>
                     <div class="mt-6">
-                        <input class="btn btn-primary btn-fw" type="submit" value="{% if update %}Editar{% else %}Pronto{% endif %}">
+
                     </div>
-                  </form>
+
                 </div>
-              </div>
-            </div>
+                <div class="modal-footer">
+                  <input class="btn btn-primary btn-fw" type="submit" value="{% if update %}Editar{% else %}Pronto{% endif %}">
+                  <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+          </div>
         </div>
-    </div>
+      </div>
 </div>
 
 {% endblock %}

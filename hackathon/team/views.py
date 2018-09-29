@@ -67,7 +67,7 @@ def get_team(request):
     team = Team.objects.get(id=int(id))
     authorization = Member.objects.get(id_user=user, id_team=team)
     if authorization is not None:
-        context = {'team': team}
+        context = {'team': team, 'level_asses': authorization.level_asses}
         return render(request, 'team.html', context)
     return return_team(request, None)
 
