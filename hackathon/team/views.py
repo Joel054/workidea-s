@@ -1,4 +1,8 @@
+
 from django.contrib.auth.models import User
+from django.core import serializers
+from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from core import Views
 from .models import Member, Team
@@ -75,7 +79,7 @@ def get_team(request):
 
 
 def new_team_invitation(request):
-    context = null
+    context = []
     if request.method == 'POST':
         team = request.GET['team']
         user_id = request.GET['user_id']
@@ -86,9 +90,11 @@ def new_team_invitation(request):
         context = {'status_invitation': 'convite enviado'}
     else:
         search = request.GET['search']
-        result = User.objects.filter(Q(username_contains=search)|Q(email=search))[:20]
-        context ={'users': result}
-    return JsonResponse(context)
+        result = User.objects.filter(username=search)
+        if result:
+            for us in result:
+                context.append(us)
+    return JsonResponse({'users': context})
 
 
 def invitation_response(request):

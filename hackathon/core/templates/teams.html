@@ -8,19 +8,21 @@
                     <div class="card-body">
                         <h4 class="card-title">Equipes</h4>
                         {% for  member in members %}
-                            <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                                <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                                <div class="wrapper ml-3">
-                                    <h6 class="mb-1">{{ member.id_team.name }}</h6>
-                                </div>
-                                    <div class="ml-auto px-1 py-1">
-                                        <form methods="post" action="{% url 'get_team' %}">
-                                            {% csrf_token %}
-                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                                            <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
-                                        </form>
+                             {% if level_asses != 'Invited' %}
+                                <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                    <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                                    <div class="wrapper ml-3">
+                                        <h6 class="mb-1">{{ member.id_team.name }}</h6>
                                     </div>
-                            </div>
+                                        <div class="ml-auto px-1 py-1">
+                                            <form methods="post" action="{% url 'get_team' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                                <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                            {% endif %}
                          {% endfor %}
                      {{ delete }}
                     </div>
@@ -30,35 +32,42 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Convites</h4>
+                        {% for  member in members %}
+                             {% if level_asses == 'Invited' %}
+                                    <!--<div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                                        <div class="wrapper ml-3">
+                                            <h6 class="mb-1">{{ member.id_team.name }}</h6>
+                                        </div>
+                                        <div class="ml-auto px-1 py-1">
+                                            <form methods="post" action="{% url 'get_team' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                                <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
+                                            </form>
+                                        </div>
+                                    </div>-->
+
+                                     <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                                        <div class="wrapper ml-3">
+                                            <h6 class="mb-1">Stella Davidson</h6>
+                                        </div>
+                                        <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
+                                                class="fas fa-check font-weight-bold"></i></div>
+                                    </div>
+                            {% endif %}
+                         {% endfor %}
+
                         <div class="wrapper d-flex align-items-center py-2 border-bottom">
                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                             <div class="wrapper ml-3">
-                                <h6 class="mb-1">Stella Davidson</h6>
-                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City, USA
-                                </small>
-                            </div>
-                            <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                    class="fas fa-check font-weight-bold"></i></div>
-                        </div>
-                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                            <div class="wrapper ml-3">
-                                <h6 class="mb-1">Daniel Russel</h6>
+                                <h6 class="mb-1">N funciona - teste</h6>
                                 <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Florida, USA
                                 </small>
                             </div>
                             <div class="badge badge-pill badge-success ml-auto px-1 py-1"><i
                                     class="fas fa-plus font-weight-bold"></i></div>
-                        </div>
-                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                            <div class="wrapper ml-3">
-                                <h6 class="mb-1">Bruno King</h6>
-                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Arkansas, USA
-                                </small>
-                            </div>
-                            <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                    class="fas fa-check font-weight-bold"></i></div>
                         </div>
                     </div>
                 </div>
