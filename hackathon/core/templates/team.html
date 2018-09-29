@@ -1,37 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
 {% block content %}
+    <script>
+    $(document).ready(function(){
+        $("#busca").change(function(){
+            var username = $(this).val();
+
+              $.ajax({
+                url: '{% url "invitation_team" %}',
+                data: {
+                  'search': username
+                },
+                dataType: 'json',
+                success: function (data) {
+
+                    alert(data);
+
+                }
+              });
+        });
+    });
+    </script>
     <div class="row">
         <div class="col-md-9 grid-margin stretch-card">
             <div class="card text-center">
                 <div class="card-body">
-                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
-                         alt="profile image"/>
+                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2" alt="profile image"/>
                     <h4>{{ team }}</h4>
                     {% if level_asses == 'Admin' %}
-                    <div class=" ml-auto px-1 py-1">
+                        <div class=" ml-auto px-1 py-1">
+                                <form>
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ team.id }}" name="id_team">
+                                    <button type="button" class="btn btn-dark btn-icon-text" data-toggle="modal" data-target="#EditarEquipe">
+                                        Editar
+                                        <i class="fas fa-pencil-alt btn-icon-append"></i>
+                                    </button>
+                                </form>
+                        </div>
+                        <div class=" ml-auto px-1 py-1">
+                                <form methods="post" action="{% url 'delete_team' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ team.id }}" name="id_team">
 
-                            <form>
-                                {% csrf_token %}
-                                <input type="hidden" value="{{ team.id }}" name="id_team">
-                                <button type="button" class="btn btn-dark btn-icon-text" data-toggle="modal" data-target="#EditarEquipe">
-                                    Editar
-                                    <i class="fas fa-pencil-alt btn-icon-append"></i>
-                                </button>
-                            </form>
-
-                    </div>
-                    <div class=" ml-auto px-1 py-1">
-                            <form methods="post" action="{% url 'delete_team' %}">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{ team.id }}" name="id_team">
-
-                                <button type="submit" class="btn btn-danger btn-icon-text">
-                                    Deletar
-                                    <i class="fa fa-eraser btn-icon-prepend"></i>
-                                </button>
-                            </form>
-                    </div>
+                                    <button type="submit" class="btn btn-danger btn-icon-text">
+                                        Deletar
+                                        <i class="fa fa-eraser btn-icon-prepend"></i>
+                                    </button>
+                                </form>
+                        </div>
                     {% endif %}
 {#                    <p class="text-muted">{{ member }}</p>#}
 {#                    <p class="text-muted">#}
@@ -43,7 +62,7 @@
 {#                    </p>#}
 {#                    <button class="btn btn-info btn-sm mt-3 mb-4">Follow</button>#}
                     <div class="border-top pt-3" style="margin-top: 20px">
-                        <div class="row">
+                       <!-- <div class="row">
                             <div class="col-4">
                                 <h6>5896</h6>
                                 <p>Post</p>
@@ -56,7 +75,7 @@
                                 <h6>7896</h6>
                                 <p>Likes</p>
                             </div>
-                        </div>
+                        </div> -->
                         <h4>Integrantes do Time</h4>
                         <div class="row">
                             <div class="col-md-4 grid-margin stretch-card">
@@ -100,6 +119,53 @@
                                                 <p class="text-muted">edward@gmail.com</p>
                                                 <p class="mt-2 text-primary font-weight-bold">Tester</p>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Enviar Convites-->
+                            <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Enviar Convites</h4>
+                                        <div class="nav-link">
+
+                                               {% csrf_token %}
+                                              <div class="input-group">
+                                                <!-- Buscar -->
+
+                                                    <div class="input-group-prepend">
+                                                      <span class="input-group-text">
+                                                          <i class="fas fa-search"></i>
+                                                      </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Nome ou email" id="busca"  >
+                                                   <!-- <div class="input-group-prepend">
+                                                      <input class="btn btn-secondary btn-fw" type="submit" value="Pesquisar">
+                                                    </div> -->
+                                              </div>
+
+
+                                        </div>
+                                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                                            <div class="wrapper ml-3">
+                                                <h6 class="mb-1">Stella Davidson</h6>
+                                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City, USA
+                                                </small>
+                                            </div>
+                                            <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
+                                                    class="fas fa-check font-weight-bold"></i></div>
+                                        </div>
+                                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                                            <div class="wrapper ml-3">
+                                                <h6 class="mb-1">Daniel Russel</h6>
+                                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>Florida, USA
+                                                </small>
+                                            </div>
+                                            <div class="badge badge-pill badge-success ml-auto px-1 py-1"><i
+                                                    class="fas fa-plus font-weight-bold"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -189,6 +255,7 @@
                     </div>
                 </div>
             </div>
+
             <!--modal editar-->
             <div class="modal fade" id="EditarEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
@@ -226,6 +293,9 @@
                     </div>
                 </div>
             </div>
+
+
+
 {% endblock %}
 
 
