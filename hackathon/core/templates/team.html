@@ -4,7 +4,15 @@
 
 {% block content %}
     <script>
+            function EnviaConvites(user_id){
+            $.post("{% url 'invitation_team' %}",
+            {
+                user_id: user_id,
+                team: {{ team.id }}
+            });
+        }
     $(document).ready(function(){
+
         $("#busca").change(function(){
             var username = $(this).val();
               $.ajax({
@@ -18,7 +26,6 @@
                     var i, peopleHTML= '';
                     for (i = 0; i < data.length; i++) {
                     peopleHTML +=
-                    " <form id=\"example-form\" method=\"post\" action=\"{% url 'invitation_team' %}\">\n" +
                         "                                                        <div class=\"wrapper d-flex align-items-center py-2 border-bottom\">\n" +
                         "                                                            <img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">\n" +
                         "                                                            <div class=\"wrapper ml-3\">\n" +
@@ -28,9 +35,8 @@
                         "                                                            </div>\n" +
                         "                                                            <input type=\"hidden\" name=\"id_team\"  value="+ {{ team.id }} +">\n" +
                         "                                                            <input type=\"hidden\" name=\"user_id\"  value=" + jsonData[i]['pk'] + ">\n" +
-                        "                                                            <input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\">\n" +
-                        "                                                        </div>\n" +
-                        "                                                    </form>";
+                        "                                                            <input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\" onclick=\"EnviaConvites("+ jsonData[i]['pk'] +") \" >\n" +
+                        "                                                        </div>\n";
                     }
                     var teste = document.getElementById('people')
                     teste.innerHTML = (peopleHTML);
@@ -179,6 +185,7 @@
                                                     </div> -->
                                               </div>
                                             <p id="people">
+
                                              </p>
                                         </div>
 
