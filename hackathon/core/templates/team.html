@@ -6,26 +6,26 @@
 {% block content %}
     <script>
             function EnviaConvites(user_id){
-            $.post("{% url 'invitation_team' %}",
-            {
-                user_id: user_id,
-                team: {{ team.id }}
-            });
-        }
-    $(document).ready(function(){
-        $("#busca").change(function(){
-            var username = $(this).val();
-              $.ajax({
-                url: '{% url "invitation_team" %}',
-                data: {
-                  'search': username
-                },
-                dataType: 'json',
-                success: function (data) {
-                    var jsonData = JSON.parse(JSON.stringify(data));
-                    var i, peopleHTML= '';
-                    for (i = 0; i < data.length; i++) {
-                    peopleHTML +=
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "invitation_team" %}',
+                    data: {
+                        'user_id': user_id,
+                        'team': {{ team.id }},
+                        'search': $("#busca").val(),
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    },
+                    dataType: 'json',
+                    success: function (data) {AtualizaBusca(data)}
+                });
+            }
+            function AtualizaBusca(data){
+                var jsonData = JSON.parse(JSON.stringify(data));
+                var i, peopleHTML= '';
+                for (i = 0; i < data.length; i++) {
+                    var existe = false;
+
+                        peopleHTML +=
                         "                                                        <div class=\"wrapper d-flex align-items-center py-2 border-bottom\">\n" +
                         "                                                            <img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">\n" +
                         "                                                            <div class=\"wrapper ml-3\">\n" +
@@ -37,11 +37,25 @@
                         "                                                            <input type=\"hidden\" name=\"user_id\"  value=" + jsonData[i]['pk'] + ">\n" +
                         "                                                            <input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\" onclick=\"EnviaConvites("+ jsonData[i]['pk'] +") \" >\n" +
                         "                                                        </div>\n";
-                    }
-                    var teste = document.getElementById('people')
-                    teste.innerHTML = (peopleHTML);
                 }
-              });
+                var teste = document.getElementById('people')
+                teste.innerHTML = (peopleHTML);
+            }
+    $(document).ready(function(){
+
+        $("#busca").change(function(){
+            var username = $(this).val();
+            $.ajax({
+                url: '{% url "invitation_team" %}',
+                data: {
+                    'search': username,
+                    'team': {{ team.id }},
+                },
+                dataType: 'json',
+                success: function (data) {
+                    AtualizaBusca(data);
+                }
+            });
         });
     });
     </script>

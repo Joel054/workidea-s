@@ -86,17 +86,27 @@ def get_team(request):
 def new_team_invitation(request):
     context = []
     if request.method == 'POST':
-        team = request.GET['team']
-        user_id = request.GET['user_id']
+        team = request.POST.get('team')
+        user_id = request.POST.get('user_id')
         team = Team.objects.get(id=team)
         us = User.objects.get(id=user_id)
-        invitation = Member(id_user=us, level_asses='C', id_team=team)
+        invitation = Member(id_user=us, level_asses='Invited', id_team=team)
         invitation.save()
-        context = {'status_invitation': 'convite enviado'}
+        search = request.POST.get('search')
+
     else:
-        search = request.GET['search']
-        result = User.objects.filter(username__contains=search)[:10]
-        context = serializers.serialize('json', result)
+        team = request.GET.get('team')
+        team = Team.objects.get(id=team)
+        search = request.GET.get('search')
+    result = User.objects.filter(username__contains=search)
+    uses = []
+    for use in result:
+        invited = Member.objects.filter(id_user=use, id_team=team)
+        if invited:
+            a = 1
+        else:
+            uses.append(use)
+    context = serializers.serialize('json', uses[:10])
     return HttpResponse(context)
 
 
@@ -106,7 +116,7 @@ def invitation_response(request):
     member = request.GET['member']
     member = Member.objects.get(id=member)
     if member.id_use == user:
-        if member.level_asses == 'C':
+        if member.level_asses == 'Invited':
             if response == 'S':
                 member.level_asses = 'U'
                 member.save()
