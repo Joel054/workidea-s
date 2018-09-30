@@ -95,7 +95,7 @@ def new_team_invitation(request):
         context = {'status_invitation': 'convite enviado'}
     else:
         search = request.GET['search']
-        result = User.objects.filter(username=search)
+        result = User.objects.filter(username__contains=search)[:10]
         context = serializers.serialize('json', result)
     return HttpResponse(context)
 

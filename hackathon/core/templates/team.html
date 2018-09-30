@@ -7,7 +7,6 @@
     $(document).ready(function(){
         $("#busca").change(function(){
             var username = $(this).val();
-
               $.ajax({
                 url: '{% url "invitation_team" %}',
                 data: {
@@ -16,14 +15,49 @@
                 dataType: 'json',
                 success: function (data) {
                     var jsonData = JSON.parse(JSON.stringify(data));
-                    alert(jsonData[0]['fields']['username'])
-}
-
-
+                    var i, peopleHTML= '';
+                    for (i = 0; i < data.length; i++) {
+                    peopleHTML +=
+                    " <form id=\"example-form\" method=\"post\" action=\"{% url 'invitation_team' %}\">\n" +
+                        "                                                        <div class=\"wrapper d-flex align-items-center py-2 border-bottom\">\n" +
+                        "                                                            <img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">\n" +
+                        "                                                            <div class=\"wrapper ml-3\">\n" +
+                        "                                                                <h6 class=\"mb-1\">" + jsonData[i]['fields']['username'] + "</h6>\n" +
+                        "                                                                <small class=\"text-muted mb-0\"><i class=\"fas fa-map-marker-alt mr-1\"></i>Florida, USA\n" +
+                        "                                                                </small>\n" +
+                        "                                                            </div>\n" +
+                        "                                                            <input type=\"hidden\" name=\"id_team\"  value="+ {{ team.id }} +">\n" +
+                        "                                                            <input type=\"hidden\" name=\"user_id\"  value=" + jsonData[i]['pk'] + ">\n" +
+                        "                                                            <input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\">\n" +
+                        "                                                        </div>\n" +
+                        "                                                    </form>";
+                    }
+                    var teste = document.getElementById('people')
+                    teste.innerHTML = (peopleHTML);
+                }
               });
         });
     });
     </script>
+    <!--peopleHTML += "<td>" + jsonData[i]['pk'] + "</td>";
+        peopleHTML += "<td>" + jsonData[i]['fields']['username'] + "</td>";
+        peopleHTML += "</tr>";
+        $("#people tbody").html(peopleHTML);
+
+                                        "<div class=\"wrapper d-flex align-items-center py-2 border-bottom\">\n" +
+                                    "<form method=\"post\" action=\" {% url 'invitation_team' %} \">"+
+
+"                                            <img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">\n" +
+"                                            <div class=\"wrapper ml-3\">\n" +
+"                                                <h6 id=\"username\" name=\\\"username\\\"\\n\" class=\"mb-1\">" + jsonData[i]['fields']['username'] +"</h6>\n" +
+"                                                <small class=\"text-muted mb-0\"><i class=\"fas fa-map-marker-alt mr-1\"></i>New York City, USA\n" + "</small>\n" +
+"                                            </div>\n" +
+                                            "<input type=\"hidden\" name=\"team_id\"\n" + "value=\"  + {{ team.id }} + \">" +
+                                            "<input type=\"hidden\" name=\"user_id\"\n" + "value=\""  + jsonData[i]['pk'] + " \">" +
+                                            "<input class=\"btn btn-primary btn-fw\" type=\"submit\"" +  "value=\"  Convidar \">" +
+                                     "</form>" +
+"                                    </div>";-->
+
     <div class="row">
         <div class="col-md-9 grid-margin stretch-card">
             <div class="card text-center">
@@ -130,7 +164,6 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Enviar Convites</h4>
                                         <div class="nav-link">
-
                                                {% csrf_token %}
                                               <div class="input-group">
                                                 <!-- Buscar -->
@@ -145,19 +178,14 @@
                                                       <input class="btn btn-secondary btn-fw" type="submit" value="Pesquisar">
                                                     </div> -->
                                               </div>
+                                            <p id="people">
+                                             </p>
+                                        </div>
 
 
-                                        </div>
-                                        <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                                            <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                                            <div class="wrapper ml-3">
-                                                <h6 class="mb-1">Stella Davidson</h6>
-                                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City, USA
-                                                </small>
-                                            </div>
-                                            <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                                    class="fas fa-check font-weight-bold"></i></div>
-                                        </div>
+
+
+                                         <!--
                                         <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                                             <div class="wrapper ml-3">
@@ -167,7 +195,8 @@
                                             </div>
                                             <div class="badge badge-pill badge-success ml-auto px-1 py-1"><i
                                                     class="fas fa-plus font-weight-bold"></i></div>
-                                        </div>
+                                        </div>-->
+
                                     </div>
                                 </div>
                             </div>
