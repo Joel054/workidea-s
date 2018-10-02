@@ -115,7 +115,7 @@
 {#                    </p>#}
 {#                    <button class="btn btn-info btn-sm mt-3 mb-4">Follow</button>#}
                     <div class="border-top pt-3" style="margin-top: 20px">
-                        <h4 style="padding: 20px">Hackathons que NOME_TIME participa</h4>
+                        <h4 style="padding: 20px">Hackathons que {{ team }} está participando</h4>
                         <div class="row">
                             <div class="col-md-4 grid-margin stretch-card">
                                 <div class="card text-center">
@@ -131,21 +131,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 grid-margin stretch-card">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2" alt="profile image"/>
-                                        <h4>HACKATHON NOME</h4>
-                                            {#<p class="text-muted">Developer</p>#}
-                                        <p class="mt-4 card-text">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                                Aenean commodo ligula eget dolor. Lorem
-                                        </p>
-                                        <button type="button" class="btn btn-outline-primary btn-fw">Abrir</button>
-                                    </div>
-                                </div>
-                            </div>
-
+                        </div>
+                    </div>
+                    <div class="border-top pt-3" style="margin-top: 20px">
+                        <h4 style="padding: 20px">Hackathons que {{ team }} está gerenciando</h4>
+                        <div class="row">
                             <div class="col-md-4 grid-margin stretch-card">
                                 <div class="card text-center">
                                     <div class="card-body">
@@ -170,80 +160,57 @@
             <div class="card-body">
                 <div class="row">
                     <!--Enviar Convites-->
-                    <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Enviar Convites</h4>
-                                <div class="nav-link">
-                                       {% csrf_token %}
-                                      <div class="input-group">
-                                        <!-- Buscar -->
-                                            <div class="input-group-prepend">
-                                              <span class="input-group-text">
-                                                  <i class="fas fa-search"></i>
-                                              </span>
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="Nome ou email" id="busca"  >
-                                           <!-- <div class="input-group-prepend">
-                                              <input class="btn btn-secondary btn-fw" type="submit" value="Pesquisar">
-                                            </div> -->
-                                      </div>
-                                    <p id="people">
-                                     </p>
+                    {% if level_asses == 'Admin' %}
+                        <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Enviar Convites</h4>
+                                    <div class="nav-link">
+                                           {% csrf_token %}
+                                          <div class="input-group">
+                                            <!-- Buscar -->
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text">
+                                                      <i class="fas fa-search"></i>
+                                                  </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Nome ou email" id="busca"  >
+                                               <!-- <div class="input-group-prepend">
+                                                  <input class="btn btn-secondary btn-fw" type="submit" value="Pesquisar">
+                                                </div> -->
+                                          </div>
+                                          <p id="people">
+                                          </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
                 <div class="row text-center" style="padding-top: 30px;">
                     <div class="col-md-12">
                         <h4>Integrantes do Time</h4>
                     </div>
-                    <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded"
-                                         alt="profile image"/>
-                                    <div class="ml-3">
-                                        <h6>Maria</h6>
-                                        <p class="text-muted">maria@gmail.com</p>
-                                        <p class="mt-2 text-primary font-weight-bold">Designer</p>
+                    <!-- listar integrantes do time -->
+                    {% for  member in members %}
+                        {% if level_asses == 'User' %}
+                            <div class="col-md-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-row">
+                                            <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded"
+                                                 alt="profile image"/>
+                                            <div class="ml-3">
+                                                <h6>Maria</h6>
+                                                <p class="text-muted">{{ team.User }}</p>
+                                                <p class="mt-2 text-primary font-weight-bold">Designer</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded"
-                                         alt="profile image"/>
-                                    <div class="ml-3">
-                                        <h6>Thomas Edison</h6>
-                                        <p class="text-muted">thomas@gmail.com</p>
-                                        <p class="mt-2 text-primary font-weight-bold">Developer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded"
-                                         alt="profile image"/>
-                                    <div class="ml-3">
-                                        <h6>Edward</h6>
-                                        <p class="text-muted">edward@gmail.com</p>
-                                        <p class="mt-2 text-primary font-weight-bold">Tester</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -272,67 +239,67 @@
                 </div>
             </div>
         </div>
-                <div class="col-md-6 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title mb-0">Daily Order</h4>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-inline-block pt-3">
-                                    <div class="d-md-flex">
-                                        <h2 class="mb-0">$2256</h2>
-                                        <div class="d-flex align-items-center ml-md-2 mt-2 mt-md-0">
-                                            <i class="far fa-clock text-muted"></i>
-                                            <small class="ml-1 mb-0">Updated: 05:42pm</small>
-                                        </div>
-                                    </div>
-                                    <small class="text-gray">hey, let’s have lunch together</small>
-                                </div>
-                                <div class="d-inline-block">
-                                    <i class="fas fa-shopping-cart text-danger icon-lg"></i>
+        <div class="col-md-6 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-0">Daily Order</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-inline-block pt-3">
+                            <div class="d-md-flex">
+                                <h2 class="mb-0">$2256</h2>
+                                <div class="d-flex align-items-center ml-md-2 mt-2 mt-md-0">
+                                    <i class="far fa-clock text-muted"></i>
+                                    <small class="ml-1 mb-0">Updated: 05:42pm</small>
                                 </div>
                             </div>
+                            <small class="text-gray">hey, let’s have lunch together</small>
+                        </div>
+                        <div class="d-inline-block">
+                            <i class="fas fa-shopping-cart text-danger icon-lg"></i>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!--modal editar-->
-            <div class="modal fade" id="EditarEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="card-title">Edite sua Equipe</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                      <form id="example-form" method="post" action="{% url 'update_team' %}">
-                        <div class="modal-body">
-                            {% csrf_token %}
-                            <div>
-                              <section>
-                                <div class="form-group">
-                                  <label>Nome</label>
-                                  <input class="form-control" name="name" id="name"  placeholder="Nome da Equipe" value="{{ team.name }}">
-                                  <small class="form-text text-muted">Ex: Só Beck end, Terror do NetBeans, HeadShot, Tic-e-taca, C mexe comigo..</small>
-                                </div>
-                                <div class="form-group">
-                                  <label>Descrição</label>
-                                  <input class="form-control" name="description" id="description"  placeholder="Descrição da Equipe"  value="{{ team.description }}">
-                                  <small class="form-text text-muted">Ex: Só tem fera aqui bixo..</small>
-                                </div>
-                                <input type="hidden" name="id_team" value="{{ team.id }}">
-                              </section>
-                            </div>
+    <!--modal editar-->
+    <div class="modal fade" id="EditarEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="card-title">Edite sua Equipe</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              <form id="example-form" method="post" action="{% url 'update_team' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div>
+                      <section>
+                        <div class="form-group">
+                          <label>Nome</label>
+                          <input class="form-control" name="name" id="name"  placeholder="Nome da Equipe" value="{{ team.name }}">
+                          <small class="form-text text-muted">Ex: Só Beck end, Terror do NetBeans, HeadShot, Tic-e-taca, C mexe comigo..</small>
                         </div>
-                        <div class="modal-footer">
-                          <input class="btn btn-primary btn-fw" type="submit" value="Editar">
-                          <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                        <div class="form-group">
+                          <label>Descrição</label>
+                          <input class="form-control" name="description" id="description"  placeholder="Descrição da Equipe"  value="{{ team.description }}">
+                          <small class="form-text text-muted">Ex: Só tem fera aqui bixo..</small>
                         </div>
-                    </form>
+                        <input type="hidden" name="id_team" value="{{ team.id }}">
+                      </section>
                     </div>
                 </div>
+                <div class="modal-footer">
+                  <input class="btn btn-primary btn-fw" type="submit" value="Editar">
+                  <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
             </div>
+        </div>
+    </div>
 
 
 {% endblock %}

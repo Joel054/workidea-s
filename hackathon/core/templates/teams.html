@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                             {% endif %}
-                         {% endfor %}
+                        {% endfor %}
                      {{ delete }}
                     </div>
                 </div>
@@ -47,9 +47,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Convites</h4>
+                        <!-- lISTAR CONVITES -->
                         {% for  member in members %}
                              {% if level_asses == 'Invited' %}
-                                    <!--<div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                         <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                                         <div class="wrapper ml-3">
                                             <h6 class="mb-1">{{ member.id_team.name }}</h6>
@@ -61,16 +62,8 @@
                                                 <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
                                             </form>
                                         </div>
-                                    </div>-->
-
-                                     <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                                        <div class="wrapper ml-3">
-                                            <h6 class="mb-1">Stella Davidson</h6>
-                                        </div>
-                                        <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
-                                                class="fas fa-check font-weight-bold"></i></div>
                                     </div>
+                                    hue
                             {% endif %}
                          {% endfor %}
 
