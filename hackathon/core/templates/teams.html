@@ -47,7 +47,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Convites</h4>
-                        <!-- lISTAR CONVITES -->
+                        <!-- LISTAR CONVITES -->
                         {% for  member in members %}
                              {% if level_asses == 'Invited' %}
                                     <div class="wrapper d-flex align-items-center py-2 border-bottom">
@@ -56,10 +56,10 @@
                                             <h6 class="mb-1">{{ member.id_team.name }}</h6>
                                         </div>
                                         <div class="ml-auto px-1 py-1">
-                                            <form methods="post" action="{% url 'get_team' %}">
+                                            <form methods="post" action="{% url 'response_invitations_team' %}">
                                                 {% csrf_token %}
                                                 <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                                                <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
+                                                <button type="submit" class="btn btn-primary btn-fw">Aceitar</button>
                                             </form>
                                         </div>
                                     </div>
@@ -71,9 +71,7 @@
                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                             <div class="wrapper ml-3">
                                 <h6 class="mb-1">Stella Davidson</h6>
-                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City,
-                                    USA
-                                </small>
+                                <small class="text-muted mb-0"><i class="fas fa-map-marker-alt mr-1"></i>New York City, USA</small>
                             </div>
                             <div class="badge badge-pill badge-info ml-auto px-1 py-1"><i
                                     class="fas fa-check font-weight-bold"></i></div>
