@@ -43,7 +43,7 @@ def create_team(request):
 
 def delete_team(request):
     user = request.user
-    id = request.GET.get('id_team')
+    id = request.POST.get('id_team')
     team = Team.objects.get(id=int(id))
     authorization = Member.objects.get(id_user=user, id_team=team)
     context = {'delete': 'error'}
