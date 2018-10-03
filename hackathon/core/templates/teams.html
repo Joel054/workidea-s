@@ -30,11 +30,9 @@
                                         <h6 class="mb-1">{{ member.id_team.name }}</h6>
                                     </div>
                                         <div class="ml-auto px-1 py-1">
-                                            <form methods="post" action="{% url 'get_team' %}">
-                                                {% csrf_token %}
-                                                <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                            <a href="{% url 'get_team' member.id_team.slug %}">
                                                 <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
-                                            </form>
+                                            </a>
                                         </div>
                                     </div>
                             {% endif %}
