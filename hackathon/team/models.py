@@ -18,7 +18,7 @@ class Member(models.Model):
     LEVEL_ASSES = (
         ('U', 'User'),
         ('A', 'Admin'),
-        ('C', 'Invited')
+        ('I', 'Invited')
     )
     level_asses = models.CharField(max_length=50, choices=LEVEL_ASSES)
     id_team = models.ForeignKey(Team, on_delete=models.CASCADE)
