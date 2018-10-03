@@ -17,7 +17,7 @@ def index(request):
 def dashboard(request):
     if request.user.is_authenticated:
         return render(request, 'index.html')
-    return redirect('../login/')
+    return redirect('login')
 
 
 def register_commit(request):

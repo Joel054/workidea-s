@@ -115,12 +115,11 @@ def invitation_response(request):
     user = request.user
     member = request.GET['member']
     member = Member.objects.get(id=member)
-    if member.id_use == user:
+    if member.id_user == user:
         if member.level_asses == 'Invited':
             if response == 'S':
                 member.level_asses = 'U'
                 member.save()
             else:
                 member.delete()
-            Views.dashboard(request)
-    Views.dashboard(request)
+    return Views.dashboard(request)
