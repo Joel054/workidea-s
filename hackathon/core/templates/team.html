@@ -28,17 +28,17 @@
                 var existe = false;
 
                 peopleHTML +=
-                    "                                                        <div class=\"wrapper d-flex align-items-center py-2 border-bottom\">\n" +
-                    "                                                            <img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">\n" +
-                    "                                                            <div class=\"wrapper ml-3\">\n" +
-                    "                                                                <h6 class=\"mb-1\">" + jsonData[i]['fields']['username'] + "</h6>\n" +
-                    "                                                                <small class=\"text-muted mb-0\"><i class=\"fas fa-map-marker-alt mr-1\"></i>Florida, USA\n" +
-                    "                                                                </small>\n" +
-                    "                                                            </div>\n" +
-                    "                                                            <input type=\"hidden\" name=\"id_team\"  value=" + {{ team.id }} +">\n" +
-                    "                                                            <input type=\"hidden\" name=\"user_id\"  value=" + jsonData[i]['pk'] + ">\n" +
-                    "                                                            <input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\" onclick=\"EnviaConvites(" + jsonData[i]['pk'] + ") \" >\n" +
-                    "                                                        </div>\n";
+                    "<div class=\"wrapper d-flex align-items-center py-2 border-bottom\">" +
+                        "<img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">" +
+                            "<div class=\"wrapper ml-12\">" +
+                                "<h6 class=\"mb-1\">" + jsonData[i]['fields']['username'] + "</h6>" +
+                                "<small class=\"text-muted mb-0\"><i class=\"fas fa-map-marker-alt mr-1\"></i>Florida, USA" +
+                                "</small>" +
+                            "</div>" +
+                            "<input type=\"hidden\" name=\"id_team\"  value=" + {{ team.id }} +">" +
+                            "<input type=\"hidden\" name=\"user_id\"  value=" + jsonData[i]['pk'] + ">" +
+                            "<input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\" onclick=\"EnviaConvites("+jsonData[i]['pk']+ ")\">"
+                    + "</div>";
             }
             var teste = document.getElementById('people')
             teste.innerHTML = (peopleHTML);
@@ -114,8 +114,7 @@
                                    <input class="btn btn-secondary btn-fw" type="submit" value="Pesquisar">
                                  </div> -->
                             </div>
-                            <p id="people">
-                            </p>
+                            <div class="col-md-12" id="people"></div>
                         </div>
                     </div>
                 </div>

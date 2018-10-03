@@ -55,7 +55,7 @@ def get_user(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("../login/")
+    return redirect("../")
 
 
 def update_user(request):
@@ -68,7 +68,7 @@ def update_user(request):
         if username != '':
             test_username = User.objects.filter(username=username).exists()
             if test_username:
-                return render(request, 'settings.html', {'error': 'Este username ja existe'})
+                return render(request, 'settings.html', {'error': 'Este username já existe'})
             user.username = username
         if email != '':
             user.email = email
