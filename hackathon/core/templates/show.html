@@ -93,19 +93,17 @@
                                 <a data-scroll="" class="nav-link section-scroll" href="#home">Início</a>
                             </li>
                             <li class="nav-item">
-                                <a data-scroll="" class="nav-link section-scroll" href="#about-p">Sobre</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a data-scroll="" class="nav-link section-scroll" href="#features">Serviços</a>
+                                <a data-scroll="" class="nav-link section-scroll" href="#about">Sobre</a>
                             </li>
                             <li class="nav-item">
-                                <a data-scroll="" class="nav-link section-scroll" href="#pricing">Contribuidores</a>
+                                <a data-scroll="" class="nav-link section-scroll" href="#pricing">Desafios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-scroll="" class="nav-link section-scroll" href="#sponsors">Contribuidores</a>
                             </li>
                             <li>
                                 <a data-scroll="" href="#blog" class="nav-link section-scroll">Blog</a>
                             </li>
-
                             <li>
                                 <div class="connect-block">
                                     <a href="{% url 'register' %}">Cadastre-se</a>
@@ -142,8 +140,7 @@
                         <div class="hero-text">
 
                             <h2>Crie, gerencie e participe de Hackathons.</h2>
-
-                            <p>Participe e organize eventos para produção de ideias de software.</p>
+                            <p>Projeto de Software II</p>
 
                             <a href="{% url 'login' %}" class="btn btn-white">Comece agora</a>
 
@@ -171,12 +168,11 @@
             <div class="container">
                 <div class="row">
                     <div class="row-centered">
-                        <div class="col-centered col-lg-7">
+                        <div class="col-centered col-lg-9">
                             <h2 class="title-h2">O que é um Hackathon?</h2>
                             <p class="font-p mg-bt-60">
-                                Hackathon é um evento para fomentar a inovação que reúne programadores, designers e outros profissionais engajados ao desenvolvimento de software,
-                                cujo objetivo é desenvolver ideias e software que atenda a um fim específico.<br><br>
-                                Atualmente os hackathons acontecem de forma presencial, WorkIdea's tem o objetivo de automatizar este processo através de uma plataforma online.
+                                Hackathon é um evento para fomentar a inovação, que reúne profissionais engajados ao desenvolvimento de software e hardware,
+                                cujo objetivo é desenvolver ideias que atendam a um fim específico.<br><b>WorkIdea's</b> tem o objetivo de automatizar este processo através de uma plataforma online.
                             </p>
                         </div>
                     </div>
@@ -212,12 +208,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row-centered">
+                        <div class="col-centered col-lg-9">
+                            <p class="font-p mg-bt-60">
+                                O principal <b>problema</b> se passa ao término das atividades do hackathon, pois muitas vezes os resultados obtidos durante a atividade são descontinuados ou descartados.<br>
+                                O sistema vai propiciar que pessoas com os mesmos interesses mantenham contato, extendendo o tempo de execução das atividades, além de ser uma vitrine de investimentos para futuras startups.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--container-->
         </section>
         <!--Features-1-->
-        <section id="about-p" class="padd-80 bg-color">
+        <section id="pricing" class="padd-80 bg-color">
             <!--container-->
             <div class="container">
                 <div class="row">
@@ -229,6 +233,9 @@
                             <p class="font-p mg-bt-30">
                                 Tarefa 2
                             </p>
+                            <p class="font-p mg-bt-30">
+                                Tarefa 3
+                            </p>
                             <a href="{% url 'register' %}" class="btn btn-color">Comece agora</a>
                         </div>
                     </div>
@@ -239,9 +246,41 @@
             </div>
             <!--container-->
         </section>
-        <!--Features-2-->
-        <section id="features-app" class="padd-80 ">
-            <!--container-->
+         <!--formulário-->
+        <section id="about-p" class="bg-color-1 padd-60">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+
+                        <div class="call-to-action-text">
+
+                            <h2>Questionário</h2>
+
+                            <p>Após as tarefas, responda o questionário com algumas perguntas sobre sua experiência:</p>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="call-to-action-btn">
+                            <a href="" class="btn btn-white">Questionário</a>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+        </section>
+<!--
+       <section id="features-app" class="padd-80 ">
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 text-center">
@@ -264,7 +303,6 @@
                                     <a class="nav-link" href="#tab3" role="tab" data-toggle="tab">Security</a>
                                 </li>
                             </ul>
-                            <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane  active" id="tab1">
                                     <p class="font-p  mg-bt-30">
@@ -327,50 +365,10 @@
 
 
             </div>
-            <!--container-->
 
-        </section>
-        <!--call-to-action-->
+        </section>-->
 
-        <section id="call-to-action" class="bg-color-1 padd-60">
-
-            <div class="container">
-
-                <div class="row">
-
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-
-                        <div class="call-to-action-text">
-
-                            <h2>Invista em ideias</h2>
-
-                            <p>WireShop is free to use till beta. You just pay a merchant <br/> free per successful transaction!</p>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="call-to-action-btn">
-                            <a href="" class="btn btn-white">Comece agora - It's free</a>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-            </div>
-
-
-        </section>
-
-
-        <!--call-to-action-->
-
-        <section id="features" class="padd-80">
-
-            <!--container-->
-
+        <!--<section id="features" class="padd-80">
             <div class="container">
 
                 <div class="row">
@@ -447,9 +445,9 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <!--blog-->
-        <section id="blog" class="padd-80 clearfix">
+        </section>-->
+
+        <!--<section id="blog" class="padd-80 clearfix">
             <div class="container">
                 <div class="row">
                     <div class="row-centered">
@@ -525,12 +523,9 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <!--blog-->
+        </section>-->
 
-        <!--get app-->
-
-        <section id="app" class=" pd-tp-80  pd-bt-100 bg-color  clearfix">
+        <!--<section id="app" class=" pd-tp-80  pd-bt-100 bg-color  clearfix">
 
             <div class="container">
                 <div class="row-centered">
@@ -538,23 +533,12 @@
 
                         <h2 class="title-h2">Sobre</h2>
 
-                        <p class="font-p mg-bt-30">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-
-                        </p>
-
-                        <a href="#" class="btn btn-color">Comece agora<i class="arrow_right"></i></a>
-
                     </div>
 
                 </div>
             </div>
 
-        </section>
-
-        <!--get app-->
-
-        <!--sponsors clients-->
+        </section>-->
 
         <section id="sponsors" class="pd-tp-80 pd-bt-80">
 
@@ -567,34 +551,34 @@
                         <div class="item">
 
                             <div class="client-item-img ">
-                                <img src="assets/images/logo1.png" class="img-responsive " alt=" " title=" ">
+                                <img src="{% static 'images/logo-branco.png' %}" class="img-responsive " alt=" " title=" ">
                             </div>
                         </div>
                         <div class="item">
 
                             <div class="client-item-img ">
-                                <img src="assets/images/logo2.png" class="img-responsive " alt=" " title=" ">
+                                <img src="{% static 'images/logo-branco.png' %}" class="img-responsive " alt=" " title=" ">
                             </div>
                         </div>
 
                         <div class="item">
 
                             <div class="client-item-img">
-                                <img src="assets/images/logo3.png " class="img-responsive " alt=" " title=" ">
+                                <img src="{% static 'images/logo-branco.png' %}" class="img-responsive " alt=" " title=" ">
                             </div>
                         </div>
 
                         <div class="item">
 
                             <div class="client-item-img">
-                                <img src="assets/images/logo4.png" class="img-responsive " alt=" " title=" ">
+                                <img src="{% static 'images/logo-branco.png' %}" class="img-responsive " alt=" " title=" ">
                             </div>
                         </div>
 
                         <div class="item">
 
                             <div class="client-item-img">
-                                <img src="assets/images/logo5.png" class="img-responsive " alt=" " title=" ">
+                                <img src="{% static 'images/logo-branco.png' %}" class="img-responsive " alt=" " title=" ">
                             </div>
                         </div>
 
@@ -636,7 +620,7 @@
                                     </div>
                                     <div class="text-footer">
                                         <p>
-                                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                                            Trabalho em desenvolvimento para a disciplina de Projeto de Software II 2018, Sistemas de Informação - UFSM.
                                         </p>
                                     </div>
 
@@ -767,7 +751,7 @@
                 <!-- COPYRIGHT TEXT -->
 
                 <div class="copyright">
-                    <p>2018 © Copyright Design_GrapahMA All rights Reserved.</p>
+                    <p>Clecio, João, Joel</p>
                 </div>
                 <!-- COPYRIGHT TEXT -->
 
