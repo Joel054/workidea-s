@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Equipes</h4>
                         {% for  member in members %}
-                             {% if level_asses != 'Invited' %}
+                             {% if member.level_asses != 'Invited' %}
                                 <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                     <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                                     <div class="wrapper ml-3">
@@ -49,7 +49,7 @@
                         <h4 class="card-title">Convites</h4>
                         <!-- LISTAR CONVITES -->
                         {% for  member in members %}
-                             {% if level_asses == 'Invited' %}
+                             {% if member.level_asses == 'Invited' %}
                                     <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                         <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                                         <div class="wrapper ml-3">
@@ -63,7 +63,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                    hue
                             {% endif %}
                          {% endfor %}
 

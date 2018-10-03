@@ -83,7 +83,7 @@
             <nav class="navbar navbar-expand-lg fixed-top">
                 <div class="container">
 
-                    <a class="navbar-brand brand-logo" href=""><img src="{% static 'images/logo.png' %}" style="width:155px; height:30px;" alt="logo"></a>
+                    <a class="navbar-brand brand-logo" href=""><img src="{% static 'images/logo-branco.png' %}" style="width:155px; height:30px;" alt="logo"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon  icon_menu"></span>
 </button>
@@ -172,9 +172,11 @@
                 <div class="row">
                     <div class="row-centered">
                         <div class="col-centered col-lg-7">
-                            <h2 class="title-h2">Explore a fundo sua criatividade</h2>
+                            <h2 class="title-h2">O que é um Hackathon?</h2>
                             <p class="font-p mg-bt-60">
-                                Através do WorkIdea's, você pode descobrir suas habilidades além de aproximar-se de pessoas com o mesmo interesse
+                                Hackathon é um evento para fomentar a inovação que reúne programadores, designers e outros profissionais engajados ao desenvolvimento de software,
+                                cujo objetivo é desenvolver ideias e software que atenda a um fim específico.<br><br>
+                                Atualmente os hackathons acontecem de forma presencial, WorkIdea's tem o objetivo de automatizar este processo através de uma plataforma online.
                             </p>
                         </div>
                     </div>
@@ -182,13 +184,22 @@
                         <img src="{% static 'assets_show/images/image2.svg' %}" alt="" class="img-width">
                     </div>
                     <div class="col-md-6 col-lg-6 col-xs-12">
+                        <div class="icon-block mg-bt-mobile">
+                            <div class="icon">
+                                <img src="assets/images/icon3.svg" alt="">
+                            </div>
+                            <div class="icon-info">
+                                <h3>Colaboração</h3>
+                                <p>Crie e participe de equipes para interagir de forma colaborativa na resolução de problemas.</p>
+                            </div>
+                        </div>
                         <div class="icon-block">
                             <div class="icon">
                                 <img src="assets/images/icon1.svg" alt="">
                             </div>
                             <div class="icon-info">
-                                <h3>Portfólio</h3>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium</p>
+                                <h3>Eventos</h3>
+                                <p>Crie, gerencie ou participe de hackathons juntamente com a sua equipe.</p>
                             </div>
                         </div>
                         <div class="icon-block">
@@ -197,16 +208,7 @@
                             </div>
                             <div class="icon-info">
                                 <h3>Feedbacks</h3>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium</p>
-                            </div>
-                        </div>
-                        <div class="icon-block mg-bt-mobile">
-                            <div class="icon">
-                                <img src="assets/images/icon3.svg" alt="">
-                            </div>
-                            <div class="icon-info">
-                                <h3>Colaboração</h3>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium</p>
+                                <p>Desenvolva e valide suas ideias, para expor e divulgar seus trabalhos através de um portfólio de soluções.</p>
                             </div>
                         </div>
                     </div>
@@ -221,13 +223,13 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="features-text">
-                            <h2 class="title-h2">Desafie-se</h2>
+                            <h2 class="title-h2">Desafios</h2>
                             <p class="font-p ">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i ncididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                Tarefa 1 </p>
                             <p class="font-p mg-bt-30">
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.
+                                Tarefa 2
                             </p>
-                            <a href="" class="btn btn-color">Comece agora</a>
+                            <a href="{% url 'register' %}" class="btn btn-color">Comece agora</a>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
