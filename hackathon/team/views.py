@@ -22,7 +22,7 @@ def create_team(request):
         if team_name is not None:
             return return_team(request, {'new_team_none': 'new team none'})
     except Team.DoesNotExist:
-        name = request.POST['name']
+        pass
     description = request.POST['description']
     id = request.POST.get('id_team')
     if id is int:
@@ -32,9 +32,10 @@ def create_team(request):
             if authorization.level_asses == 'Admin':
                 team.name = name
                 team.description = description
+                team.slug = team.name.replace(' ', '')
                 team.save()
                 return return_team(request, {'update_team_ok': 'update team ok'})
-    team = Team(name=name, description=description)
+    team = Team(name=name, description=description, slug=name.replace(' ', ''))
     team.save()
     member = Member(id_user=user, level_asses='Admin', id_team=team)
     member.save()
@@ -62,20 +63,16 @@ def update_team(request):
     if authorization:
         if authorization.level_asses == 'Admin':
             team.name = request.POST.get("name")
+            team.slug = team.name.replace(' ', '')
             team.description = request.POST.get("description")
             team.save()
-            return get_team(request)
+            return get_team(request, team.slug)
     return return_team(request, None)
 
 
-def get_team(request):
+def get_team(request, team):
     user = request.user
-    id = 0
-    if request.method == 'POST':
-        id = request.POST.get('id_team')
-    else:
-        id = request.GET.get('id_team')
-    team = Team.objects.get(id=id)
+    team = Team.objects.get(slug=team)
     authorization = Member.objects.get(id_user=user, id_team=team)
     if authorization:
         context = {'team': team, 'level_asses': authorization.level_asses}
