@@ -8,6 +8,18 @@ from core import Views
 from .models import Member, Team
 from .Team import return_team
 from django.http import HttpResponse
+import re
+import unicodedata
+
+
+def remover_acentos(palavra):
+
+    # Unicode normalize transforma um caracter em seu equivalente em latin.
+    nfkd = unicodedata.normalize('NFKD', palavra)
+    palavraSemAcento = u"".join([c for c in nfkd if not unicodedata.combining(c)])
+
+    # Usa expressão regular para retornar a palavra apenas com números, letras e espaço
+    return re.sub(palavraSemAcento)
 
 
 def list_team(request):
@@ -32,7 +44,8 @@ def create_team(request):
             if authorization.level_asses == 'Admin':
                 team.name = name
                 team.description = description
-                team.slug = team.name.replace(' ', '')
+                nome = remover_acentos(team.name)
+                team.slug = nome.replace(' ', '')
                 team.save()
                 return return_team(request, {'update_team_ok': 'update team ok'})
     team = Team(name=name, description=description, slug=name.replace(' ', ''))
@@ -63,7 +76,7 @@ def update_team(request):
     if authorization:
         if authorization.level_asses == 'Admin':
             team.name = request.POST.get("name")
-            team.slug = team.name.replace(' ', '')
+            team.slug = team.name.replace(' ', '') + id
             team.description = request.POST.get("description")
             team.save()
             return get_team(request, team.slug)
