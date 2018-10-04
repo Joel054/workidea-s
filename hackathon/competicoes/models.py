@@ -44,8 +44,25 @@ class Hackathon(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     team_manager = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="manager")
-    teams = models.ManyToManyField(Team, related_name="teams")
+    teams = models.ManyToManyField(Team, through='Participation', related_name="teams")
     phases = models.ManyToManyField(Phase)
 
     def __str__(self):
         return self.name
+
+
+class Participation(models.Model):
+    id = models.AutoField(primary_key=True)
+    id_hackathon = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
+    LEVEL_ASSES = (
+        ('P', 'Participant'),
+        ('D', 'Disqualified'),
+        ('W', 'Winner'),
+        {'I', 'Invited'}
+    )
+    level_asses = models.CharField(max_length=50, choices=LEVEL_ASSES)
+    id_team = models.ForeignKey(Team, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return_ = "Team " + self.id_team.name + " é " + self.level_asses + " do Hackathon " + self.id_hackathon.name
+        return return_

@@ -1,13 +1,13 @@
 from django.urls import path
 
-from team import views
+from team import Views
 
 urlpatterns = [
-    path('', views.list_team, name='list_teams'),
-    path('new', views.create_team, name='create_team'),
-    path('delete', views.delete_team, name='delete_team'),
-    path('update', views.update_team, name='update_team'),
-    path('<slug:team>', views.get_team, name= 'get_team'),
-    path('invitation/new', views.new_team_invitation, name='invitation_team'),
-    path('invitation/response', views.invitation_response, name='response_invitations_team')
+    path('', Views.list_team, name='list_teams'),
+    path('new', Views.create_team, name='create_team'),
+    path('delete', Views.delete_team, name='delete_team'),
+    path('update', Views.update_team, name='update_team'),
+    path('<slug:team>', Views.get_team, name='get_team'),
+    path('invitation/new', Views.new_team_invitation, name='invitation_team'),
+    path('invitation/response', Views.invitation_response, name='response_invitations_team')
 ]

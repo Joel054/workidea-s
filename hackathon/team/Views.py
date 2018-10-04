@@ -75,7 +75,7 @@ def get_team(request, team):
     team = Team.objects.get(slug=team)
     authorization = Member.objects.get(id_user=user, id_team=team)
     if authorization:
-        context = {'team': team, 'level_asses': authorization.level_asses}
+        context = {'team': team, 'level_asses': authorization.level_asses, 'members_of_team': team.members.all()}
         return render(request, 'team.html', context)
     return return_team(request, None)
 
@@ -119,4 +119,4 @@ def invitation_response(request):
                 member.save()
             else:
                 member.delete()
-    return Views.dashboard(request)
+    return get_team(request, member.id_team.slug)
