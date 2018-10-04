@@ -250,7 +250,7 @@
                         <!-- listar integrantes do time -->
                         {% for  member in members_of_team %}
                             {% if level_asses != 'Invited' %}
-                                <div class="col-md-12 grid-margin stretch-card">
+                                <div class="col-md-4 grid-margin stretch-card" style="padding: 15px">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex flex-row">
@@ -258,8 +258,8 @@
                                                      src="{% static 'images/logoSmall.png' %}"
                                                      alt="profile image"/>
                                                 <div class="ml-3">
-                                                    <h6>Maria</h6>
-                                                    <p class="text-muted">{{ member }}</p>
+                                                    <h6>{{ member.username }}</h6>
+                                                    <p class="text-muted">{{ member.email }}</p>
                                                     <p class="mt-2 text-primary font-weight-bold">Designer</p>
                                                 </div>
                                             </div>

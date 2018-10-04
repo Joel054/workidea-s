@@ -38,7 +38,7 @@
                             {% endif %}
                         {% endfor %}
                         {% if members.count == 0 %}
-                            <h1>asdasdasd</h1>
+                            <p class="text-muted">Você ainda não tem equipes, crie a sua clicando <a href="" data-toggle="modal" data-target="#NovaEquipe">aqui</a>.</p>
                         {% endif %}
                     </div>
                 </div>
@@ -50,6 +50,8 @@
                         <!-- CONVITES -->
                         {% for  member in members %}
                              {% if member.level_asses == 'Invited' %}
+                                    <script type="text/javascript">
+                                    </script>
                                     <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                         <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                                         <div class="wrapper ml-3">
@@ -67,7 +69,6 @@
                                     </div>
                              {% endif %}
                         {% endfor %}
-
                         <!--<div class="wrapper d-flex align-items-center py-2 border-bottom">
                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                             <div class="wrapper ml-3">
