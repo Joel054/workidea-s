@@ -40,7 +40,7 @@ class Phase(models.Model):
 
 
 class Hackathon(models.Model):
-    id = models.AutoField(primary_key=True)
+    slug = models.SlugField('Slug', unique=True)
     name = models.CharField(max_length=255)
     description = models.TextField()
     team_manager = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="manager")

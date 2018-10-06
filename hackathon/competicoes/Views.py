@@ -14,13 +14,14 @@ def create_hackathon(request):
     hackathon = Hackathon()
     hackathon.name = request.POST.get('name')
     hackathon.description = request.POST.get('description')
+    hackathon.slug = hackathon.name.replace(' ', '')
     team_id = request.POST.get('team_id')
     try:
         hackathon.team_manager = Team.objects.get(id=team_id)
     except Team.DoesNotExist:
         return list_hackathon(request, {'id_invalido': 'id de time inválido'})
     hackathon.save()
-    return get_hackathon(request)
+    return get_hackathon(request, hackathon.slug)
 
 
 def update_hackathon(request):
@@ -35,9 +36,8 @@ def update_hackathon(request):
     return get_hackathon(request)
 
 
-def get_hackathon(request):
-    id = request.POST.get('id_hackathon')
-    hackathon = Hackathon.objects.get(id=id)
+def get_hackathon(request, hackathon):
+    hackathon = Hackathon.objects.get(slug=hackathon)
     user = request.user
     member = Member.objects.get(id_team=hackathon.team_manager, id_user=user)
     if member.level_asses == 'A':
@@ -54,7 +54,7 @@ def list_hackathon(request):
     if member:
         hackathons = Hackathon.objects.filter(team_manager=team)
         context = {'hackathons': hackathons}
-        return render(request, 'hackatons.html', context)
+        return render(request, 'competicoes/index.html', context)
     return dashboard(request)
 
 

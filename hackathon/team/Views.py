@@ -1,10 +1,9 @@
 
 from django.contrib.auth.models import User
 from django.core import serializers
-from django.db.models import Q
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from core import Views
+
+from competicoes.models import Hackathon, Participation
 from .models import Member, Team
 from .Team import return_team
 from django.http import HttpResponse
@@ -88,7 +87,14 @@ def get_team(request, team):
     team = Team.objects.get(slug=team)
     authorization = Member.objects.get(id_user=user, id_team=team)
     if authorization:
-        context = {'team': team, 'level_asses': authorization.level_asses, 'members_of_team': team.members.all()}
+        team_manager = Hackathon.objects.filter(team_manager=team)
+        participations = Participation.objects.filter(id_team=team.id)
+        context = {
+            'team': team,
+            'level_asses': authorization.level_asses,
+            'members_of_team': team.members.all(),
+            'hackathons_managing': team_manager,
+            'hackathons_participation': participations}
         return render(request, 'team.html', context)
     return return_team(request, None)
 
