@@ -124,23 +124,24 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card text-center">
                 <div class="card-body">
-                    <h4 style="padding: 10px">Hackathons que {{ team }} está participando</h4>
+                    <h4 style="padding: 10px">Hackathons que a Equipe {{ team }} está participando</h4>
                     <div class="row">
-                        <div class="col-md-4 grid-margin stretch-card">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
-                                         alt="profile image"/>
-                                    <h4>HACKATHON NOME</h4>
-                                    {#<p class="text-muted">Developer</p>#}
-                                    <p class="mt-4 card-text">
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                        Aenean commodo ligula eget dolor. Lorem
-                                    </p>
-                                    <button type="button" class="btn btn-outline-primary btn-fw">Abrir</button>
+                        <!-- for lista hackathons-->
+                        {% for  hackathons in hackathons_participation %}
+                            <div class="col-md-4 grid-margin stretch-card">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
+                                             alt="profile image"/>
+                                        <h4>{{ hackathons.name }}</h4>
+                                        <p class="mt-4 card-text">
+                                            {{ hackathons.description }}
+                                        </p>
+                                        <button type="button" class="btn btn-outline-primary btn-fw">Abrir</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -148,23 +149,28 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card text-center">
                 <div class="card-body">
-                    <h4 style="padding: 10px">Hackathons que {{ team }} está gerenciando</h4>
+                    <h4 style="padding: 10px">Hackathons que a Equipe {{ team }} está gerenciando</h4>
                     <div class="row">
-                        <div class="col-md-4 grid-margin stretch-card">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
-                                         alt="profile image"/>
-                                    <h4>HACKATHON NOME</h4>
-                                    {#<p class="text-muted">Developer</p>#}
-                                    <p class="mt-4 card-text">
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                        Aenean commodo ligula eget dolor. Lorem
-                                    </p>
-                                    <button type="button" class="btn btn-outline-primary btn-fw">Abrir</button>
+                        <!-- for lista hackathons-->
+                        {% for  hackathons in hackathons_managing %}
+                            <div class="col-md-6 grid-margin stretch-card">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
+                                             alt="profile image"/>
+                                        <h4>{{ hackathons.name }}</h4>
+                                        <p class="mt-4 card-text">
+                                            {{ hackathons.description }}
+                                        </p>
+                                        <form methods="post" action="{% url 'response_invitations_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ hackathons.id }}" name="hackathon">
+                                            <button type="submit" class="btn btn-outline-primary btn-fw">Abrir</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                         <div>
                              <p>crie um <a href="" data-toggle="modal" data-target="#NovoHackathon" >hackathon</a></p>
                         </div>
@@ -299,8 +305,8 @@
                             <div>
                                 <section>
                                     <div class="form-group">
-                                        <label>Nome</label>
-                                        <input class="form-control" name="name" id="name" placeholder="Nome do Hackathon">
+                                        <label>Tema</label>
+                                        <input class="form-control" name="name" id="name" placeholder="Tema do Hackathon">
                                     </div>
                                     <div class="form-group">
                                         <label>Descrição</label>
@@ -312,8 +318,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
                             <button class="btn btn-light" type="reset">Limpar</button>
+                            <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
