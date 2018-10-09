@@ -8,6 +8,7 @@ from core.Views import dashboard
 from team.models import Team, Member
 from competicoes.models import Hackathon
 
+from competicoes.models import Participation
 
 
 def create_hackathon(request):
@@ -40,7 +41,7 @@ def get_hackathon(request, hackathon):
     hackathon = Hackathon.objects.get(slug=hackathon)
     user = request.user
     member = Member.objects.get(id_team=hackathon.team_manager, id_user=user)
-    if member.level_asses == 'A':
+    if member:
         context = {'hackathon': hackathon}
         return render(request, 'hackathon.html', context)
     return list_hackathon(request)
@@ -75,3 +76,22 @@ def create_phase(request):
 
 def dashboard_hackathon(request):
     return render(request, 'competicoes/index.html')
+
+
+def participe_hackathon(request, team_slug, hackathon_slug):
+    user = request.user
+    team = Team.objects.filter(slug=team_slug)
+    hackathon = Hackathon.objects.filter(slug=hackathon_slug)
+    if hackathon.team_manager != team:
+        part = Participation.objects.filter(id_team = team, id_hackathon = hackathon)
+        if part:
+            a = 1;
+        else:
+            member = Member.objects.filter(id_user = user, id_team = team)
+            if member.level_asses == "Admin":
+                participation = Participation(id_team=team, id_hackathon=hackathon, level_asses='Participant')
+                participation.save()
+    return get_hackathon(request, hackathon.slug)
+
+
+# def new_activity(request):
