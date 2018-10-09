@@ -62,6 +62,16 @@
             });
         });
     </script>
+
+    <script src="{% static 'assets_show/js/jquery-1.12.4.min.js'%}"></script>
+    <!-- Bootstrap Plugins -->
+    <!-- Template Plugins -->
+
+    <script src="{% static 'assets_show/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'assets_show/js/jquery.easy-pie-chart.js'%}"></script>
+    <!-- Main js -->
+    <script src="{% static 'assets_show/js/main.js'%}"></script>
+
     <div class="row" style="padding-top: 10px">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card text-center">
@@ -91,7 +101,7 @@
         </div>
     </div>
 
-
+    <!-- convites -->
     <div class="row">
         <!--Enviar Convites-->
         {% if level_asses == 'Admin' %}
@@ -120,6 +130,42 @@
             </div>
         {% endif %}
     </div>
+
+    <!-- CAROSSEL participar de hackathon -->
+    <div class="warpper clearfix">
+        <div class="row">
+            <div class="col-lg-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Hackathons Disponíveis</h4>
+                  <div class="client-caroussel">
+                    {% for  hackathons in hackathons_disponiveis %}
+                        <div class="item">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
+                                         alt="profile image"/>
+                                    <h4>{{ hackathons.nome }}</h4>
+                                    <p class="mt-4 card-text">
+                                        {{ hackathons.description }}
+                                    </p>
+                                    <!-- PARTICIPAR -->
+                                    <form methods="post" action="{% url 'response_invitations_team' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ hackathons.id }}" name="hackathon">
+                                        <button type="submit" class="btn btn-outline-primary btn-fw">Participar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card text-center">
@@ -137,7 +183,12 @@
                                         <p class="mt-4 card-text">
                                             {{ hackathons.description }}
                                         </p>
-                                        <button type="button" class="btn btn-outline-primary btn-fw">Abrir</button>
+                                        <!--  ABRIR PARTICIPAÇÃO -->
+                                        <form methods="post" action="{% url 'response_invitations_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ hackathons.id }}" name="hackathon">
+                                            <button type="submit" class="btn btn-outline-primary btn-fw">Abrir</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -162,6 +213,7 @@
                                         <p class="mt-4 card-text">
                                             {{ hackathons.description }}
                                         </p>
+                                        <!--  ABRIR GERENCIAMENTO -->
                                         <form methods="post" action="{% url 'response_invitations_team' %}">
                                             {% csrf_token %}
                                             <input type="hidden" value="{{ hackathons.id }}" name="hackathon">
