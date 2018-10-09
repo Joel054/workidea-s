@@ -43,7 +43,7 @@ def get_hackathon(request, hackathon):
     member = Member.objects.get(id_team=hackathon.team_manager, id_user=user)
     if member:
         context = {'hackathon': hackathon}
-        return render(request, 'hackathon.html', context)
+        return render(request, 'competicoes/index.html', context)
     return list_hackathon(request)
 
 
