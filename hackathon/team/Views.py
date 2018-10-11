@@ -89,12 +89,22 @@ def get_team(request, team):
     if authorization:
         team_manager = Hackathon.objects.filter(team_manager=team)
         participations = Participation.objects.filter(id_team=team.id)
+        hackathons_disponiveis = Hackathon.objects.all()
+        hackathons_disp =[]
+        for hacks in hackathons_disponiveis:
+            part = Participation.objects.filter(id_team=team, id_hackathon=hacks)
+            if part:
+                a=1
+            else:
+                if hacks.team_manager != team:
+                    hackathons_disp.append(hacks)
         context = {
             'team': team,
             'level_asses': authorization.level_asses,
             'members_of_team': team.members.all(),
             'hackathons_managing': team_manager,
-            'hackathons_participation': participations}
+            'hackathons_participation': participations,
+            'hackathons_disponiveis': hackathons_disp}
         return render(request, 'team.html', context)
     return return_team(request, None)
 
