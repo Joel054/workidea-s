@@ -48,25 +48,28 @@
                     <div class="card-body">
                         <h4 class="card-title">Convites</h4>
                         <!-- CONVITES -->
-                        {% for  member in members %}
-                             {% if member.level_asses == 'Invited' %}
-                                    <div class="wrapper d-flex align-items-center py-2 border-bottom">
-                                        <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
-                                        <div class="wrapper ml-3">
-                                            <h6 class="mb-1">Equipe <b>{{ member.id_team.name }}</b> lhe enviou um convite</h6>
-                                        </div>
-                                        <div class="ml-auto px-1 py-1">
-                                            <form methods="post" action="{% url 'response_invitations_team' %}">
-                                                {% csrf_token %}
-                                                <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
-                                                <input type="hidden" value="{{ member.id }}" name="member">
-                                                <input type="hidden" value="S" name="response">
-                                                <button type="submit" class="btn btn-primary btn-fw">Aceitar</button>
-                                            </form>
-                                        </div>
+                        {% if member.level_asses == 'Invited' %}
+                            {% for  member in members %}
+                                <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                    <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
+                                    <div class="wrapper ml-3">
+                                        <h6 class="mb-1">Equipe <b>{{ member.id_team.name }}</b> lhe enviou um convite</h6>
                                     </div>
+                                    <div class="ml-auto px-1 py-1">
+                                        <form methods="post" action="{% url 'response_invitations_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                            <input type="hidden" value="{{ member.id }}" name="member">
+                                            <input type="hidden" value="S" name="response">
+                                            <button type="submit" class="btn btn-primary btn-fw">Aceitar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                                 {% else %}
+                            <h4>você não possui convites <i class="fa fa-sad-cry"></i></h4>
                              {% endif %}
-                        {% endfor %}
+
                         <!--<div class="wrapper d-flex align-items-center py-2 border-bottom">
                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                             <div class="wrapper ml-3">
