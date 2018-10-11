@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from core.Views import dashboard
@@ -39,12 +39,8 @@ def update_hackathon(request):
 
 def get_hackathon(request, hackathon):
     hackathon = Hackathon.objects.get(slug=hackathon)
-    user = request.user
-    member = Member.objects.get(id_team=hackathon.team_manager, id_user=user)
-    if member:
-        context = {'hackathon': hackathon}
-        return render(request, 'competicoes/index.html', context)
-    return list_hackathon(request)
+    context = {'hackathon': hackathon}
+    return render(request, 'competicoes/index.html', context)
 
 
 def list_hackathon(request):
@@ -89,11 +85,9 @@ def participe_hackathon(request):
         if part:
             a = 1;
         else:
-            member = Member.objects.get(id_user=user, id_team=team)
-            if member.level_asses == "Admin":
-                participation = Participation(id_team=team, id_hackathon=hackathon, level_asses='Participant')
-                participation.save()
-    return get_hackathon(request, hackathon.slug)
-
+            participation = Participation(id_team=team, id_hackathon=hackathon, level_asses='Participant')
+            participation.save()
+            return get_hackathon(request, hackathon.slug)
+    return redirect("/team/"+team.slug)
 
 # def new_activity(request):
