@@ -88,7 +88,7 @@ def get_team(request, team):
     authorization = Member.objects.get(id_user=user, id_team=team)
     if authorization:
         team_manager = Hackathon.objects.filter(team_manager=team)
-        participations = Participation.objects.filter(id_team=team.id)
+        participations = Participation.objects.filter(id_team=team)
         hackathons_disponiveis = Hackathon.objects.all()
         hackathons_disp =[]
         for hacks in hackathons_disponiveis:
@@ -98,6 +98,8 @@ def get_team(request, team):
             else:
                 if hacks.team_manager != team:
                     hackathons_disp.append(hacks)
+        print(participations)
+        print( team.members.all())
         context = {
             'team': team,
             'level_asses': authorization.level_asses,

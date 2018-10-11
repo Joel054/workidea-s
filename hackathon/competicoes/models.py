@@ -64,5 +64,4 @@ class Participation(models.Model):
     id_team = models.ForeignKey(Team, on_delete=models.CASCADE)
 
     def __str__(self):
-        return_ = "Team " + self.id_team.name + " é " + self.level_asses + " do Hackathon " + self.id_hackathon.name
-        return return_
+        return self.id_team.slug

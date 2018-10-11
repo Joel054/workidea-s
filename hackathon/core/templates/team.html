@@ -149,9 +149,12 @@
                                         {{ hackathons.description }}
                                     </p>
                                     <!-- PARTICIPAR -->
-                                    <a href="{% url 'competicoes:participe_hackathon'  team.slug hackathons.slug %}">
+                                    <form methods="post" action="{% url 'competicoes:participe_hackathon' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ hackathons.slug }}" name="hackathon_slug">
+                                        <input type="hidden" value="{{ team.slug }}" name="team_slug">
                                         <button type="submit" class="btn btn-outline-primary btn-fw">Participar</button>
-                                    </a>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -170,18 +173,17 @@
                     <h4 style="padding: 10px">Hackathons que a Equipe {{ team }} está participando</h4>
                     <div class="row">
                         <!-- for lista hackathons-->
-                        {% for  hackathons in hackathons_participation %}
+                       {% for  hackathons in hackathons_participation %}
                             <div class="col-md-4 grid-margin stretch-card">
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
                                              alt="profile image"/>
-                                        <h4>{{ hackathons.name }}</h4>
+                                        <h4>{{ hackathons.id_hackathon.name }}</h4>
                                         <p class="mt-4 card-text">
-                                            {{ hackathons.description }}
+                                            {{ hackathons.id_hackathon.description }}
                                         </p>
-                                        <!--  ABRIR PARTICIPAÇÃO -->
-                                        <a href="{% url 'competicoes:get_hackathon' hackathons.slug %}">
+                                        <a href="{% url 'competicoes:get_hackathon' hackathons.id_hackathon.slug %}">
                                             <button type="submit" class="btn btn-outline-primary btn-fw">Abrir</button>
                                         </a>
                                     </div>

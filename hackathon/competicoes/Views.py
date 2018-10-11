@@ -34,7 +34,7 @@ def update_hackathon(request):
         hackathon.name = request.POST.get('name')
         hackathon.description = request.POST.get('description')
         hackathon.save()
-    return get_hackathon(request)
+    return get_hackathon(request, hackathon.slug)
 
 
 def get_hackathon(request, hackathon):
@@ -78,16 +78,18 @@ def dashboard_hackathon(request):
     return render(request, 'competicoes/index.html')
 
 
-def participe_hackathon(request, team_slug, hackathon_slug):
+def participe_hackathon(request):
+    team_slug = request.GET["team_slug"]
+    hackathon_slug = request.GET["hackathon_slug"]
     user = request.user
-    team = Team.objects.filter(slug=team_slug)
-    hackathon = Hackathon.objects.filter(slug=hackathon_slug)
+    team = Team.objects.get(slug=team_slug)
+    hackathon = Hackathon.objects.get(slug=hackathon_slug)
     if hackathon.team_manager != team:
-        part = Participation.objects.filter(id_team = team, id_hackathon = hackathon)
+        part = Participation.objects.filter(id_team=team, id_hackathon=hackathon)
         if part:
             a = 1;
         else:
-            member = Member.objects.filter(id_user = user, id_team = team)
+            member = Member.objects.get(id_user=user, id_team=team)
             if member.level_asses == "Admin":
                 participation = Participation(id_team=team, id_hackathon=hackathon, level_asses='Participant')
                 participation.save()
