@@ -48,7 +48,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Convites</h4>
                         <!-- CONVITES -->
-{#                        {% if member.level_asses == 'Invited' %}#}
+                        {% if member.level_asses == 'Invited' %}
                             {% for  member in members %}
                                 <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                     <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
@@ -66,9 +66,7 @@
                                     </div>
                                 </div>
                             {% endfor %}
-{#                                 {% else %}#}
-{#                            <h4>você não possui convites <i class="fa fa-sad-cry"></i></h4>#}
-{#                             {% endif %}#}
+                        {% endif %}
 
                         <!--<div class="wrapper d-flex align-items-center py-2 border-bottom">
                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
