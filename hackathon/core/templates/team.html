@@ -314,7 +314,7 @@
                         </div>
                         <!-- listar integrantes do time -->
                         {% for  member in members_of_team %}
-                            {% if level_asses != 'Invited' %}
+                            {% if member.level_asses != 'Invited' %}
                                 <div class="col-md-4 grid-margin stretch-card" style="padding: 15px">
                                     <div class="card">
                                         <div class="card-body">

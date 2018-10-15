@@ -48,8 +48,8 @@
                     <div class="card-body">
                         <h4 class="card-title">Convites</h4>
                         <!-- CONVITES -->
-                        {% if member.level_asses == 'Invited' %}
-                            {% for  member in members %}
+                        {% for  member in members %}
+                            {% if member.level_asses == 'Invited' %}
                                 <div class="wrapper d-flex align-items-center py-2 border-bottom">
                                     <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                                     <div class="wrapper ml-3">
@@ -65,9 +65,8 @@
                                         </form>
                                     </div>
                                 </div>
-                            {% endfor %}
-                        {% endif %}
-
+                            {% endif %}
+                        {% endfor %}
                         <!--<div class="wrapper d-flex align-items-center py-2 border-bottom">
                             <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}" alt="profile">
                             <div class="wrapper ml-3">
