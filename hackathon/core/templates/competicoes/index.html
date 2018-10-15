@@ -169,7 +169,14 @@
                 <div class="card-body">
                     <h4 class="menu-title">{{ hackathon.name }}</h4>
                     <p class="card-description">{{ hackathon.description }}</p>
+                    <div class="template-demo">
+                    <button type="button" class="btn btn-info btn-fw btn-icon-text" data-toggle="modal" data-target="#integrantes">
+                        Integrantes do Hackathon
+                        <i class="fas fa-users btn-icon-append" style="color: white"></i>
+                    </button>
                 </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -179,7 +186,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Nova atividade</h4>
-                    <form id="example-form" method="post" action="{% url 'create_team' %}">
+                    <form id="example-form" method="post" action="{% url 'competicoes:create_phase' %}">
                         {% csrf_token %}
                         <div>
                             <section>
@@ -194,6 +201,7 @@
                                 </div>
                             </section>
                         </div>
+                        <input type="hidden" name="id_hackathon" value="{{ hackathon.id }}">
                         <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
                     </form>
                 </div>
@@ -359,7 +367,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-inline-block pt-3">
                             <div class="d-md-flex">
-                                <h2 class="mb-0">10</h2>
+                                <h2 class="mb-0">{{ teams_of_hackathon.count }}</h2>
                             </div>
                         </div>
                         <div class="d-inline-block">
@@ -429,6 +437,48 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!--modal Integrantes-->
+    <div class="modal fade" id="integrantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="card">
+                <div class="card-body">
+
+                    <div class="row text-center" style="padding-top: 30px;">
+                        <div class="col-md-12">
+                            <h4>Equipes Integrantes do Hackathon</h4>
+                            {% if teams_of_hackathon.count == 0 %}
+                                <p>Este hackathon ainda não tem integrantes.</p>
+                            {% endif %}
+                        </div>
+                        <!-- listar integrantes do time -->
+                        {% for  teams in teams_of_hackathon %}
+                                <div class="col-md-4 grid-margin stretch-card" style="padding: 15px">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row">
+                                                <img class="img-sm rounded-circle"
+                                                     src="{% static 'images/logoSmall.png' %}"
+                                                     alt="profile image"/>
+                                                <div class="ml-3">
+                                                    <h6>{{ teams.name }}</h6>
+                                                    <p class="text-muted">{{ teams.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
+                    </div>
             </div>
         </div>
     </div>

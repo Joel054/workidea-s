@@ -8,5 +8,6 @@ urlpatterns = [
     path('new', Views.create_hackathon, name='create_hackathon'),
     path('update', Views.update_hackathon, name='update_hackathon'),
     path('get/<slug:hackathon>', Views.get_hackathon, name='get_hackathon'),
-    path('participe', Views.participe_hackathon, name='participe_hackathon')
+    path('participe', Views.participe_hackathon, name='participe_hackathon'),
+    path('phase', Views.create_phase, name='create_phase')
 ]

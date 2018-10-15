@@ -39,7 +39,9 @@ def update_hackathon(request):
 
 def get_hackathon(request, hackathon):
     hackathon = Hackathon.objects.get(slug=hackathon)
-    context = {'hackathon': hackathon}
+    context = {
+        'hackathon': hackathon,
+        'teams_of_hackathon': hackathon.teams.all()}
     return render(request, 'competicoes/index.html', context)
 
 
@@ -61,7 +63,7 @@ def create_phase(request):
     id_hackathon = request.POST.get('id_hackathon')
     hackathon = Hackathon.objects.get(id=id_hackathon)
     member = Member.objects.filter(id_user=user, id_team=hackathon.team_manager)
-    if member.level_asses == "A":
+    if member.level_asses == "Admin":
         phase = Phase()
         phase.name = request.POST.get('name')
         phase.description = request.POST.get('description')
