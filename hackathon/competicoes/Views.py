@@ -50,7 +50,8 @@ def get_hackathon(request, hackathon):
     hackathon = Hackathon.objects.get(slug=hackathon)
     context = {
         'hackathon': hackathon,
-        'teams_of_hackathon': hackathon.teams.all()}
+        'teams_of_hackathon': hackathon.teams.all(),
+        'phases_of_hackathon': hackathon.phases.all()}
     return render(request, 'competicoes/index.html', context)
 
 
@@ -71,7 +72,7 @@ def create_phase(request):
     user = request.user
     id_hackathon = request.POST.get('id_hackathon')
     hackathon = Hackathon.objects.get(id=id_hackathon)
-    member = Member.objects.filter(id_user=user, id_team=hackathon.team_manager)
+    member = Member.objects.get(id_user=user, id_team=hackathon.team_manager)
     if member.level_asses == "Admin":
         phase = Phase()
         phase.name = request.POST.get('name')
@@ -79,6 +80,7 @@ def create_phase(request):
         phase.save()
         hackathon.phases.add(phase)
         hackathon.save()
+    return get_hackathon(request, hackathon.slug)
 
 
 def dashboard_hackathon(request):
