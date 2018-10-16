@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import unicodedata
+
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -10,12 +12,19 @@ from competicoes.models import Hackathon
 
 from competicoes.models import Participation
 
+from competicoes.models import Phase
+
+def remover_acentos(palavra):
+    # Usa expressão regular para retornar a palavra apenas com números, letras e espaço
+    return ''.join((c for c in unicodedata.normalize('NFD', palavra) if unicodedata.category(c) != 'Mn'))
 
 def create_hackathon(request):
     hackathon = Hackathon()
     hackathon.name = request.POST.get('name')
     hackathon.description = request.POST.get('description')
-    hackathon.slug = hackathon.name.replace(' ', '')
+    num = Team.objects.filter(name=hackathon.name).count()
+    nome = remover_acentos(hackathon.name)
+    hackathon.slug = nome.replace(' ', '')+str(num)
     team_id = request.POST.get('team_id')
     try:
         hackathon.team_manager = Team.objects.get(id=team_id)

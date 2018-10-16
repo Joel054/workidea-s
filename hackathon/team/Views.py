@@ -12,13 +12,8 @@ import unicodedata
 
 
 def remover_acentos(palavra):
-
-    # Unicode normalize transforma um caracter em seu equivalente em latin.
-    nfkd = unicodedata.normalize('NFKD', palavra)
-    palavraSemAcento = u"".join([c for c in nfkd if not unicodedata.combining(c)])
-
     # Usa expressão regular para retornar a palavra apenas com números, letras e espaço
-    return re.sub(palavraSemAcento)
+    return ''.join((c for c in unicodedata.normalize('NFD', palavra) if unicodedata.category(c) != 'Mn'))
 
 
 def list_team(request):
@@ -28,26 +23,12 @@ def list_team(request):
 def create_team(request):
     user = request.user
     name = request.POST['name']
-    try:
-        team_name = Team.objects.get(name=name)
-        if team_name is not None:
-            return return_team(request, {'new_team_none': 'new team none'})
-    except Team.DoesNotExist:
-        pass
+    num = Team.objects.filter(name=name).count()
     description = request.POST['description']
-    id = request.POST.get('id_team')
-    if id is int:
-        team = Team.objects.get(id=int(id))
-        authorization = Member.objects.get(id_user=user, id_team=team)
-        if authorization is not None:
-            if authorization.level_asses == 'Admin':
-                team.name = name
-                team.description = description
-                nome = remover_acentos(team.name)
-                team.slug = nome.replace(' ', '')
-                team.save()
-                return return_team(request, {'update_team_ok': 'update team ok'})
-    team = Team(name=name, description=description, slug=name.replace(' ', ''))
+    nome = remover_acentos(name)
+    print(nome)
+    slug = nome.replace(' ', '')+str(num)
+    team = Team(name=name, description=description, slug=slug)
     team.save()
     member = Member(id_user=user, level_asses='Admin', id_team=team)
     member.save()
