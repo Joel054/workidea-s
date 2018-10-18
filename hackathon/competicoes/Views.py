@@ -14,9 +14,13 @@ from competicoes.models import Participation
 
 from competicoes.models import Phase
 
+from competicoes.models import Activity
+
+
 def remover_acentos(palavra):
     # Usa expressão regular para retornar a palavra apenas com números, letras e espaço
     return ''.join((c for c in unicodedata.normalize('NFD', palavra) if unicodedata.category(c) != 'Mn'))
+
 
 def create_hackathon(request):
     hackathon = Hackathon()
@@ -103,4 +107,50 @@ def participe_hackathon(request):
             return get_hackathon(request, hackathon.slug)
     return redirect("/team/"+team.slug)
 
-# def new_activity(request):
+
+def new_activity(request):
+    id_phase = request.POST.get("id_phase")
+    id_team = request.POST.get("id_team")
+    description = request.POST.get("description")
+    name = request.POST.get("name")
+
+    team = Team.objects.get(id=id_team)
+    phase = Phase.objects.get(id=id_phase)
+
+    activity = Activity(id_team=team, description=description, name=name)
+    activity.save()
+    phase.activities.append(activity)
+    phase.save()
+
+
+def update_activity(request):
+    id_activity = request.POST.get("id_activity")
+    user = request.user
+    id_team = request.POST.get("id_team")
+    description = request.POST.get("description")
+    name = request.POST.get("name")
+    slug_hackathon = request.POST.get("slug_hackathon")
+
+    team = Team.objects.get(id=id_team)
+    member = Member.objects.get(id_user=user, id_team=team)
+
+    context = {}
+    if member.level_asses == "Admin":
+        activity = Activity.objects.get(id=id_activity)
+        activity.description = description
+        activity.name = name
+        activity.save()
+        context.append({"result": "Susses"})
+    else:
+        context.append({"result": "Not permission"})    # ainda não utilizado
+    return get_hackathon(request, slug_hackathon)
+
+
+def get_phase(request):
+    id_phase = request.POST.get("id_phase")
+    phase = Phase.objects.get(id=id_phase)
+    context = {
+        'phase': phase,
+        'activities': phase.activities
+    }
+    return render(request, "phase.html", context)

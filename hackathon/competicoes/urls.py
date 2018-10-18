@@ -9,5 +9,8 @@ urlpatterns = [
     path('update', Views.update_hackathon, name='update_hackathon'),
     path('get/<slug:hackathon>', Views.get_hackathon, name='get_hackathon'),
     path('participe', Views.participe_hackathon, name='participe_hackathon'),
-    path('phase', Views.create_phase, name='create_phase')
+    path('phase', Views.create_phase, name='create_phase'),
+    path('activity/new', Views.new_activity, name='new_activity'),
+    path('activity/update', Views.update_activity, name='update_activity'),
+    path('phase/get', Views.get_phase, name='get_phase')
 ]
