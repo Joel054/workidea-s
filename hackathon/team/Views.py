@@ -45,7 +45,6 @@ def remover_acentos(palavra):
     palavra = palavra.replace("ª", "CE")
     palavra = palavra.replace("º", "CE")
     palavra = palavra.replace("°", "CE")
-    print("palavra: "+ palavra)
     return ''.join((c for c in unicodedata.normalize('NFD', palavra) if unicodedata.category(c) != 'Mn'))
 
 
