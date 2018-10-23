@@ -1,61 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-        <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-              Dashboard
-            </h3>
-          </div>
-          <div class="row grid-margin">
-            <div class="col-12">
-{#               {% include '_partial/fast_info.html' %}#}
-            </div>
-          </div>
-        <div class="row" style="padding: 10px">
-        <div class="col-md-3 grid-margin stretch-card">
+    <div class="page-header">
+        <h3 class="page-title">
+            Dashboard
+            <small style="color: red">está em construção ainda!</small>
+        </h3>
+    </div>
+    <div class="row" style="padding: 10px">
+        <div class="col-md-6 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <i class="fas fa-brain" style="font-size: 60px"></i>
-                        <div class="ml-3">
-                            <h6>Meus Hakathons</h6>
+                    <h4 class="card-title mb-0">Você está inserido em</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-inline-block pt-3">
+                            <div class="d-md-flex">
+                                <h2 class="mb-0">4</h2>
+                            </div>
+                            <h4 class="text-gray">Equipes</h4>
+                        </div>
+                        <div class="d-inline-block">
+                            <i class="fas fa-user-friends text-info icon-lg" style="color: red"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 grid-margin stretch-card">
+        <div class="col-md-6 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <i class="fas fa-list-ol" style="font-size: 60px"></i>
-                        <div class="ml-3">
-                            <h6>Fases</h6>
+                    <h4 class="card-title mb-0">Você participa de</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-inline-block pt-3">
+                            <div class="d-md-flex">
+                                <h2 class="mb-0">10</h2>
+                            </div>
+                            <h4 class="text-gray">Hackathons</h4>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <i class="fas fa-plus" style="font-size: 60px"></i>
-                        <div class="ml-3">
-                            <h6>Criar Hackathon</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <i class="fas fa-paper-plane" style="font-size: 60px"></i>
-                        <div class="ml-3">
-                            <h6>Meus convites</h6>
+                        <div class="d-inline-block">
+                            <i class="fas fa-chart-pie text-info icon-lg"></i>
                         </div>
                     </div>
                 </div>
@@ -66,8 +49,8 @@
         <div class="col-md-9 grid-margin stretch-card d-none d-md-flex">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">NOME_HACKATHON</h4>
-                    <p class="card-description">Úlitmo hackathon visitado</p>
+                    <h4 class="card-title">Úlitmo hackathon visitado</h4>
+                    <p class="card-description">NOME_HACKATHON</p>
                     <div class="row">
                         <div class="col-2">
                             <ul class="nav nav-tabs nav-tabs-vertical" role="tablist">
@@ -147,7 +130,7 @@
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Resultado</h4>
+                    <h4 class="card-title">Histórico de ações</h4>
                     <ul class="solid-bullet-list">
                         <li>
                             <h6>User confirmation</h6>
@@ -173,5 +156,178 @@
             </div>
         </div>
     </div>
+    <div class="row" style="padding: 10px">
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <a href="#equipes" data-toggle="modal" data-target="">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <i class="fas fa-user-friends" style="font-size: 60px;color: #0a88e3"></i>
+                            <div class="ml-3">
+                                <h6>Minhas Equipes</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
         </div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <a href="#NovaEquipe" data-toggle="modal">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <i class="fas fa-plus" style="font-size: 60px;color:#1c7430"></i>
+                            <div class="ml-3">
+                                <h6>Criar nova equipe</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <a href="#convites" data-toggle="modal">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <i class="fas fa-paper-plane" style="font-size: 60px; color:#392C70"></i>
+                            <div class="ml-3">
+                                <h6>Meus convites para equipes</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {#   MODAIS #}
+    {#    listagem de equipes#}
+    <div class="modal fade" id="equipes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Equipes</h4>
+                        {% for  member in members %}
+                            {% if member.level_asses != 'Invited' %}
+                                <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                    <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}"
+                                         alt="profile">
+                                    <div class="wrapper ml-3">
+                                        <h6 class="mb-1">{{ member.id_team.name }}</h6>
+                                    </div>
+                                    <div class="ml-auto px-1 py-1">
+                                        <a href="{% url 'get_team' member.id_team.slug %}">
+                                            <button type="submit" class="btn btn-primary btn-fw">Entrar</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% if members.count == 0 %}
+                            <p class="text-muted">Você ainda não tem equipes, crie a sua clicando <a href=""
+                                                                                                     data-toggle="modal"
+                                                                                                     data-target="#NovaEquipe">aqui</a>.
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    convites#}
+    <div class="modal fade" id="convites" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row text-center" style="padding-top: 30px;">
+                            <div class="col-md-12">
+                                <h4>Convites</h4>
+                            </div>
+                        </div>
+                        <!-- CONVITES -->
+                        {% for  member in members %}
+                            {% if member.level_asses == 'Invited' %}
+                                <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                    <img class="img-sm rounded-circle" src="{% static 'images/logoSmall.png' %}"
+                                         alt="profile">
+                                    <div class="wrapper ml-3">
+                                        <h6 class="mb-1">Equipe <b>{{ member.id_team.name }}</b> lhe enviou um convite
+                                        </h6>
+                                    </div>
+                                    <div class="ml-auto px-1 py-1">
+                                        <form methods="post" action="{% url 'response_invitations_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                            <input type="hidden" value="{{ member.id }}" name="member">
+                                            <input type="hidden" value="S" name="response">
+                                            <button type="submit" class="btn btn-primary btn-fw">Aceitar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
+        </div>
+    </div>
+    </div>
+    </div>
+    {#    criar nova equipe#}
+    <!--modal nova equipe-->
+    <div class="modal fade" id="NovaEquipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="card-title">{% if update %}Edite sua Equipe{% else %}Crie sua Equipe{% endif %}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="example-form" method="post" action="{% url 'create_team' %}">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <div>
+                            <section>
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <input class="form-control" name="name" id="name" placeholder="Nome da Equipe"
+                                           value="{% if update %} {{ update.name }} {% endif %}">
+                                    <small class="form-text text-muted">Ex: Só Beck end, Terror do NetBeans,
+                                        HeadShot, Tic-e-taca, C mexe comigo..
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Descrição</label>
+                                    <input class="form-control" name="description" id="description"
+                                           placeholder="Descrição da Equipe"
+                                           value="{% if update %} {{ update.description }} {% endif %}">
+                                    <small class="form-text text-muted">Ex: Só tem fera aqui bixo..</small>
+                                </div>
+                                <input type="hidden" name="id_team"
+                                       value="{% if update %} {{ update.id }} {% endif %}">
+                            </section>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light" type="reset">Limpar</button>
+                        <input class="btn btn-primary btn-fw" type="submit"
+                               value="{% if update %}Editar{% else %}Pronto{% endif %}">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
