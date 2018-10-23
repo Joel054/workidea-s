@@ -64,7 +64,7 @@ def create_team(request):
     team.save()
     member = Member(id_user=user, level_asses='Admin', id_team=team)
     member.save()
-    return return_team(request, {'new_team_ok': 'new team ok'})
+    return return_team(request, {'new_team_ok': 'Time cadastrado com sucesso!'})
 
 
 def delete_team(request):
@@ -76,7 +76,7 @@ def delete_team(request):
     if authorization is not None:
         if authorization.level_asses == 'Admin':
             team.delete()
-            context = {'delete': 'delete team ok'}
+            context = {'delete': 'Equipe deletada com sucesso!'}
     return return_team(request, context)
 
 

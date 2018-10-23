@@ -7,7 +7,13 @@
         <div class="msg-warning alert alert-fill-danger" role="alert">
         <i class="fa fa-exclamation-triangle"></i>
         {{ delete }}
-    </div>
+        </div>
+    {% endif %}
+    {% if new_team_ok %}
+        <div class="msg-warning alert alert-fill-success" role="alert">
+        <i class="fa fa-thumbs-up"></i>
+        {{ new_team_ok }}
+        </div>
     {% endif %}
         <div class="row">
             <div class="col-md-8 grid-margin grid-margin-md-0 stretch-card">
