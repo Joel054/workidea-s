@@ -97,31 +97,9 @@ $(document).ready(function ($) {
         }
     });
 
-
-
-    /*----------------------------------------------------*/
-    /*  VIDEO POP PUP
-    /*----------------------------------------------------*/
-
-    $('.video-modal').magnificPopup({
-        type: 'iframe',
-
-        iframe: {
-            patterns: {
-                youtube: {
-
-                    index: 'youtube.com',
-                    src: 'https://www.youtube.com/embed/7e90gBu4pas'
-
-                }
-            }
-        }
-    });
-
     /* ---------------------------------------------
      Back top page scroll up
      --------------------------------------------- */
-
 
     $.scrollUp({
         scrollText: '<i class="arrow_carrot-up"></i>',

@@ -3,99 +3,35 @@
 
 
 {% block content %}
-    <script>
-        function EnviaConvites(user_id) {
-            $.ajax({
-                type: 'POST',
-                url: '{% url "invitation_team" %}',
-                data: {
-                    'user_id': user_id,
-                    'team': {{ team.id }},
-                    'search': $("#busca").val(),
-                    'csrfmiddlewaretoken': '{{ csrf_token }}',
-                },
-                dataType: 'json',
-                success: function (data) {
-                    AtualizaBusca(data)
-                }
-            });
-        }
 
-        function AtualizaBusca(data) {
-            var jsonData = JSON.parse(JSON.stringify(data));
-            var i, peopleHTML = '';
-            for (i = 0; i < data.length; i++) {
-                var existe = false;
 
-                peopleHTML +=
-                    "<div class=\"wrapper d-flex align-items-center py-2 border-bottom\">" +
-                        "<img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">" +
-                            "<div class=\"wrapper ml-12\">" +
-                                "<h6 class=\"mb-1\">" + jsonData[i]['fields']['username'] + "</h6>" +
-                                "<small class=\"text-muted mb-0\">" + jsonData[i]['fields']['email'] +" " +
-                                "</small>" +
-                            "</div>" +
-                            "<input type=\"hidden\" name=\"id_team\"  value=" + {{ team.id }} +">" +
-                            "<input type=\"hidden\" name=\"user_id\"  value=" + jsonData[i]['pk'] + ">" +
-                            "<input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\" onclick=\"EnviaConvites("+jsonData[i]['pk']+ ")\">"
-                    + "</div>";
-            }
-            var teste = document.getElementById('people')
-            teste.innerHTML = (peopleHTML);
-        }
 
-        $(document).ready(function () {
-
-            $("#busca").change(function () {
-                var username = $(this).val();
-                $.ajax({
-                    url: '{% url "invitation_team" %}',
-                    data: {
-                        'search': username,
-                        'team': {{ team.id }},
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        AtualizaBusca(data);
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script src="{% static 'assets_show/js/jquery-1.12.4.min.js'%}"></script>
-    <!-- Bootstrap Plugins -->
-    <!-- Template Plugins -->
-
-    <script src="{% static 'assets_show/js/owl.carousel.min.js'%}"></script>
-    <script src="{% static 'assets_show/js/jquery.easy-pie-chart.js'%}"></script>
-    <!-- Main js -->
-    <script src="{% static 'assets_show/js/main.js'%}"></script>
-
-    <div class="row" style="padding-top: 10px">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="card text-center">
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-12 stretch-card">
+            <div class="card card-statistics text-center">
                 <div class="card-body">
                     <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
                          alt="profile image"/>
                     <h4>{{ team }}</h4>
-                <div class="template-demo">
-                    <button type="button" class="btn btn-info btn-fw btn-icon-text" data-toggle="modal" data-target="#integrantes">
-                        Integrantes
-                        <i class="fas fa-users btn-icon-append" style="color: white"></i>
-                    </button>
-                    {% if level_asses == 'Admin' %}
-                        <button type="button" class="btn btn-dark btn-fw btn-icon-text" data-toggle="modal"
-                                            data-target="#EditarEquipe">
-                            Editar
-                            <i class="fas fa-pencil-alt btn-icon-append"></i>
+                    <div class="template-demo">
+                        <button type="button" class="btn btn-info btn-fw btn-icon-text" data-toggle="modal"
+                                data-target="#integrantes">
+                            Integrantes
+                            <i class="fas fa-users btn-icon-append" style="color: white"></i>
                         </button>
-                        <button type="button" class="btn btn-danger btn-fw btn-icon-text" data-toggle="modal" data-target="#excluir">
-                            Deletar
-                            <i class="fa fa-eraser btn-icon-prepend"></i>
-                        </button>
-                    {% endif %}
-                  </div>
+                        {% if level_asses == 'Admin' %}
+                            <button type="button" class="btn btn-dark btn-fw btn-icon-text" data-toggle="modal"
+                                    data-target="#EditarEquipe">
+                                Editar
+                                <i class="fas fa-pencil-alt btn-icon-append"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-fw btn-icon-text" data-toggle="modal"
+                                    data-target="#excluir">
+                                Deletar
+                                <i class="fa fa-eraser btn-icon-prepend"></i>
+                            </button>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -130,42 +66,47 @@
             </div>
         {% endif %}
     </div>
-
+{% if hackathons_disponiveis %}
     <!-- CAROSSEL participar de hackathon -->
     <div class="warpper clearfix">
         <div class="row">
-            <div class=" col-md-4 col-lg-12 grid-margin">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Hackathons Disponíveis</h4>
-                  <div class="client-caroussel">
-                      {% for  hackathons in hackathons_disponiveis %}
-                        <div class="item">
-                            <div class="card text-center" style="border: none;box-shadow: 0px 0px 8px 0px #888888;">
-                                <div class="card-body">
-                                    <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2" />
-                                    <h4>{{ hackathons.name }}</h4>
-                                    <p class="mt-4 card-text">
-                                        {{ hackathons.description }}
-                                    </p>
-                                    <!-- PARTICIPAR -->
-                                    <form methods="post" action="{% url 'competicoes:participe_hackathon' %}">
-                                        {% csrf_token %}
-                                        <input type="hidden" value="{{ hackathons.slug }}" name="hackathon_slug">
-                                        <input type="hidden" value="{{ team.slug }}" name="team_slug">
-                                        <button type="submit" class="btn btn-outline-primary btn-fw">Participar</button>
-                                    </form>
+            <div class=" col-md-4 col-lg-12 col-sm-12 grid-margin">
+                <div class="card" style="height: 420px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Hackathons Disponíveis</h4>
+                        <div class="client-caroussel">
+                            {% for  hackathons in hackathons_disponiveis %}
+                                <div class="item" style="height: 350px; padding-top: 10px; padding-left: 5px">
+                                    <div class="card text-center"
+                                         style="border: none;box-shadow: 0px 0px 8px 0px #888888;height: 320px">
+                                        <div class="card-body">
+                                            <img src="{% static 'images/logoSmall.png' %}"
+                                                 class="img-lg rounded-circle mb-2"/>
+                                            <h4 style="height: 30px">{{ hackathons.name }}</h4>
+                                            <p class="mt-4 card-text" style="height: 30px">
+                                                {{ hackathons.description }}
+                                            </p>
+                                            <!-- PARTICIPAR -->
+                                            <form methods="post" action="{% url 'competicoes:participe_hackathon' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" value="{{ hackathons.slug }}"
+                                                       name="hackathon_slug">
+                                                <input type="hidden" value="{{ team.slug }}" name="team_slug">
+                                                <button type="submit" class="btn btn-outline-primary btn-fw">
+                                                    Participar
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endfor %}
                         </div>
-                    {% endfor %}
-                  </div>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
     </div>
-
+{% endif %}
     <div class="row">
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card text-center">
@@ -173,11 +114,12 @@
                     <h4 style="padding: 10px">Hackathons que a Equipe {{ team }} está participando</h4>
                     <div class="row">
                         <!-- for lista hackathons-->
-                       {% for  hackathons in hackathons_participation %}
+                        {% for  hackathons in hackathons_participation %}
                             <div class="col-md-6 grid-margin stretch-card">
                                 <div class="card text-center" style="border: none;background-color: #f2f2f2;">
                                     <div class="card-body">
-                                        <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
+                                        <img src="{% static 'images/logoSmall.png' %}"
+                                             class="img-lg rounded-circle mb-2"
                                              alt="profile image"/>
                                         <h4>{{ hackathons.id_hackathon.name }}</h4>
                                         <p class="mt-4 card-text">
@@ -199,31 +141,33 @@
                 <div class="card-body">
                     <h4 style="padding: 10px">Hackathons que a Equipe {{ team }} está gerenciando</h4>
                     <div class="row">
-                    {% if hackathons_managing %}
-                        <!-- for lista hackathons-->
-                        {% for  hackathons in hackathons_managing %}
-                            <div class="col-md-6 grid-margin stretch-card">
-                                <div class="card text-center" style="border: none;background-color: #f2f2f2;">
-                                    <div class="card-body">
-                                        <img src="{% static 'images/logoSmall.png' %}" class="img-lg rounded-circle mb-2"
-                                             alt="profile image"/>
-                                        <h4>{{ hackathons.name }}</h4>
-                                        <p class="mt-4 card-text">
-                                            {{ hackathons.description }}
-                                        </p>
-                                        <!--  ABRIR GERENCIAMENTO -->
-                                        <a href="{% url 'competicoes:get_hackathon' hackathons.slug %}">
-                                            <button type="submit" class="btn btn-outline-primary btn-fw">Abrir</button>
-                                        </a>
+                        {% if hackathons_managing %}
+                            <!-- for lista hackathons-->
+                            {% for  hackathons in hackathons_managing %}
+                                <div class="col-md-6 grid-margin stretch-card">
+                                    <div class="card text-center" style="border: none;background-color: #f2f2f2;">
+                                        <div class="card-body">
+                                            <img src="{% static 'images/logoSmall.png' %}"
+                                                 class="img-lg rounded-circle mb-2"
+                                                 alt="profile image"/>
+                                            <h4>{{ hackathons.name }}</h4>
+                                            <p class="mt-4 card-text">
+                                                {{ hackathons.description }}
+                                            </p>
+                                            <!--  ABRIR GERENCIAMENTO -->
+                                            <a href="{% url 'competicoes:get_hackathon' hackathons.slug %}">
+                                                <button type="submit" class="btn btn-outline-primary btn-fw">Abrir
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
                         {% else %}
-                        <div>
-                             <p>crie um <a href="" data-toggle="modal" data-target="#NovoHackathon" >hackathon</a></p>
-                        </div>
-                    {% endif %}
+                            <div>
+                                <p>crie um <a href="" data-toggle="modal" data-target="#NovoHackathon">hackathon</a></p>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -289,7 +233,9 @@
                         {% csrf_token %}
                         <input type="hidden" value="{{ team.id }}" name="id_team">
                         <div>
-                            <h2 style="text-align: center">Você tem certeza que deseja excluir a equipe <br><small>{{ team }}?</small></h2>
+                            <h2 style="text-align: center">Você tem certeza que deseja excluir a equipe <br>
+                                <small>{{ team }}?</small>
+                            </h2>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -302,12 +248,12 @@
     </div>
 
     <!--modal Integrantes-->
-    <div class="modal fade" id="integrantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="integrantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="card">
                     <div class="card-body">
-
                         <div class="row text-center" style="padding-top: 30px;">
                             <div class="col-md-12">
                                 <h4>Integrantes do Time</h4>
@@ -315,7 +261,7 @@
                             <!-- listar integrantes do time -->
                             {% for  member in members_of_team %}
                                 {% if member.level_asses != 'Invited' %}
-                                    <div class="col-md-4 grid-margin stretch-card" style="padding: 15px">
+                                    <div class="col-md-2 stretch-card" style="padding: 15px;">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex flex-row">
@@ -325,7 +271,7 @@
                                                     <div class="ml-3">
                                                         <h6>{{ member.username }}</h6>
                                                         <p class="text-muted">{{ member.email }}</p>
-                                                        <p class="mt-2 text-primary font-weight-bold">Designer</p>
+{#                                                        <p class="mt-2 text-primary font-weight-bold">Designer</p>#}
                                                     </div>
                                                 </div>
                                             </div>
@@ -336,52 +282,133 @@
                         </div>
                     </div>
                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
+                </div>
             </div>
         </div>
     </div>
 
     {#    Modal novo hackathon#}
     <div class="modal fade" id="NovoHackathon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="card-title">Crie seu Hackathon</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form id="example-form" method="post" action="{% url 'competicoes:create_hackathon' %}">
-                        <div class="modal-body">
-                            {% csrf_token %}
-                            <div>
-                                <section>
-                                    <div class="form-group">
-                                        <label>Tema</label>
-                                        <input class="form-control" name="name" id="name" placeholder="Tema do Hackathon">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Descrição</label>
-                                        <input class="form-control" name="description" id="description"
-                                               placeholder="Descrição do Hackathon">
-                                    </div>
-                                    <input type="hidden" name="team_id" value="{{ team.id }}">
-                                </section>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-light" type="reset">Limpar</button>
-                            <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </form>
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="card-title">Crie seu Hackathon</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form id="example-form" method="post" action="{% url 'competicoes:create_hackathon' %}">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <div>
+                            <section>
+                                <div class="form-group">
+                                    <label>Tema</label>
+                                    <input class="form-control" name="name" id="name" placeholder="Tema do Hackathon">
+                                </div>
+                                <div class="form-group">
+                                    <label>Descrição</label>
+                                    <input class="form-control" name="description" id="description"
+                                           placeholder="Descrição do Hackathon">
+                                </div>
+                                <input type="hidden" name="team_id" value="{{ team.id }}">
+                            </section>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light" type="reset">Limpar</button>
+                        <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
+{% endblock %}
+{% block scripts %}
+    <script>
+        function EnviaConvites(user_id) {
+            $.ajax({
+                type: 'POST',
+                url: '{% url "invitation_team" %}',
+                data: {
+                    'user_id': user_id,
+                    'team': {{ team.id }},
+                    'search': $("#busca").val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                dataType: 'json',
+                success: function (data) {
+                    AtualizaBusca(data)
+                }
+            });
+        }
+
+        function AtualizaBusca(data) {
+            var jsonData = JSON.parse(JSON.stringify(data));
+            var i, peopleHTML = '';
+            for (i = 0; i < data.length; i++) {
+                var existe = false;
+
+                peopleHTML +=
+                    "<div class=\"wrapper d-flex align-items-center py-2 border-bottom\">" +
+                    "<img class=\"img-sm rounded-circle\" src=\"{% static 'images/logoSmall.png' %}\" alt=\"profile\">" +
+                    "<div class=\"wrapper ml-12\">" +
+                    "<h6 class=\"mb-1\">" + jsonData[i]['fields']['username'] + "</h6>" +
+                    "<small class=\"text-muted mb-0\">" + jsonData[i]['fields']['email'] + " " +
+                    "</small>" +
+                    "</div>" +
+                    "<input type=\"hidden\" name=\"id_team\"  value=" + {{ team.id }} +">" +
+                    "<input type=\"hidden\" name=\"user_id\"  value=" + jsonData[i]['pk'] + ">" +
+                    "<input class=\"btn btn-primary btn-fw\" type=\"submit\" value=\"Convidar\" onclick=\"EnviaConvites(" + jsonData[i]['pk'] + ")\">"
+                    + "</div>";
+            }
+            var teste = document.getElementById('people')
+            teste.innerHTML = (peopleHTML);
+        }
+
+        $(document).ready(function () {
+
+            $("#busca").change(function () {
+                var username = $(this).val();
+                $.ajax({
+                    url: '{% url "invitation_team" %}',
+                    data: {
+                        'search': username,
+                        'team': {{ team.id }},
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        AtualizaBusca(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script src="{% static 'assets_show/js/jquery-1.12.4.min.js' %}"></script>
+
+    <script src="{% static 'assets_show/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets_show/js/jquery.easy-pie-chart.js' %}"></script>
+    <!-- Main js -->
+    <script src="{% static 'assets_show/js/main.js' %}"></script>
+    {##}
+
+    {#scripts do base:#}
+
+    {#    <script src="{% static 'js/off-canvas.js' %}"></script>#}
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    {#    <script src="{% static 'js/misc.js' %}"></script>#}
+    <script src="{% static 'js/settings.js' %}"></script>
+    {#    <script src="{% static 'js/todolist.js' %}"></script>#}
+    <!-- Custom js for this page-->
+    {#    <script src="{% static 'js/dashboard.js' %}"></script>#}
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+{#    <script src="{% static 'vendors/js/vendor.bundle.addons.js' %}"></script>#}
 {% endblock %}
 
 {#{% if user.is_authenticated %}#}

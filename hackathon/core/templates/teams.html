@@ -8,14 +8,6 @@
         <i class="fa fa-exclamation-triangle"></i>
         {{ delete }}
     </div>
-        <script>
-            setTimeout(function(){
-                var msg = document.getElementsByClassName("msg-warning");
-                while(msg.length > 0){
-                    msg[0].parentNode.removeChild(msg[0]);
-                }
-            }, 2000);
-        </script>
     {% endif %}
         <div class="row">
             <div class="col-md-8 grid-margin grid-margin-md-0 stretch-card">
@@ -147,5 +139,12 @@
             <i class="fas fa-user-friends"></i>
         </div>
     </div>
-
+        <script>
+            setTimeout(function(){
+                var msg = document.getElementsByClassName("msg-warning");
+                while(msg.length > 0){
+                    msg[0].parentNode.removeChild(msg[0]);
+                }
+            }, 2000);
+        </script>
 {% endblock %}
