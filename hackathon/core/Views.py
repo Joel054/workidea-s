@@ -68,7 +68,7 @@ def update_user(request):
         if username != '':
             test_username = User.objects.filter(username=username).exists()
             if test_username:
-                return render(request, 'settings.html', {'error': 'Este username já existe'})
+                return render(request, 'settings.html', {'error': 'Este username já existe, tente novamente!'})
             user.username = username
         if email != '':
             user.email = email

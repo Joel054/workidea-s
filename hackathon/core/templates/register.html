@@ -44,6 +44,22 @@
                             <img src="{% static 'images/logo.png' %}" alt="logo">
                         </div>
                         <h4>Cadastre-se!</h4>
+                        <div class="msg-warning text-center mt-4 font-weight-light">
+                            {% if errors %}
+                                <div class="msg-warning alert alert-fill-danger" role="alert">
+                                    <i class="fa fa-exclamation-triangle" style="padding-bottom: 15px"></i>
+                                    <p>{{ errors }}<br>Tente novamente!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <script>
+                            setTimeout(function(){
+                                var msg = document.getElementsByClassName("msg-warning");
+                                while(msg.length > 0){
+                                    msg[0].parentNode.removeChild(msg[0]);
+                                }
+                            }, 5000);
+                        </script>
                         <h6 class="font-weight-light">São só alguns passos.</h6>
                         <form method="post" action="{% url 'register_commit' %}">
                             {% csrf_token %}
@@ -130,7 +146,7 @@
                                 Já tem uma conta? <a href="{% url 'login' %}" class="text-primary">Login</a>
                             </div>
                         </form>
-                        <div style="color:red;"> {{ form.errors }}</div>
+
                     </div>
                 </div>
                 <div class="col-lg-6 register-half-bg d-flex flex-row">

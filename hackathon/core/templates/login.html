@@ -68,8 +68,25 @@
                                         Não possui conta? <a href="{% url 'register' %}" class="text-primary">Criar</a>
                                     </div>
                                     <input type="hidden" name="next" value="{{ next }}">
-                                    <div style="color:red;"> {{ form.errors }}</div>
-
+                                    <div class="text-center mt-4 font-weight-light">
+                                        {% if form.errors %}
+                                            <div class="msg-warning alert alert-fill-danger" role="alert">
+                                                <i class="fa fa-exclamation-triangle" style="padding-bottom: 15px"></i>
+                                                <p>Dados de usuário e senha incorretos, tente novamente!</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                <div class="text-center mt-4 font-weight-light">
+                                        {{ success }}
+                                    </div>
+                                    <script>
+                                        setTimeout(function(){
+                                            var msg = document.getElementsByClassName("msg-warning");
+                                            while(msg.length > 0){
+                                                msg[0].parentNode.removeChild(msg[0]);
+                                            }
+                                        }, 5000);
+                                    </script>
                                 </form>
                             </div>
                         </div>
