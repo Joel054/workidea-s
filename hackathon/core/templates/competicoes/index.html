@@ -180,7 +180,7 @@
             </div>
         </div>
     </div>
-
+    <!-- Só equipe admin -->
     <div class="row default-identation">
         <div class="col-md-12 col-sm-12 col-xl-12 grid-margin stretch-card  d-md-flex">
             <div class="card">
@@ -231,8 +231,7 @@
                                                     {{ phases.description }}
                                                 </p>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-fw left" data-toggle="modal"
-                                                    data-target="#FazerTarefa">Fazer</button>
+                                            <button type="submit" class="btn btn-primary btn-fw left">Fazer</button>
                                         </div>
                                     </div>
                                 </div>
@@ -257,57 +256,54 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- Nova tarefa -->
-                    {% if  phases_of_hackathon.count != 0 %}
-                        <div class="col-lg-6 grid-margin stretch-card">
-                          <div class="card">
-                              <div class="mt-4">
-                                <div class="accordion" id="accordion" role="tablist">
-                                  <div class="card">
-
+                        <!-- Responder tarefa -->
+                        {% if  phases_of_hackathon.count != 0 %}
+                            <div class="col-md-6 ">
+                              <div class="rounded border mb-2">
                                   {% for  phases in phases_of_hackathon %}
-                                      <form methods="post" action="{% url 'competicoes:new_activity' %}">
-                                        <div class="card-header" role="tab" id="heading-2">
-                                          <h6 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-                                              {{ phases.name }}
-                                            </a>{{ phases.description }}
-                                          </h6>
-                                        </div>
-                                        <div id="collapse-2" class="collapse" role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion">
-                                          <div class="card-body">
-                                            <div class="row">
-                                              <div class="col-12">
-                                                <div>
-                                                    <section>
-                                                        <div class="form-group">
-                                                            <textarea class="form-control" name="description" placeholder="Resposta da Atividade" required></textarea>
-                                                        </div>
-                                                    </section>
-                                                </div>
-                                              </div>
-                                              <div class="col-12">
-                                                    <div class="media">
-                                                        <input type="hidden" name="id_phase" value="{{ phases.id }}">
-                                                        <input type="hidden" name="name" value="{{ phases.name }}">
-                                                        <input type="hidden" name="id_team" value="{{ hackathon.team_manager.id }}">
-                                                        <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+                                  <div class="mt-4">
+                                      <div class="accordion" id="accordion" role="tablist">
+                                            <div class="card">
+                                                  <form methods="post" action="{% url 'competicoes:new_activity' %}">
+                                                    <div class="card-header" role="tab" id="heading-2">
+                                                      <h6 class="mb-0">
+                                                        <a class="collapsed" data-toggle="collapse" href="#{{ phases.id }}" aria-expanded="false" aria-controls="{{ phases.id }}">
+                                                          {{ phases.name }}
+                                                            <p class="mb-0 text-muted">{{ phases.description }}</p>
+                                                        </a>
+                                                      </h6>
                                                     </div>
-                                              </div>
+                                                    <div id="{{ phases.id }}" class="collapse" role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion">
+                                                      <div class="card-body">
+                                                        <div class="row">
+                                                          <div class="col-12">
+                                                            <div>
+                                                                <section>
+                                                                    <div class="form-group">
+                                                                        <textarea class="form-control" name="description" placeholder="Resposta da Atividade" required></textarea>
+                                                                    </div>
+                                                                </section>
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-12">
+                                                                <div class="media">
+                                                                    <input type="hidden" name="id_phase" value="{{ phases.id }}">
+                                                                    <input type="hidden" name="name" value="{{ phases.name }}">
+                                                                    <input type="hidden" name="id_team" value="{{ hackathon.team_manager.id }}">
+                                                                    <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+                                                                </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
                                             </div>
-                                          </div>
-                                        </div>
-                                      </form>
-
-                                  {% endfor %}
-
-                                  </div>
-                                </div>
+                                      </div>
+                                 </div>
+                                {% endfor %}
                               </div>
-                          </div>
-                        </div>
-                    {% endif %}
-
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
