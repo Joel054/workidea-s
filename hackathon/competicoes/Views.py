@@ -109,13 +109,14 @@ def create_phase(request):
     id_hackathon = request.POST.get('id_hackathon')
     hackathon = Hackathon.objects.get(id=id_hackathon)
     member = Member.objects.get(id_user=user, id_team=hackathon.team_manager)
-    if member.level_asses == "Admin":
-        phase = Phase()
-        phase.name = request.POST.get('name')
-        phase.description = request.POST.get('description')
-        phase.save()
-        hackathon.phases.add(phase)
-        hackathon.save()
+    # nao precisa necessariamente ser admin da equipe para poder inserir, integrantes tmb podem
+    #if member.level_asses == "User":
+    phase = Phase()
+    phase.name = request.POST.get('name')
+    phase.description = request.POST.get('description')
+    phase.save()
+    hackathon.phases.add(phase)
+    hackathon.save()
     return get_hackathon(request, hackathon.slug)
 
 
