@@ -12,5 +12,166 @@
 {#               {% include '_partial/fast_info.html' %}#}
             </div>
           </div>
+        <div class="row" style="padding: 10px">
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <i class="fas fa-brain" style="font-size: 60px"></i>
+                        <div class="ml-3">
+                            <h6>Meus Hakathons</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <i class="fas fa-list-ol" style="font-size: 60px"></i>
+                        <div class="ml-3">
+                            <h6>Fases</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <i class="fas fa-plus" style="font-size: 60px"></i>
+                        <div class="ml-3">
+                            <h6>Criar Hackathon</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <i class="fas fa-paper-plane" style="font-size: 60px"></i>
+                        <div class="ml-3">
+                            <h6>Meus convites</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding: 10px">
+        <div class="col-md-9 grid-margin stretch-card d-none d-md-flex">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">NOME_HACKATHON</h4>
+                    <p class="card-description">Úlitmo hackathon visitado</p>
+                    <div class="row">
+                        <div class="col-2">
+                            <ul class="nav nav-tabs nav-tabs-vertical" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab-vertical" data-toggle="tab" href="#home-2"
+                                       role="tab" aria-controls="home-2" aria-selected="true">
+                                        Sobre
+                                        <i class="fa fa-home text-info ml-2"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab-vertical" data-toggle="tab" href="#profile-2"
+                                       role="tab" aria-controls="profile-2" aria-selected="false">
+                                        Mentores
+                                        <i class="fa fa-user-tie text-danger ml-2"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab-vertical" data-toggle="tab" href="#contact-2"
+                                       role="tab" aria-controls="contact-2" aria-selected="false">
+                                        Tutores
+                                        <i class="far fa-user-ninja text-success ml-2"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab-vertical" data-toggle="tab" href="#contact-2"
+                                       role="tab" aria-controls="contact-2" aria-selected="false">
+                                        Times
+                                        <i class="far fa-users text-success ml-2"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-10">
+                            <div class="tab-content tab-content-vertical">
+                                <div class="tab-pane fade show active" id="home-2" role="tabpanel"
+                                     aria-labelledby="home-tab-vertical">
+                                    <div class="text-center">
+                                    </div>
+                                    <h3>Sobre o Hackathon: {{ hackathon.name }}</h3>
+                                    <br>
+                                    <p>
+                                        {{ hackathon.description }}
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="profile-2" role="tabpanel"
+                                     aria-labelledby="profile-tab-vertical">
+                                    <div class="text-center">
+                                        <img class="mb-3 w-25 rounded" src="../../images/faces/face1.jpg"
+                                             alt="sample image">
+                                        <h5 class="mt-0">Adam John</h5>
+                                        <p class="mb-0">UX specialist</p>
+                                        <p class="mb-0">Florida</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="contact-2" role="tabpanel"
+                                     aria-labelledby="contact-tab-vertical">
+                                    <h4>Contact us </h4>
+                                    <p>
+                                        Feel free to contact us if you have any questions!
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-phone text-info"></i>
+                                        +123456789
+                                    </p>
+                                    <p>
+                                        <i class="far fa-envelope-open text-success"></i>
+                                        contactus@example.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Resultado</h4>
+                    <ul class="solid-bullet-list">
+                        <li>
+                            <h6>User confirmation</h6>
+                        </li>
+                        <li>
+                            <h6>Continuous evaluation</h6>
+                            <p>Lorem Ipsum is simply dummy text of the printing </p>
+                            <p class="text-muted">
+                                <i class="far fa-clock"></i>
+                                7 months ago.
+                            </p>
+                        </li>
+                        <li>
+                            <h6>Promotion</h6>
+                            <p>Lorem Ipsum is simply dummy text of the printing </p>
+                            <p class="text-muted">
+                                <i class="far fa-clock"></i>
+                                7 months ago.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
         </div>
 {% endblock %}
