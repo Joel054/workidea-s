@@ -67,7 +67,7 @@ def create_hackathon(request):
     except Team.DoesNotExist:
         return list_hackathon(request, {'id_invalido': 'id de time inválido'})
     hackathon.save()
-    return get_hackathon(request, hackathon.slug)
+    return get_hackathon(request, hackathon.slug, hackathon.team_manager.slug)
 
 
 def update_hackathon(request):
@@ -79,15 +79,17 @@ def update_hackathon(request):
         hackathon.name = request.POST.get('name')
         hackathon.description = request.POST.get('description')
         hackathon.save()
-    return get_hackathon(request, hackathon.slug)
+    return get_hackathon(request, hackathon.slug,hackathon.team_manager.slug)
 
 
-def get_hackathon(request, hackathon):
+def get_hackathon(request, hackathon,team):
     hackathon = Hackathon.objects.get(slug=hackathon)
+    team = Team.objects.get(slug=team)
     context = {
         'hackathon': hackathon,
         'teams_of_hackathon': hackathon.teams.all(),
-        'phases_of_hackathon': hackathon.phases.all()}
+        'phases_of_hackathon': hackathon.phases.all(),
+        'team': team}
     return render(request, 'competicoes/index.html', context)
 
 
@@ -117,7 +119,7 @@ def create_phase(request):
     phase.save()
     hackathon.phases.add(phase)
     hackathon.save()
-    return get_hackathon(request, hackathon.slug)
+    return get_hackathon(request, hackathon.slug, hackathon.team_manager.slug)
 
 
 def dashboard_hackathon(request):
@@ -137,7 +139,7 @@ def participe_hackathon(request):
         else:
             participation = Participation(id_team=team, id_hackathon=hackathon, level_asses='Participant')
             participation.save()
-            return get_hackathon(request, hackathon.slug)
+            return get_hackathon(request, hackathon.slug, team.slug)
     return redirect("/team/"+team.slug)
 
 
@@ -146,6 +148,7 @@ def new_activity(request):
     id_team = request.POST.get("id_team")
     description = request.POST.get("description")
     name = request.POST.get("name")
+    hackathon_slug = request.POST.get("hackathon_slug")
 
     team = Team.objects.get(id=id_team)
     phase = Phase.objects.get(id=id_phase)
@@ -154,6 +157,7 @@ def new_activity(request):
     activity.save()
     phase.activities.append(activity)
     phase.save()
+    return get_hackathon(request, hackathon_slug, team.slug)
 
 
 def update_activity(request):
@@ -176,7 +180,7 @@ def update_activity(request):
         context.append({"result": "Susses"})
     else:
         context.append({"result": "Not permission"})    # ainda não utilizado
-    return get_hackathon(request, slug_hackathon)
+    return get_hackathon(request, slug_hackathon, team.slug)
 
 
 def get_phase(request):
