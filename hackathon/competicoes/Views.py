@@ -149,7 +149,7 @@ def new_activity(request):
     description = request.POST.get("description")
     name = request.POST.get("name")
     hackathon_slug = request.POST.get("hackathon_slug")
-
+    print(id_team)
     team = Team.objects.get(id=id_team)
     phase = Phase.objects.get(id=id_phase)
 
