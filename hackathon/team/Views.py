@@ -112,7 +112,7 @@ def get_team(request, team):
                 if hacks.team_manager != team:
                     hackathons_disp.append(hacks)
         print(participations)
-        print( team.members.all())
+        print(team.members.all())
         context = {
             'team': team,
             'level_asses': authorization.level_asses,

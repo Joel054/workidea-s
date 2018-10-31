@@ -75,9 +75,14 @@
                                                 <p>Dados de usuário e senha incorretos, tente novamente!</p>
                                             </div>
                                         {% endif %}
+                                        {% if sucess %}
+                                            <div class="msg-warning alert alert-fill-success" role="alert">
+                                            <i class="fa fa-thumbs-up" style="padding-bottom: 15px"></i>
+                                                <p>Usuario criado com sucesso!</p>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 <div class="text-center mt-4 font-weight-light">
-                                        {{ success }}
                                     </div>
                                     <script>
                                         setTimeout(function(){

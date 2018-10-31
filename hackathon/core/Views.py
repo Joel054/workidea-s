@@ -39,7 +39,7 @@ def register_commit(request):
             user.save()
     else:
         return render(request, 'register.html', {'errors': 'As senhas não correspondem'})
-    return redirect('../login/')
+    return render(request, 'login.html', {'sucess': 'Usuário criado com sucesso!'})
 
 
 def register(request):
