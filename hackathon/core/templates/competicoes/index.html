@@ -20,39 +20,42 @@
         </div>
     </div>
     <!-- Só equipe admin -->
-    <div class="row default-identation">
-        <div class="col-md-12 col-sm-12 col-xl-12 grid-margin stretch-card  d-md-flex">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Nova atividade</h4>
-                    <form id="example-form" method="post" action="{% url 'competicoes:create_phase' %}">
-                        {% csrf_token %}
-                        <div>
-                            <section>
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input class="form-control" name="name" id="name" placeholder="Nome da atividade">
-                                </div>
-                                <div class="form-group">
-                                    <label>Descrição</label>
-                                    <textarea class="form-control" name="description" id="description"
-                                              placeholder="Descrição da Atividade" required></textarea>
-                                </div>
-                            </section>
-                        </div>
-                        <input type="hidden" name="id_hackathon" value="{{ hackathon.id }}">
-                        <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
-                    </form>
+    {% if  hackathon.team_manager.id == team.id %}
+        <div class="row default-identation">
+            <div class="col-md-12 col-sm-12 col-xl-12 grid-margin stretch-card  d-md-flex">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Nova atividade</h4>
+                        <form id="example-form" method="post" action="{% url 'competicoes:create_phase' %}">
+                            {% csrf_token %}
+                            <div>
+                                <section>
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input class="form-control" name="name" id="name" placeholder="Nome da atividade">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descrição</label>
+                                        <textarea class="form-control" name="description" id="description"
+                                                  placeholder="Descrição da Atividade" required></textarea>
+                                    </div>
+                                </section>
+                            </div>
+                            <input type="hidden" name="id_hackathon" value="{{ hackathon.id }}">
+                            <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
+    {% endif %}
+
 
     <div class="row default-identation">
         <div class="col-md-12 col-sm-12 col-xl-12 grid-margin stretch-card  d-md-flex">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Atividades</h4>
+                    <h4 class="card-title"> Atividades </h4>
                     <p class="card-description">
                         As seguintes fases devem ser elaboradas, e enviadas.
                     </p>
