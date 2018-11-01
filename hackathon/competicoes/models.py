@@ -14,7 +14,7 @@ class Activity(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return_ = "Phase " + self.id_phase.name + " enviada pelo Team " + self.id_team.name
+        return_ = "Phase " + self.name + " enviada pelo Team " + self.id_team.name
         return return_
 
 

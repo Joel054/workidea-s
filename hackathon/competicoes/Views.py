@@ -144,18 +144,18 @@ def participe_hackathon(request):
 
 
 def new_activity(request):
-    id_phase = request.POST.get("id_phase")
-    id_team = request.POST.get("id_team")
-    description = request.POST.get("description")
-    name = request.POST.get("name")
-    hackathon_slug = request.POST.get("hackathon_slug")
+    id_phase = request.GET.get("id_phase")
+    id_team = request.GET.get("id_team")
+    description = request.GET.get("description")
+    name = request.GET.get("name")
+    hackathon_slug = request.GET.get("hackathon_slug")
     print(id_team)
     team = Team.objects.get(id=id_team)
     phase = Phase.objects.get(id=id_phase)
 
     activity = Activity(id_team=team, description=description, name=name)
     activity.save()
-    phase.activities.append(activity)
+    phase.activities.add(activity)
     phase.save()
     return get_hackathon(request, hackathon_slug, team.slug)
 
