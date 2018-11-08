@@ -82,13 +82,33 @@ def update_hackathon(request):
     return get_hackathon(request, hackathon.slug,hackathon.team_manager.slug)
 
 
+class activities_front:
+    phase = None
+    activities = None
+
+    def __init__(self, ac, ph):
+        self.phase = ph
+        self.activities = ac
+
+    def getPhase(self):
+        return self.phase
+
+
 def get_hackathon(request, hackathon,team):
     hackathon = Hackathon.objects.get(slug=hackathon)
     team = Team.objects.get(slug=team)
+    list_phases = []
+    for phase in hackathon.phases.all():
+        activit = activities_front(phase.activities.all(), phase)
+        print(activit.phase)
+        list_phases.append({phase.activities.all()})
+    print("--------------------------------------------")
+    print(list_phases)
     context = {
         'hackathon': hackathon,
         'teams_of_hackathon': hackathon.teams.all(),
         'phases_of_hackathon': hackathon.phases.all(),
+        'activities_of_hackathon': list_phases,
         'team': team}
     return render(request, 'competicoes/index.html', context)
 
@@ -148,12 +168,13 @@ def new_activity(request):
     id_team = request.GET.get("id_team")
     description = request.GET.get("description")
     name = request.GET.get("name")
+    nota = request.GET.get("nota")
     hackathon_slug = request.GET.get("hackathon_slug")
-    print(id_team)
+    print(nota)
     team = Team.objects.get(id=id_team)
     phase = Phase.objects.get(id=id_phase)
 
-    activity = Activity(id_team=team, description=description, name=name)
+    activity = Activity(id_team=team, description=description, name=name, nota=nota)
     activity.save()
     phase.activities.add(activity)
     phase.save()

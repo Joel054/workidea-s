@@ -12,6 +12,7 @@ class Activity(models.Model):
     id_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team")
     name = models.CharField(max_length=255)
     description = models.TextField()
+    nota = models.IntegerField()
 
     def __str__(self):
         return_ = "Phase " + self.name + " enviada pelo Team " + self.id_team.name
