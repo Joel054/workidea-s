@@ -93,6 +93,19 @@
                                       <div class="rounded border mb-2">
                                       <!-- Listar e Responder tarefas -->
                                           {% for  phases in phases_of_hackathon %}
+                                              <!-- Testar se ja foi respondido -->
+                                              {% for  phase in activities_of_hackathon %}
+                                                    {% for ac in phase %}
+                                                        {% for activite in ac %}
+                                                            {% if  phases.name in activite.name %}
+
+                                                            {% else %}
+
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                              {% endfor %}
+
                                           <div class="mt-4">
                                               <div class="accordion" id="accordion" role="tablist">
                                                     <div class="card">
@@ -150,7 +163,7 @@
                                           <div class="mt-4">
                                               <div class="accordion" id="accordion" role="tablist">
                                                     <div class="card">
-                                                          <form methods="post" action="{% url 'competicoes:new_activity' %}">
+                                                          <form methods="post" action="{% url 'competicoes:update_activity' %}">
                                                             <div class="card-header" role="tab" id="heading-2">
                                                               <h6 class="mb-0">
                                                                 <a class="collapsed" data-toggle="collapse" href="#{{ phases.id }}" aria-expanded="false" aria-controls="{{ phases.id }}">
@@ -181,8 +194,14 @@
                                                                                               <option value="5">5</option>
                                                                                             </select>
                                                                                             <div class="br-widget">
-                                                                                                <input type="hidden" name="id_phase" value="{{ phases.id }}">
-                                                                                                <a href="#" data-rating-value="1" data-rating-text="1" class="br-selected">1</a>
+                                                                                                <input type="hidden" name="id_activity" value="{{ activite.id }}">
+                                                                                                <input type="hidden" name="id_team" value="{{ activite.id_team.id }}">
+                                                                                                <input type="hidden" name="description" value="{{ activite.description }}">
+                                                                                                <input type="hidden" name="name" value="{{  activite.name }}">
+                                                                                                <input type="hidden" name="nota" value="5">
+                                                                                                <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+
+                                                                                                <a href="#" name="nota" data-rating-value="1" data-rating-text="1" class="br-selected">1</a>
                                                                                                 <a href="#" data-rating-value="2" data-rating-text="2" class="br-selected">2</a>
                                                                                                 <a href="#" data-rating-value="3" data-rating-text="3" class="br-selected">3</a>
                                                                                                 <a href="#" data-rating-value="4" data-rating-text="4" class="br-selected">4</a>
@@ -222,7 +241,7 @@
                                                                 {{ activite.description }}
                                                             </p>
                                                             <h5 data-rating-value="1" data-rating-text="1" class="mb-1 br-selected" style="padding-top: 10px">
-                                                                Nota: {% if activite.nota == 0 %}Ainda não foi avaliado{% else  %}{{ activite.nota }} {% endif  %}</h5>
+                                                                Nota: {% if activite.nota == 0 %}Ainda não foi avaliada{% else  %}{{ activite.nota }} {% endif  %}</h5>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary btn-fw left">Editar</button>
                                                     </div>
