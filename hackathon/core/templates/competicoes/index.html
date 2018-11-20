@@ -68,7 +68,7 @@
                                 {% if  phases_of_hackathon.count != 0 %}
                                     {% for  phases in phases_of_hackathon %}
                                         <div class="card rounded border mb-2">
-                                            <div class="card-body p-3">
+                                            <div class="card-body p-4">
                                                 <div class="media">
                                                     <i class="fas fa-plus icon-sm text-success align-self-center mr-3"></i>
                                                     <div class="media-body">
@@ -77,7 +77,6 @@
                                                             {{ phases.description }}
                                                         </p>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-fw left">Editar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,24 +88,12 @@
 
                             <!-- participando -->
                             {% if  hackathon.team_manager.id != team.id %}
-                                {% if  phases_of_hackathon.count != 0 %}
-                                      <div class="rounded border mb-2">
-                                      <!-- Listar e Responder tarefas -->
-                                          {% for  phases in phases_of_hackathon %}
-                                              <!-- Testar se ja foi respondido -->
-                                              {% for  phase in activities_of_hackathon %}
-                                                    {% for ac in phase %}
-                                                        {% for activite in ac %}
-                                                            {% if  phases.name in activite.name %}
-
-                                                            {% else %}
-
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    {% endfor %}
-                                              {% endfor %}
-
-                                          <div class="mt-4">
+                                {% if  phases_of_hackathon_2.count != 0 %}
+                                    <!-- Listar e Responder tarefas -->
+                                    {% for  phases in phases_of_hackathon %}
+                                          <!-- Testar se ja foi respondido -->
+                                          <div class="rounded border mb-6">
+                                              <div class="mt-2">
                                               <div class="accordion" id="accordion" role="tablist">
                                                     <div class="card">
                                                           <form methods="post" action="{% url 'competicoes:new_activity' %}">
@@ -147,78 +134,75 @@
                                                     </div>
                                               </div>
                                          </div>
-                                        {% endfor %}
-                                      </div>
+                                          </div>
+                                    {% endfor %}
                                 {% else %}
                                     <p class="mb-0 text-muted" >Por enquanto nenhuma atividade foi cadastrada pelos administradores.</p>
                                 {% endif %}
                             {% endif %}
                         </div>
                     <!-- Respondidas ------------------------------------------------------------------------------------------------------------------------------ -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 ">
                             <!-- gerenciando -->
                             {% if  hackathon.team_manager.id == team.id %}
-                                <h6 class="card-title">Atividades Respondidas</h6>
+                                <h6 class="card-title">Avaliar Atividades</h6>
                                     {% for  phases in phases_of_hackathon %}
-                                          <div class="mt-4">
+                                          <div class="mt-2">
                                               <div class="accordion" id="accordion" role="tablist">
                                                     <div class="card">
-                                                          <form methods="post" action="{% url 'competicoes:update_activity' %}">
-                                                            <div class="card-header" role="tab" id="heading-2">
-                                                              <h6 class="mb-0">
-                                                                <a class="collapsed" data-toggle="collapse" href="#{{ phases.id }}" aria-expanded="false" aria-controls="{{ phases.id }}">
-                                                                  {{ phases.name }}
-                                                                    <p class="mb-0 text-muted">{{ phases.description }}</p>
-                                                                </a>
-                                                              </h6>
-                                                            </div>
-                                                            <div id="{{ phases.id }}" class="collapse" role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion">
-                                                                {% for  phase in activities_of_hackathon %}
-                                                                    {% for ac in phase %}
-                                                                        {% for activite in ac %}
-                                                                            {% if phases.name == activite.name %}
-                                                                            <div class="card-body">
-                                                                                <div class="row">
-                                                                                  <div class="card rounded border mb-2 col-12 ">
-                                                                                      <div class="card-body p-3">
-                                                                                      <h6>{{  activite.id_team }}</h6>
-                                                                                      <p>{{  activite.description }}</p>
-                                                                                      <p class="mb-0 text-muted">Avaliar</p>
-                                                                                     <div class="media">
-                                                                                         <div class="br-wrapper br-theme-bars-square">
-                                                                                             <select id="example-square" name="rating" autocomplete="off" style="display: none;">
-                                                                                              <option value="1">1</option>
-                                                                                              <option value="2">2</option>
-                                                                                              <option value="3">3</option>
-                                                                                              <option value="4">4</option>
-                                                                                              <option value="5">5</option>
-                                                                                            </select>
-                                                                                            <div class="br-widget">
-                                                                                                <input type="hidden" name="id_activity" value="{{ activite.id }}">
-                                                                                                <input type="hidden" name="id_team" value="{{ activite.id_team.id }}">
-                                                                                                <input type="hidden" name="description" value="{{ activite.description }}">
-                                                                                                <input type="hidden" name="name" value="{{  activite.name }}">
-                                                                                                <input type="hidden" name="nota" value="5">
-                                                                                                <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+                                                        <div class="card-header" role="tab" id="heading-2">
+                                                          <h6 class="mb-0">
+                                                            <a class="collapsed" data-toggle="collapse" href="#{{ phases.id }}" aria-expanded="false" aria-controls="{{ phases.id }}">
+                                                              {{ phases.name }}
+                                                                <p class="mb-0 text-muted">{{ phases.description }}</p>
+                                                            </a>
+                                                          </h6>
+                                                        </div>
+                                                        <div id="{{ phases.id }}" class="collapse " role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion">
+                                                            {% for  phase in activities_of_hackathon %}
+                                                                {% for ac in phase %}
+                                                                    {% for activite in ac %}
+                                                                        {% if phases.name == activite.name %}
 
-                                                                                                <a href="#" name="nota" data-rating-value="1" data-rating-text="1" class="br-selected">1</a>
-                                                                                                <a href="#" data-rating-value="2" data-rating-text="2" class="br-selected">2</a>
-                                                                                                <a href="#" data-rating-value="3" data-rating-text="3" class="br-selected">3</a>
-                                                                                                <a href="#" data-rating-value="4" data-rating-text="4" class="br-selected">4</a>
-                                                                                                <a href="#" data-rating-value="5" data-rating-text="5" class="br-selected br-current">5</a>
+                                                                                <form methods="post" action="{% url 'competicoes:update_activity' %}">
+                                                                                    <div class="card card-rounded">
+                                                                                            <div class=" col-12 text-white" {% if activite.nota != 0 %} style="background-color: #0a88e3"{% else %} style="background-color: lightslategray" {% endif %}>
+                                                                                                <div class="card-body p-3">
+                                                                                                      <h5>{{  activite.id_team }}</h5>
+                                                                                                      <p>{{  activite.description }}</p>
+                                                                                                          <h6>Nota: <b>{{  activite.nota }}</b></h6>
+                                                                                                      <p class="mb-0  text-white">Reavaliar</p>
+                                                                                                     <div class="media">
+                                                                                                        <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="nota">
+                                                                                                            <option {% if activite.nota == 1 %} selected = "selected" {% endif %} value="1" >1</option>
+                                                                                                            <option {% if activite.nota == 2 %} selected = "selected" {% endif %} value="2" >2</option>
+                                                                                                            <option {% if activite.nota == 3 %} selected = "selected" {% endif %} value="3" >3</option>
+                                                                                                            <option {% if activite.nota == 4 %} selected = "selected" {% endif %} value="4" >4</option>
+                                                                                                            <option {% if activite.nota == 5 %} selected = "selected" {% endif %} value="5" >5</option>
+                                                                                                        </select>
+                                                                                                     </div>
+                                                                                                     <div class="p-3">
+                                                                                                            <input type="hidden" name="id_activity" value="{{ activite.id }}">
+                                                                                                            <input type="hidden" name="id_team" value="{{ team.slug }}">
+                                                                                                            <input type="hidden" name="description" value="{{ activite.description }}">
+                                                                                                            <input type="hidden" name="name" value="{{  activite.name }}">
+                                                                                                            <input type="hidden" name="slug_hackathon" value="{{ hackathon.slug }}">
+                                                                                                             {% if activite.nota != 0 %}
+                                                                                                                 <input class="btn btn-light btn-fw" type="submit" value="Pronto">
+                                                                                                             {% else %}
+                                                                                                                 <input class="btn btn-info btn-fw" type="submit" value="Pronto">
+                                                                                                             {% endif %}
+                                                                                                     </div>
+                                                                                                </div>
                                                                                             </div>
-                                                                                         </div>
                                                                                     </div>
-                                                                                  </div>
-                                                                                </div>
-                                                                              </div>
-                                                                            </div>
-                                                                            {% endif %}
-                                                                        {% endfor %}
+                                                                                </form>
+
+                                                                        {% endif %}
                                                                     {% endfor %}
                                                                 {% endfor %}
-                                                           </div>
-                                                          </form>
+                                                            {% endfor %}
+                                                       </div>
                                                     </div>
                                               </div>
                                          </div>
@@ -232,7 +216,7 @@
                                         {% for activite in ac %}
                                             {% if activite.id_team == team %}
                                              <div class="card rounded border mb-2">
-                                                <div class="card-body p-3">
+                                                <div class="card-body p-4">
                                                     <div class="media">
                                                         <i class="fa fa-check icon-sm text-success align-self-center mr-3"></i>
                                                         <div class="media-body">
@@ -240,10 +224,10 @@
                                                             <p class="mb-0 text-muted">
                                                                 {{ activite.description }}
                                                             </p>
-                                                            <h5 data-rating-value="1" data-rating-text="1" class="mb-1 br-selected" style="padding-top: 10px">
-                                                                Nota: {% if activite.nota == 0 %}Ainda não foi avaliada{% else  %}{{ activite.nota }} {% endif  %}</h5>
+                                                            <h6 data-rating-value="1" data-rating-text="1" class="mb-1 br-selected" style="padding-top: 10px">
+                                                                {% if activite.nota == 0 %} Nota: Ainda não foi avaliada{% else  %}<b>Nota: {{ activite.nota }}</b> {% endif  %}</h6>
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary btn-fw left">Editar</button>
+
                                                     </div>
                                                 </div>
                                             </div>

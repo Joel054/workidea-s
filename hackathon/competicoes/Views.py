@@ -82,32 +82,25 @@ def update_hackathon(request):
     return get_hackathon(request, hackathon.slug,hackathon.team_manager.slug)
 
 
-class activities_front:
-    phase = None
-    activities = None
-
-    def __init__(self, ac, ph):
-        self.phase = ph
-        self.activities = ac
-
-    def getPhase(self):
-        return self.phase
-
 
 def get_hackathon(request, hackathon,team):
     hackathon = Hackathon.objects.get(slug=hackathon)
     team = Team.objects.get(slug=team)
     list_phases = []
+    listi = []
     for phase in hackathon.phases.all():
-        activit = activities_front(phase.activities.all(), phase)
-        print(activit.phase)
+        i = 0
+        for act in phase.activities.all():
+            if act.id_team == team:
+                i=1
+        if i == 0:
+            listi.append(phase)
         list_phases.append({phase.activities.all()})
-    print("--------------------------------------------")
-    print(list_phases)
     context = {
         'hackathon': hackathon,
         'teams_of_hackathon': hackathon.teams.all(),
-        'phases_of_hackathon': hackathon.phases.all(),
+        'phases_of_hackathon': listi,
+        'phases_of_hackathon_2': hackathon.phases.all(),
         'activities_of_hackathon': list_phases,
         'team': team}
     return render(request, 'competicoes/index.html', context)
@@ -170,7 +163,7 @@ def new_activity(request):
     name = request.GET.get("name")
     nota = request.GET.get("nota")
     hackathon_slug = request.GET.get("hackathon_slug")
-    print(nota)
+
     team = Team.objects.get(id=id_team)
     phase = Phase.objects.get(id=id_phase)
 
@@ -182,25 +175,23 @@ def new_activity(request):
 
 
 def update_activity(request):
-    id_activity = request.POST.get("id_activity")
+    id_activity = request.GET.get("id_activity")
     user = request.user
-    id_team = request.POST.get("id_team")
-    description = request.POST.get("description")
-    name = request.POST.get("name")
-    slug_hackathon = request.POST.get("slug_hackathon")
-
-    team = Team.objects.get(id=id_team)
+    id_team = request.GET.get("id_team")
+    description = request.GET.get("description")
+    name = request.GET.get("name")
+    nota = request.GET.get("nota")
+    slug_hackathon = request.GET.get("slug_hackathon")
+    print(nota)
+    team = Team.objects.get(slug=id_team)
     member = Member.objects.get(id_user=user, id_team=team)
 
-    context = {}
-    if member.level_asses == "Admin":
-        activity = Activity.objects.get(id=id_activity)
-        activity.description = description
-        activity.name = name
-        activity.save()
-        context.append({"result": "Susses"})
-    else:
-        context.append({"result": "Not permission"})    # ainda não utilizado
+    #if member.level_asses == "Admin":
+    activity = Activity.objects.get(id=id_activity)
+    activity.description = description
+    activity.name = name
+    activity.nota = nota
+    activity.save()
     return get_hackathon(request, slug_hackathon, team.slug)
 
 
