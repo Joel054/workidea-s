@@ -129,7 +129,7 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # # auth
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = '/dashboard'
+LOGIN_REDIRECT_URL = '/team'
 LOGOUT_URL = '/login'
 #AUTH_USER_MODEL = 'user.User'
 #

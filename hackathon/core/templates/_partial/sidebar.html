@@ -15,47 +15,57 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard' %}">
+            <a class="nav-link" href="{% url 'list_teams' %}">
                 <i class="fa fa-home menu-icon text-success"></i>
                 <span class="menu-title ">Home</span>
             </a>
         </li>
-        <!--<li class="nav-item">
-            <a class="nav-link" href="{% url 'competicoes:dashboard_hackathon' %}">
-                <i class="fa fa-puzzle-piece menu-icon"></i>
-                <span class="menu-title">Meus Hackthons</span>
-            </a>
-        </li>-->
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'list_teams' %}">
-                <i class="fas fa-user-friends menu-icon text-info"></i>
+            <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
+               aria-controls="page-layouts">
+                 <i class="fas fa-user-friends menu-icon text-info"></i>
                 <span class="menu-title">Equipes</span>
+                <i class="menu-arrow"></i>
             </a>
-{#            <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"#}
-{#               aria-controls="page-layouts">#}
-{#                <i class="fas fa-user-friends menu-icon"></i>#}
-{#                <span class="menu-title">Equipes</span>#}
-{#                <i class="menu-arrow"></i>#}
-{#            </a>#}
 {##}
-{#            <div class="collapse" id="page-layouts">#}
-{#                <ul class="nav flex-column sub-menu">#}
-{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'list_teams' %}">Times</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time2</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time3</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time4</a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </div>#}
+            <div class="collapse" id="page-layouts">
+                <ul class="nav flex-column sub-menu">
+                    {% for  member in members %}
+                             {% if member.level_asses != 'Invited' %}
+                    <li class="nav-item d-none d-lg-block">
+                        <a class="nav-link" href="{% url 'get_team' member.id_team.slug %}">{{ member.id_team.name }}</a>
+                    </li>
+                    {% endif %}
+                        {% endfor %}
+                </ul>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
-                <i class="fas fa-frown menu-icon"></i>
+                <i class="fas fa-frown menu-icon" style="color: red"></i>
                 <span class="menu-title">Sair</span>
             </a>
         </li>
     </ul>
 </nav>
+{#<div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"#}
+{#         aria-hidden="true">#}
+{#        <div class="modal-dialog " role="document">#}
+{#            <div class="modal-content">#}
+{#                <form method="post" action="{% url 'delete_team' %}">#}
+{#                    <div class="modal-body">#}
+{#                        <div>#}
+{#                            <h2 style="text-align: center">Você tem certeza que deseja sair do sistema?</h2>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                        <input class="btn btn-danger btn-fw" type="submit" value="Excluir">#}
+{#                        <a href="{% url 'logout' %}">#}
+{#                            <button type="button" class="btn btn-light" data-dismiss="modal">Sair</button>#}
+{#                        </a>#}
+{#                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>#}
+{#                    </div>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
