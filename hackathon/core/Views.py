@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 
 
 # Create your views here.
+from team.Team import return_team
 
 
 def index(request):
@@ -77,7 +78,7 @@ def update_user(request):
         if last_name != '':
             user.last_name = last_name
         user.save()
-        return dashboard(request)
+        return return_team(request, None)
     return redirect("../login/")
 
 

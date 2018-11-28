@@ -163,7 +163,6 @@
                                                                 {% for ac in phase %}
                                                                     {% for activite in ac %}
                                                                         {% if phases.name == activite.name %}
-
                                                                                 <form methods="post" action="{% url 'competicoes:update_activity' %}">
                                                                                     <div class="card card-rounded">
                                                                                             <div class=" col-12 text-white" {% if activite.nota != 0 %} style="background-color: #0a88e3"{% else %} style="background-color: lightslategray" {% endif %}>
@@ -197,11 +196,17 @@
                                                                                             </div>
                                                                                     </div>
                                                                                 </form>
-
                                                                         {% endif %}
                                                                     {% endfor %}
                                                                 {% endfor %}
                                                             {% endfor %}
+                                                            <!-- testa se tem atividades respondidas
+                                                            {% if activite %}
+                                                            {% else %}
+                                                                <div class="card-body">
+                                                                    <p class="text-muted">Esta fase ainda não tem respostas.</p>
+                                                                </div>
+                                                            {% endif %} -->
                                                        </div>
                                                     </div>
                                               </div>

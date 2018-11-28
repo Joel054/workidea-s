@@ -20,6 +20,7 @@
                 <span class="menu-title ">Home</span>
             </a>
         </li>
+        {% if members %}
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
                aria-controls="page-layouts">
@@ -31,15 +32,16 @@
             <div class="collapse" id="page-layouts">
                 <ul class="nav flex-column sub-menu">
                     {% for  member in members %}
-                             {% if member.level_asses != 'Invited' %}
-                    <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="{% url 'get_team' member.id_team.slug %}">{{ member.id_team.name }}</a>
-                    </li>
-                    {% endif %}
-                        {% endfor %}
+                        {% if member.level_asses != 'Invited' %}
+                            <li class="nav-item d-none d-lg-block">
+                                <a class="nav-link" href="{% url 'get_team' member.id_team.slug %}">{{ member.id_team.name }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
                 <i class="fas fa-frown menu-icon" style="color: red"></i>
