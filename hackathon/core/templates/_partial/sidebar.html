@@ -20,7 +20,7 @@
                 <span class="menu-title ">Home</span>
             </a>
         </li>
-        {% if members %}
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
                aria-controls="page-layouts">
@@ -28,7 +28,7 @@
                 <span class="menu-title">Equipes</span>
                 <i class="menu-arrow"></i>
             </a>
-{##}
+{##}        {% if members %}
             <div class="collapse" id="page-layouts">
                 <ul class="nav flex-column sub-menu">
                     {% for  member in members %}
@@ -40,8 +40,17 @@
                     {% endfor %}
                 </ul>
             </div>
-        </li>
+        {% else %}
+            <div class="collapse" id="page-layouts">
+                <ul class="nav flex-column sub-menu">
+                    <div class="wrapper d-flex align-items-center py-3">
+                    <p class="mb-0 text-muted" >Você ainda não tem equipes</p>
+                    </div>
+                </ul>
+            </div>
         {% endif %}
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
                 <i class="fas fa-frown menu-icon" style="color: red"></i>

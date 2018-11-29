@@ -223,7 +223,8 @@
                                              <div class="card rounded border mb-2">
                                                 <div class="card-body p-4">
                                                     <div class="media">
-                                                        <i class="fa fa-check icon-sm text-success align-self-center mr-3"></i>
+                                                    {% if activite.nota == 0 %} <i class="fa fa-times icon-sm text-warning align-self-center mr-3"></i> {% else  %}<b><i class="fa fa-check icon-sm text-success align-self-center mr-3"></i></b> {% endif  %}
+
                                                         <div class="media-body">
                                                             <h6 class="mb-1">{{ activite.name }}</h6>
                                                             <p class="mb-0 text-muted">

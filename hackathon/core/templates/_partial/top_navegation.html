@@ -22,28 +22,42 @@
 {#                    </div>#}
 {#                </li>#}
             </ul>
+
             <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item dropdown">
                     <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                        data-toggle="dropdown">
                         <i class="fas fa-bell mx-0"></i>
-                        <span class="count">16</span>
+                        {% for  member in members %}
+                            {% if member.level_asses == 'Invited' %}
+                                <span class="count">{{ member.count }}</span>
+                            {% endif %}
+                        {% endfor %}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                          aria-labelledby="notificationDropdown">
-                        <div class="dropdown-divider"></div>
-                        <a href="{% url 'list_teams' %}" class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-info">
-                                    <i class="far fa-envelope mx-0"></i>
+                        {% for  member in members %}
+                            {% if member.level_asses == 'Invited' %}
+                             <a href="{% url 'list_teams' %}" class="dropdown-item preview-item">
+                                <div class="wrapper d-flex align-items-center py-2 border-bottom">
+                                    <div class="wrapper ml-3">
+                                        <h6 class="mb-1">Equipe <b>{{ member.id_team.name }}</b> lhe enviou um convite</h6>
+                                    </div>
+                                    <div class="ml-auto px-1 py-1">
+                                        <form methods="post" action="{% url 'response_invitations_team' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ member.id_team.id }}" name="id_team">
+                                            <input type="hidden" value="{{ member.id }}" name="member">
+                                            <input type="hidden" value="S" name="response">
+                                            <button type="submit" class="btn btn-primary btn-fw">Aceitar</button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium">New user registration</h6>
-                                <p class="font-weight-light small-text">
-                                    2 days ago
-                                </p>
-                            </div>
+                             </a>
+                            {% endif %}
+                        {% endfor %}
+                        <a class="dropdown-item wrapper d-flex align-items-center py-3">
+                            <p class="card-description">As notificações acabaram!</p>
                         </a>
                     </div>
                 </li>
