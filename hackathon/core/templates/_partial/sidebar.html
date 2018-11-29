@@ -24,17 +24,18 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
                aria-controls="page-layouts">
-                 <i class="fas fa-user-friends menu-icon text-info"></i>
+                <i class="fas fa-user-friends menu-icon text-info"></i>
                 <span class="menu-title">Equipes</span>
                 <i class="menu-arrow"></i>
             </a>
-{##}        {% if members %}
+            {##}        {% if members %}
             <div class="collapse" id="page-layouts">
                 <ul class="nav flex-column sub-menu">
                     {% for  member in members %}
                         {% if member.level_asses != 'Invited' %}
                             <li class="nav-item d-none d-lg-block">
-                                <a class="nav-link" href="{% url 'get_team' member.id_team.slug %}">{{ member.id_team.name }}</a>
+                                <a class="nav-link"
+                                   href="{% url 'get_team' member.id_team.slug %}">{{ member.id_team.name }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}
@@ -44,39 +45,32 @@
             <div class="collapse" id="page-layouts">
                 <ul class="nav flex-column sub-menu">
                     <div class="wrapper d-flex align-items-center py-3">
-                    <p class="mb-0 text-muted" >Você ainda não tem equipes</p>
+                        <p class="mb-0 text-muted">Você ainda não tem equipes</p>
                     </div>
                 </ul>
             </div>
         {% endif %}
         </li>
-
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">
+            <a data-target="#exit" class="nav-link" data-toggle="modal">
                 <i class="fas fa-frown menu-icon" style="color: red"></i>
                 <span class="menu-title">Sair</span>
             </a>
         </li>
     </ul>
 </nav>
-{#<div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"#}
-{#         aria-hidden="true">#}
-{#        <div class="modal-dialog " role="document">#}
-{#            <div class="modal-content">#}
-{#                <form method="post" action="{% url 'delete_team' %}">#}
-{#                    <div class="modal-body">#}
-{#                        <div>#}
-{#                            <h2 style="text-align: center">Você tem certeza que deseja sair do sistema?</h2>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="modal-footer">#}
-{#                        <input class="btn btn-danger btn-fw" type="submit" value="Excluir">#}
-{#                        <a href="{% url 'logout' %}">#}
-{#                            <button type="button" class="btn btn-light" data-dismiss="modal">Sair</button>#}
-{#                        </a>#}
-{#                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+<div id="exit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exit" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Você tem certeza que deseja ir embora?</h1>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'logout' %}">
+                    <button type="button" class="btn btn-danger">Sair <i class="fas fa-frown menu-icon"></i></button>
+                </a>
+                <button type="button" class="btn btn-success" data-dismiss="modal">vou ficar <i class="fas fa-smile-beam menu-icon"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
