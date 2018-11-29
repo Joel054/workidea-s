@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 from competicoes.models import Hackathon, Participation
 from .models import Member, Team
-from .Team import return_team
+from .Team import return_team, return_generic
 from django.http import HttpResponse
 import re
 import unicodedata
@@ -120,7 +120,7 @@ def get_team(request, team):
             'hackathons_managing': team_manager,
             'hackathons_participation': participations,
             'hackathons_disponiveis': hackathons_disp}
-        return render(request, 'team.html', context)
+        return return_generic(request, 'team.html', context)
     return return_team(request, None)
 
 

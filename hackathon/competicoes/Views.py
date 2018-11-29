@@ -16,6 +16,8 @@ from competicoes.models import Phase
 
 from competicoes.models import Activity
 
+from team.Team import return_generic, return_team
+
 
 def remover_acentos(palavra):
     # Usa expressão regular para retornar a palavra apenas com números, letras e espaço
@@ -103,7 +105,7 @@ def get_hackathon(request, hackathon,team):
         'phases_of_hackathon_2': hackathon.phases.all(),
         'activities_of_hackathon': list_phases,
         'team': team}
-    return render(request, 'competicoes/index.html', context)
+    return return_generic(request, 'competicoes/index.html', context)
 
 
 def list_hackathon(request):
@@ -114,8 +116,8 @@ def list_hackathon(request):
     if member:
         hackathons = Hackathon.objects.filter(team_manager=team)
         context = {'hackathons': hackathons}
-        return render(request, 'competicoes/index.html', context)
-    return dashboard(request)
+        return return_generic(request, 'competicoes/index.html', context)
+    return return_team(request, None)
 
 
 # Phase
@@ -136,7 +138,7 @@ def create_phase(request):
 
 
 def dashboard_hackathon(request):
-    return render(request, 'competicoes/index.html')
+    return return_generic(request, 'competicoes/index.html', None)
 
 
 def participe_hackathon(request):
@@ -202,4 +204,4 @@ def get_phase(request):
         'phase': phase,
         'activities': phase.activities
     }
-    return render(request, "phase.html", context)
+    return return_generic(request, "phase.html", context)

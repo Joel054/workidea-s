@@ -10,6 +10,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from team.Team import return_team
 
+from team.Team import return_generic
+
 
 def index(request):
     return render(request, 'show.html')
@@ -69,7 +71,7 @@ def update_user(request):
         if username != '':
             test_username = User.objects.filter(username=username).exists()
             if test_username:
-                return render(request, 'settings.html', {'error': 'Este username já existe, tente novamente!'})
+                return return_generic(request, 'settings.html', {'error': 'Este username já existe, tente novamente!'})
             user.username = username
         if email != '':
             user.email = email
@@ -83,4 +85,4 @@ def update_user(request):
 
 
 def settings(request):
-    return render(request, 'settings.html')
+    return return_generic(request, 'settings.html', None)
